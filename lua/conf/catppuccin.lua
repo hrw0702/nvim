@@ -8,7 +8,7 @@ require("catppuccin").setup(
         term_color = false,
         -- 代码样式
         styles = {
-            comments = "italic",
+            comments = "NONE",
             functions = "NONE",
             keywords = "NONE",
             strings = "NONE",
