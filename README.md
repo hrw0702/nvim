@@ -3,6 +3,7 @@
 neovim 现在支持 vimscript 和 lua 这 2 种语言书写配置，个人使用纯 lua 语言，它能够更加方便的管理多个插件。
 neovim 的配置文件放在 ~/.config/nvim/init.lua 中，可按照下面的目录结构创建相关目录：
 
+```
 /home/askfiy/.config/nvim
 ├── init.lua
 ├── ftplugin/
@@ -17,7 +18,8 @@ neovim 的配置文件放在 ~/.config/nvim/init.lua 中，可按照下面的目
 │   ├── dap/
 │   └── lsp/
 └── snippet/
-<br>
+```
+
 ### 目录说明：
 
 - ftplugin：存放不同文件类型的缩进规则文件
@@ -27,7 +29,7 @@ neovim 的配置文件放在 ~/.config/nvim/init.lua 中，可按照下面的目
 - dap：存放 DAP 相关配置文件
 - lsp：存放 LSP 相关配置文件
 - snippet：存放代码片段相关文件
-<br>
+
 ### 文件说明：
 
 - init.lua：配置入口文件
