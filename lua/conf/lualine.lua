@@ -89,9 +89,9 @@ ins_left {
         return ''
     end,
     color = function()
-    -- auto change color according to neovims mode
-    local mode_color = {
-        n = colors.red,
+        -- auto change color according to neovims mode
+        local mode_color = {
+            n = colors.red,
             i = colors.green,
             v = colors.blue,
             [''] = colors.blue,
@@ -112,7 +112,7 @@ ins_left {
             ['!'] = colors.red,
             t = colors.red,
         }
-return { fg = mode_color[vim.fn.mode()] }
+        return { fg = mode_color[vim.fn.mode()] }
     end,
     padding = { right = 1 },
 }

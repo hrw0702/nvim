@@ -88,7 +88,7 @@ packer.startup(
                     "nvim-lua/plenary.nvim"
                 },
                 config = function()
-                    require("conf.gitsigns").setup()
+                    require("conf.gitsigns")
                 end
             }
             -- nvim-autopairs 自动补全另一半括号
