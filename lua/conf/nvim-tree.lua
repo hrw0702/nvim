@@ -94,7 +94,7 @@ require'nvim-tree'.setup { -- BEGIN_DEFAULT_OPTS
         exclude = {},
     },
     git = {
-        enable = false,
+        enable = true,
         ignore = true,
         timeout = 400,
     },

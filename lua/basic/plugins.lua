@@ -47,6 +47,8 @@ packer.startup(
                 'akinsho/bufferline.nvim',
                 requires = {
                     'kyazdani42/nvim-web-devicons',
+                    -- 删除 buffer 时不影响现有布局
+                    'famiu/bufdelete.nvim',
                 },
                 config = function()
                     -- 插件加载完成后自动运行 lua/conf/bufferline.lua 文件中的代码
@@ -92,7 +94,76 @@ packer.startup(
                 end
             }
             -- nvim-autopairs 自动补全另一半括号
+            use {
+                "windwp/nvim-autopairs",
+                config = function()
+                    require("conf.nvim-autopairs")
+                end
+            }
 
+            -- 内置终端
+            use {
+                "akinsho/toggleterm.nvim",
+                config = function()
+                    require("conf.toggleterm")
+                end
+            }
+
+            -- 精美弹窗
+            use {
+                "rcarriga/nvim-notify",
+                config = function()
+                    require("conf.nvim-notify")
+                end
+            }
+
+            -- todo tree
+            use {
+                "folke/todo-comments.nvim",
+                config = function()
+                    require("conf.todo-comments")
+                end
+            }
+
+            -- LSP 基础服务
+            use {
+                "neovim/nvim-lspconfig",
+                config = function()
+                    require("conf.nvim-lspconfig")
+                end
+            }
+
+            -- 自动安装 LSP
+            use {
+                "williamboman/nvim-lsp-installer",
+                config = function()
+                    require("conf.nvim-lsp-installer")
+                end
+            }                                          
+
+            -- LSP UI 美化
+            use {
+                "tami5/lspsaga.nvim",
+                config = function()
+                    require("conf.lspsaga")
+                end
+            }
+
+            -- LSP 进度提示
+            use {
+                "j-hui/fidget.nvim",
+                config = function()
+                    require("conf.fidget")
+                end
+            }
+
+            -- 插入模式获得函数签名
+            use {
+                "ray-x/lsp_signature.nvim",
+                config = function()
+                    require("conf.lsp_signature")
+                end
+            }
             -- 使用 DAP 进行代码调试，需要使用 3 个插件：
             -- nvim-dap ：基础插件
             -- nvim-dap-virtual-text：显示内联信息
