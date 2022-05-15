@@ -1,7 +1,7 @@
 ### 配置目录
 
 neovim 现在支持 vimscript 和 lua 这 2 种语言书写配置，个人使用纯 lua 语言，它能够更加方便的管理多个插件。
-neovim 的配置文件放在 ~/.config/nvim/init.lua 中，可按照下面的目录结构创建相关目录：
+neovim 的配置文件放在 `~/.config/nvim/init.lua`中，可按照下面的目录结构创建相关目录：
 
 ```
 /home/askfiy/.config/nvim
