@@ -196,6 +196,19 @@ packer.startup(
                     require("conf.nvim-cmp")
                 end
             }
+
+            -- 模糊查找
+            use {
+                "nvim-telescope/telescope.nvim",
+                requires = {
+                    "nvim-lua/plenary.nvim", -- Lua 开发模块
+                    "BurntSushi/ripgrep", -- 文字查找
+                    "sharkdp/fd" -- 文件查找
+                },
+                config = function()
+                    require("conf.telescope")
+                end
+            }
             -- 使用 DAP 进行代码调试，需要使用 3 个插件：
             -- nvim-dap ：基础插件
             -- nvim-dap-virtual-text：显示内联信息
