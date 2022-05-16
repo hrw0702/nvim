@@ -83,6 +83,7 @@ ins_left {
     padding = { left = 0, right = 1 }, -- We don't need space before this
 }
 
+-- NOTE:
 ins_left {
     -- mode component
     function()
@@ -165,6 +166,12 @@ ins_left {
 }
 
 ins_left {
+    'branch',
+    icon = '',
+    color = { fg = colors.violet, gui = 'bold' },
+}
+
+ins_left {
     -- filesize component
     'filesize',
     cond = conditions.buffer_not_empty,
@@ -190,6 +197,7 @@ ins_left {
         color_info = { fg = colors.cyan },
     },
 }
+
 
 -- Insert mid section. You can make any number of sections in neovim :)
 -- for lualine it's any number greater then 2
@@ -220,6 +228,7 @@ ins_left {
     color = { fg = '#ffffff', gui = 'bold' },
 }
 
+
 -- Add components to right sections
 ins_right {
     'o:encoding', -- option component same as &encoding in viml
@@ -235,11 +244,6 @@ ins_right {
     color = { fg = colors.green, gui = 'bold' },
 }
 
-ins_right {
-    'branch',
-    icon = '',
-    color = { fg = colors.violet, gui = 'bold' },
-}
 
 ins_right {
     'diff',
