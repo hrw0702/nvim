@@ -52,4 +52,4 @@ vim.keybinds.gmap("n", "<C-l>", ":BufferLineCycleNext<CR>", vim.keybinds.opts)
 
 -- nvim-treesitter 代码格式化
 -- vim.keybinds.gmap("n", "<F4>", "gg=G", vim.keybinds.opts)
-vim.keybinds.gmap("n", "<F4>", ":Format<CR>", vim.keybinds.opts)
+vim.keybinds.gmap("n", "<F4>", ":FormatWrite<CR>", vim.keybinds.opts)
