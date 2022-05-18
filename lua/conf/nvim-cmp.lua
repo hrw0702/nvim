@@ -21,9 +21,9 @@ local lspkind = require("lspkind")
 
 local cmp = require("cmp")
 
-cmp_config=(
----@diagnostic disable-next-line: redundant-parameter
-{
+cmp_config=({
+    ---@diagnostic disable-next-line: redundant-parameter
+
     -- 指定补全引擎
     snippet = {
         expand = function(args)
@@ -81,8 +81,8 @@ cmp_config=(
             path = "(Path)",
             calc = "(Calc)",
             cmp_tabnine = "(Tabnine)",
-            vsnip = "(Snippet)",
-            luasnip = "(Snippet)",
+            vsnip = "(vSnippet)",
+            luasnip = "(luaSnippet)",
             buffer = "(Buffer)",
             spell = "(Spell)",
         },
@@ -180,8 +180,7 @@ cmp_config=(
             {"i", "s", "c"}
         )
     }
-}
-)
+})
 
 -- 命令行 / 模式提示
 cmp.setup.cmdline(

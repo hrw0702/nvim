@@ -6,11 +6,11 @@ vim.g.maplocalleader = " "
 -- 之后就可以这样映射按键
 -- vim.keybinds.gmap("模式", "按键", "映射为XX", vim.keybinds.opts)
 vim.keybinds = {
-    gmap = vim.api.nvim_set_keymap,
-    bmap = vim.api.nvim_buf_set_keymap,
-    dgmap = vim.api.nvim_del_keymap,
-    dbmap = vim.api.nvim_buf_del_keymap,
-    opts = {noremap = true, silent = true}
+	gmap = vim.api.nvim_set_keymap,
+	bmap = vim.api.nvim_buf_set_keymap,
+	dgmap = vim.api.nvim_del_keymap,
+	dbmap = vim.api.nvim_buf_del_keymap,
+	opts = { noremap = true, silent = true },
 }
 
 -- "jk" 映射<ESC>键
@@ -51,5 +51,5 @@ vim.keybinds.gmap("n", "<C-h>", ":BufferLineCyclePrev<CR>", vim.keybinds.opts)
 vim.keybinds.gmap("n", "<C-l>", ":BufferLineCycleNext<CR>", vim.keybinds.opts)
 
 -- nvim-treesitter 代码格式化
-vim.keybinds.gmap("n", "<F4>", "gg=G", vim.keybinds.opts)
-
+-- vim.keybinds.gmap("n", "<F4>", "gg=G", vim.keybinds.opts)
+vim.keybinds.gmap("n", "<F4>", ":Format<CR>", vim.keybinds.opts)
