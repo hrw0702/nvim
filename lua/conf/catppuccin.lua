@@ -1,62 +1,44 @@
--- https://github.com/catppuccin/nvim
+require("catppuccin").setup({
+    flavour = "mocha", -- latte, frappe, macchiato, mocha
+    background = { -- :h background
+        light = "latte",
+        dark = "mocha",
+    },
+    transparent_background = false,
+    term_colors = false,
+    dim_inactive = {
+        enabled = false,
+        shade = "dark",
+        percentage = 0.15,
+    },
+    no_italic = false, -- Force no italic
+    no_bold = false, -- Force no bold
+    styles = {
+        comments = { "italic" },
+        conditionals = { "italic" },
+        loops = {},
+        functions = {},
+        keywords = {},
+        strings = {},
+        variables = {},
+        numbers = {},
+        booleans = {},
+        properties = {},
+        types = {},
+        operators = {},
+    },
+    color_overrides = {},
+    custom_highlights = {},
+    integrations = {
+        cmp = true,
+        gitsigns = true,
+        nvimtree = true,
+        telescope = true,
+        notify = false,
+        mini = false,
+        -- For more plugins integrations please scroll down (https://github.com/catppuccin/nvim#integrations)
+    },
+})
 
-require("catppuccin").setup(
-    {
-        -- 透明背景
-        transparent_background = vim.g.background_transparency,
-        -- 使用终端背景色
-        term_color = false,
-        -- 代码样式
-        styles = {
-            comments = "NONE",
-            functions = "NONE",
-            keywords = "NONE",
-            strings = "NONE",
-            variables = "NONE"
-        },
-        -- 为不同的插件统一样式风格
-        -- 尽管这里有一些插件还没有安装，但是先将它们
-        -- 设置为 true 并不影响
-        integrations = {
-            cmp = true,
-            gitsigns = true,
-            telescope = true,
-            which_key = true,
-            bufferline = true,
-            markdown = true,
-            ts_rainbow = true,
-            hop = true,
-            notify = true,
-            indent_blankline = {
-                enabled = true,
-                colored_indent_levels = false
-            },
-            nvimtree = {
-                enabled = true,
-                show_root = false,
-                -- 透明背景
-                transparent_panel = false,
-            },
-            native_lsp = {
-                enabled = true,
-                virtual_text = {
-                    errors = "italic",
-                    hints = "italic",
-                    warnings = "italic",
-                    information = "italic"
-                },
-                underlines = {
-                    errors = "underline",
-                    hints = "underline",
-                    warnings = "underline",
-                    information = "underline"
-                }
-            },
-            -- 后面我们自己会手动设置
-            lsp_saga = false
-        }
-    }
-)
-
--- 应用主题
-vim.cmd([[colorscheme catppuccin]])
+-- setup must be called before loading
+vim.cmd.colorscheme "catppuccin"

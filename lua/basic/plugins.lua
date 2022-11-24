@@ -10,7 +10,19 @@ packer.startup({
 		})
 		-- 安装其它插件
 		-- Neosolarized theme
-		use("overcache/NeoSolarized")
+		--		use("overcache/NeoSolarized")
+		-- Install without configuration
+		use({ "projekt0n/github-nvim-theme" })
+
+		-- Or with configuration
+		use({
+			"projekt0n/github-nvim-theme",
+			config = function()
+				require("github-theme").setup({
+					-- ...
+				})
+			end,
+		})
 		-- 优秀的暗色主题
 		use({
 			"catppuccin/nvim",
@@ -117,12 +129,13 @@ packer.startup({
 		})
 
 		-- todo tree
-		use({
-			"folke/todo-comments.nvim",
-			config = function()
-				require("conf.todo-comments")
-			end,
-		})
+		--		use({
+		--			"folke/todo-comments.nvim",
+		--			requires = "nvim-lua/plenary.nvim",
+		--			config = function()
+		--				require("conf.todo-comments")
+		--			end,
+		--		})
 
 		-- 代码注释
 		use({
