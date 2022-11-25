@@ -337,6 +337,19 @@ cmp.setup.cmdline(":", {
 	}),
 })
 
+-- The nvim-cmp almost supports LSP's capabilities so You should advertise it to LSP servers..
+local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
+-- The following example advertise capabilities to 'clangd'
+require("lspconfig").clangd.setup({
+	on_attach = on_attach,
+	capabilities = capabilities,
+})
+
+-- require("lspconfig").sumneko_lua.setup({
+-- 	on_attach = on_attach,
+-- 	capabilities = capabilities,
+-- })
 -- disable autocompletion for guihua
 -- vim.cmd("autocmd FileType guihua lua require('cmp').setup.buffer { enabled = false }")
 -- vim.cmd("autocmd FileType guihua_rust lua require('cmp').setup.buffer { enabled = false }")

@@ -189,11 +189,25 @@ packer.startup({
 
 		-- 自动安装 LSP
 		use({
-			"williamboman/nvim-lsp-installer",
+			"williamboman/mason.nvim",
 			config = function()
-				require("conf.nvim-lsp-installer")
+				require("conf.mason")
 			end,
 		})
+		-- 自动安装 LSP
+		use({
+			"williamboman/mason-lspconfig.nvim",
+			config = function()
+				require("conf.mason-lspconfig")
+			end,
+		})
+		-- 自动安装 LSP
+		-- use({
+		-- 	"williamboman/nvim-lsp-installer",
+		-- 	config = function()
+		-- 		require("conf.nvim-lsp-installer")
+		-- 	end,
+		-- })
 
 		-- LSP UI 美化
 		use({
