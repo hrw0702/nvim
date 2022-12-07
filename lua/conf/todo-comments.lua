@@ -16,8 +16,6 @@
 -- 	},
 -- })
 
--- TODO
-
 require("todo-comments").setup({
 	signs = true, -- show icons in the signs column
 	sign_priority = 8, -- sign priority
@@ -38,8 +36,10 @@ require("todo-comments").setup({
 	},
 	gui_style = {
 		fg = "NONE", -- The gui style to use for the fg highlight group.
-		bg = "BOLD", -- The gui style to use for the bg highlight group.
-	},
+		-- bg = "BOLD", -- The gui style to use for the bg highlight group.
+		bg = "NONE", -- The gui style to use for the bg highlight group. 
+    },
+
 	merge_keywords = true, -- when true, custom keywords will be merged with the defaults
 	-- highlighting of the line containing the todo comment
 	-- * before: highlights before the keyword (typically comment characters)
