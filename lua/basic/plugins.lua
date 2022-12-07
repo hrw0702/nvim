@@ -176,6 +176,7 @@ packer.startup({
 			end,
 		})
 
+		-- 配置文件在 lsp目录
 		-- LSP 基础服务
 		use({
 			"neovim/nvim-lspconfig",
@@ -191,7 +192,6 @@ packer.startup({
 			-- 	require("conf.mason")
 			-- end,
 		})
-		-- 自动安装 LSP
 		use({
 			"williamboman/mason-lspconfig.nvim",
 			-- config = function()
@@ -199,14 +199,6 @@ packer.startup({
 			-- end,
 		})
 		use({ "jose-elias-alvarez/null-ls.nvim" })
-
-		-- 自动安装 LSP
-		-- use({
-		-- 	"williamboman/nvim-lsp-installer",
-		-- 	config = function()
-		-- 		require("conf.nvim-lsp-installer")
-		-- 	end,
-		-- })
 
 		-- LSP UI 美化
 		use({
