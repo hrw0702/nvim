@@ -1,7 +1,7 @@
 -- 基础配置
 -- utf8
 vim.g.encoding = "UTF-8"
-vim.o.fileencoding = 'utf-8'
+vim.o.fileencoding = "utf-8"
 
 -- jk移动时光标下上方保留8行
 vim.o.scrolloff = 8
@@ -61,7 +61,7 @@ vim.o.wrap = false
 vim.wo.wrap = false
 
 -- 行结尾可以跳到下一行
-vim.o.whichwrap = 'b,s,<,>,[,],h,l'
+vim.o.whichwrap = "b,s,<,>,[,],h,l"
 
 -- 允许隐藏被修改过的buffer
 vim.o.hidden = true
@@ -74,7 +74,7 @@ vim.o.backup = false
 vim.o.writebackup = false
 vim.o.swapfile = false
 
--- smaller updatetime 
+-- smaller updatetime
 vim.o.updatetime = 300
 
 -- 等待mappings
@@ -87,7 +87,7 @@ vim.o.splitright = true
 -- 自动补全不自动选中
 vim.g.completeopt = "menu,menuone,noselect,noinsert"
 
--- 样式
+-- 主题样式
 vim.o.background = "dark"
 vim.o.termguicolors = true
 vim.opt.termguicolors = true
@@ -100,7 +100,7 @@ vim.opt.termguicolors = true
 vim.o.wildmenu = true
 
 -- Dont' pass messages to |ins-completin menu|
-vim.o.shortmess = vim.o.shortmess .. 'c'
+vim.o.shortmess = vim.o.shortmess .. "c"
 vim.o.pumheight = 10
 
 -- always show tabline

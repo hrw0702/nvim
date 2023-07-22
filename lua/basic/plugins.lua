@@ -21,6 +21,14 @@ packer.startup({
 				require("conf.catppuccin")
 			end,
 		})
+
+		use({
+			"neanias/everforest-nvim",
+			config = function()
+				require("conf.everforest")
+			end,
+		})
+
 		-- nvim-tree
 		use({
 			"kyazdani42/nvim-tree.lua",
@@ -211,6 +219,7 @@ packer.startup({
 		-- LSP 进度提示
 		use({
 			"j-hui/fidget.nvim",
+			"tag = legacy",
 			config = function()
 				require("conf.fidget")
 			end,
