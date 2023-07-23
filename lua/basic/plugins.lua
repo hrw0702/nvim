@@ -12,6 +12,7 @@ packer.startup({
 		-- Neosolarized theme
 		--		use("overcache/NeoSolarized")
 		-- 优秀的暗色主题
+		-- =============================================================================
 		use({
 			"catppuccin/nvim",
 			-- 改个别名，因为它的名字是 nvim，可能会冲突
@@ -23,11 +24,33 @@ packer.startup({
 		})
 
 		use({
+			"marko-cerovac/material.nvim",
+			config = function()
+				require("conf.material")
+			end,
+		})
+
+		use({
+			"navarasu/onedark.nvim",
+			config = function()
+				require("conf.onedark")
+			end,
+		})
+		use({
+			"EdenEast/nightfox.nvim",
+			config = function()
+				require("conf.nightfox")
+			end,
+		})
+
+		use({
 			"neanias/everforest-nvim",
 			config = function()
 				require("conf.everforest")
 			end,
 		})
+
+		-- =============================================================================
 
 		-- nvim-tree
 		use({
