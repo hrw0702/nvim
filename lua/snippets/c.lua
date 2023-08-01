@@ -69,6 +69,83 @@ local function cs(trigger, nodes, opts) --{{{
 end --}}}
 
 -- -- Start Refactoring --
+local function copy(args)
+	return args[1]
+end
+cs("para", {
+	-- Simple static text.
+	t("// @Parameters: "),
+	-- function, first parameter is the function, second the Placeholders
+	-- whose text it gets as input.
+	f(copy, 2),
+	t({ "", "void " }),
+	-- Placeholder/Insert.
+	i(1),
+	t("("),
+	-- Placeholder with initial text.
+	i(2, "int foo"),
+	-- Linebreak
+	t({ ") {", "\t" }),
+	-- Last Placeholder, exit Point of the snippet.
+	i(0),
+	t({ "", "}" }),
+})
+cs("wow", {
+	t({ "After expanding, the cursor is here ->" }),
+	i(2),
+	t({ "", "After jumping forward once, cursor is here ->" }),
+	i(1),
+	t({ "", "After jumping once more, the snippet is exited there ->" }),
+	i(0),
+})
+cs( -- [wow test],wow snippet
+	"wowtest",
+	fmt(
+		[[
+    After expanding, the cursor is here 1-->{}
+    After expanding, the cursor is here 2 -->{}
+    After expanding, the cursor is here 0 -->{}
+    ]],
+		{
+			i(1, "1"),
+			i(2, "2"),
+			i(0, "0"),
+		}
+	)
+)
+
+local function fn(
+	args, -- text from i(2) in this example i.e. {{"456"}}
+	parent, -- parent snippet or parent node
+	user_args -- user_args from opts.user_args
+)
+	return "[" .. args[1][1] .. user_args .. "]"
+end
+cs("fntrig", {
+	i(1),
+	t("<-i(1)"),
+	f(
+		fn, -- callback (args,parent,user_args) -> string
+		{ 2 }, -- node indice(s) whose text is passed to fn, i.e i(2)
+		{ user_args = { "user_args_value" } } -- opts
+	),
+	t("i(2)->"),
+	i(2),
+	t("<-i(2) i(0)->"),
+	i(0),
+})
+
+cs(
+	"cnode",
+	c(1, {
+		t("Ugh boring, a text node"),
+		i(nil, "At least I can edit something now..."),
+		f(function(args)
+			return "Still only counts as text!!"
+		end, {}),
+	})
+)
+
 cs( -- [while] JS While Loop snippet{{{
 	"mywhile",
 	fmt(
@@ -89,129 +166,129 @@ cs("CMD", { -- [CMD] multiline vim.cmd{{{
 	i(1, ""),
 	t({ "", "]]" }),
 }) --}}}
--- cs("cmd", fmt("vim.cmd[[{}]]", { i(1, "") })) -- single line vim.cmd
--- cs({ -- github import for packer{{{
--- 	trig = "https://github%.com/([%w-%._]+)/([%w-%._]+)!",
--- 	regTrig = true,
--- 	hidden = true,
--- }, {
--- 	t([[use "]]),
--- 	f(function(_, snip)
--- 		return snip.captures[1]
--- 	end),
--- 	t("/"),
--- 	f(function(_, snip)
--- 		return snip.captures[2]
--- 	end),
--- 	t({ [["]], "" }),
--- 	i(1, ""),
--- }, "auto") --}}}
---
--- cs( -- {regexSnippet} LuaSnippet{{{
--- 	"regexSnippet",
--- 	fmt(
--- 		[=[
--- cs( -- {}
--- {{ trig = "{}", regTrig = true, hidden = true }}, fmt([[
--- {}
--- ]], {{
---   {}
--- }}))
---       ]=],
--- 		{
--- 			i(1, "Description"),
--- 			i(2, ""),
--- 			i(3, ""),
--- 			i(4, ""),
--- 		}
--- 	),
--- 	{ pattern = "*/snippets/*.lua", "<C-d>" }
--- ) --}}}
--- cs( -- [luaSnippet] LuaSnippet{{{
--- 	"luaSnippet",
--- 	fmt(
--- 		[=[
--- cs("{}", fmt( -- {}
--- [[
--- {}
--- ]], {{
---   {}
---   }}){})
---     ]=],
--- 		{
--- 			i(1, ""),
--- 			i(2, "Description"),
--- 			i(3, ""),
--- 			i(4, ""),
--- 			c(5, {
--- 				t(""),
--- 				fmt([[, "{}"]], { i(1, "keymap") }),
--- 				fmt([[, {{ pattern = "{}", {} }}]], { i(1, "*/snippets/*.lua"), i(2, "keymap") }),
--- 			}),
--- 		}
--- 	),
--- 	{ pattern = "*/snippets/*.lua", "jcs" }
--- ) --}}}
---
--- cs( -- choice_node_snippet luaSnip choice node{{{
--- 	"choice_node_snippet",
--- 	fmt(
--- 		[[
--- c({}, {{ {} }}),
--- ]],
--- 		{
--- 			i(1, ""),
--- 			i(2, ""),
--- 		}
--- 	),
--- 	{ pattern = "*/snippets/*.lua", "jcn" }
--- ) --}}}
---
--- cs( -- [function] Lua function snippet{{{
--- 	"function",
--- 	fmt(
--- 		[[
--- function {}({})
---   {}
--- end
--- ]],
--- 		{
--- 			i(1, ""),
--- 			i(2, ""),
--- 			i(3, ""),
--- 		}
--- 	),
--- 	"jff"
--- ) --}}}
--- cs( -- [local_function] Lua function snippet{{{
--- 	"local_function",
--- 	fmt(
--- 		[[
--- local function {}({})
---   {}
--- end
--- ]],
--- 		{
--- 			i(1, ""),
--- 			i(2, ""),
--- 			i(3, ""),
--- 		}
--- 	),
--- 	"jlf"
--- ) --}}}
--- cs( -- [local] Lua local variable snippet{{{
--- 	"local",
--- 	fmt(
--- 		[[
--- local {} = {}
---   ]],
--- 		{ i(1, ""), i(2, "") }
--- 	),
--- 	"jj"
--- ) --}}}
---
--- -- Tutorial Snippets go here --
---
--- -- End Refactoring --
---
--- return snippets, autosnippets
+cs("cmd", fmt("vim.cmd[[{}]]", { i(1, "") })) -- single line vim.cmd
+cs({ -- github import for packer{{{
+	trig = "https://github%.com/([%w-%._]+)/([%w-%._]+)!",
+	regTrig = true,
+	hidden = true,
+}, {
+	t([[use "]]),
+	f(function(_, snip)
+		return snip.captures[1]
+	end),
+	t("/"),
+	f(function(_, snip)
+		return snip.captures[2]
+	end),
+	t({ [["]], "" }),
+	i(1, ""),
+}, "auto") --}}}
+
+cs( -- {regexSnippet} LuaSnippet{{{
+	"regexSnippet",
+	fmt(
+		[=[
+cs( -- {}
+{{ trig = "{}", regTrig = true, hidden = true }}, fmt([[
+{}
+]], {{
+  {}
+}}))
+      ]=],
+		{
+			i(1, "Description"),
+			i(2, ""),
+			i(3, ""),
+			i(4, ""),
+		}
+	),
+	{ pattern = "*/snippets/*.lua", "<C-d>" }
+) --}}}
+cs( -- [luaSnippet] LuaSnippet{{{
+	"luaSnippet",
+	fmt(
+		[=[
+cs("{}", fmt( -- {}
+[[
+{}
+]], {{
+  {}
+  }}){})
+    ]=],
+		{
+			i(1, ""),
+			i(2, "Description"),
+			i(3, ""),
+			i(4, ""),
+			c(5, {
+				t(""),
+				fmt([[, "{}"]], { i(1, "keymap") }),
+				fmt([[, {{ pattern = "{}", {} }}]], { i(1, "*/snippets/*.lua"), i(2, "keymap") }),
+			}),
+		}
+	),
+	{ pattern = "*/snippets/*.lua", "jcs" }
+) --}}}
+
+cs( -- choice_node_snippet luaSnip choice node{{{
+	"choice_node_snippet",
+	fmt(
+		[[
+c({}, {{ {} }}),
+]],
+		{
+			i(1, ""),
+			i(2, ""),
+		}
+	),
+	{ pattern = "*/snippets/*.lua", "jcn" }
+) --}}}
+
+cs( -- [function] Lua function snippet{{{
+	"function",
+	fmt(
+		[[
+function {}({})
+  {}
+end
+]],
+		{
+			i(1, ""),
+			i(2, ""),
+			i(3, ""),
+		}
+	),
+	"jff"
+) --}}}
+cs( -- [local_function] Lua function snippet{{{
+	"local_function",
+	fmt(
+		[[
+local function {}({})
+  {}
+end
+]],
+		{
+			i(1, ""),
+			i(2, ""),
+			i(3, ""),
+		}
+	),
+	"jlf"
+) --}}}
+cs( -- [local] Lua local variable snippet{{{
+	"local",
+	fmt(
+		[[
+local {} = {}
+  ]],
+		{ i(1, ""), i(2, "") }
+	),
+	"jj"
+) --}}}
+
+-- Tutorial Snippets go here --
+
+-- End Refactoring --
+
+return snippets, autosnippets

@@ -33,6 +33,16 @@ ls.config.set_config({
 }) --}}}
 
 -- More Settings --
-
+-- inoremap <c-u> <cmd>lua require("luasnip.extras.select_choice")()
+vim.keymap.set({ "i", "s" }, "<C-p>", function()
+	if ls.choice_active() then
+		ls.change_choice(1)
+	end
+end)
+vim.keymap.set({ "i", "s" }, "<C-n>", function()
+	if ls.choice_active() then
+		ls.change_choice(-1)
+	end
+end)
 vim.keymap.set("n", "<Leader><CR>", "<cmd>LuaSnipEdit<cr>", { silent = true, noremap = true })
 vim.cmd([[autocmd BufEnter */snippets/*.lua nnoremap <silent> <buffer> <CR> /-- End Refactoring --<CR>O<Esc>O]])

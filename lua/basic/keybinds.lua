@@ -47,9 +47,14 @@ vim.keybinds.gmap("n", "<C-right>", "<cmd>vertical resize -1<CR>", vim.keybinds.
 vim.keybinds.gmap("n", "<leader>m", ":NvimTreeToggle<CR>", vim.keybinds.opts)
 
 -- bufferline 左右TAB切换
-vim.keybinds.gmap("n", "<C-h>", ":BufferLineCyclePrev<CR>", vim.keybinds.opts)
-vim.keybinds.gmap("n", "<C-l>", ":BufferLineCycleNext<CR>", vim.keybinds.opts)
+vim.keybinds.gmap("n", "<S-h>", ":BufferLineCyclePrev<CR>", vim.keybinds.opts)
+vim.keybinds.gmap("n", "<S-l>", ":BufferLineCycleNext<CR>", vim.keybinds.opts)
 
--- nvim-treesitter 代码格式化
--- vim.keybinds.gmap("n", "<F4>", "gg=G", vim.keybinds.opts)
+-- formatter 代码格式化
+vim.keybinds.gmap("n", "<leader>fr", ":Format<CR>", vim.keybinds.opts)
 vim.keybinds.gmap("n", "<F4>", ":FormatWrite<CR>", vim.keybinds.opts)
+
+-- MarkdownPreview
+vim.keybinds.gmap("n", "<F5>", ":MarkdownPreview<CR>", vim.keybinds.opts)
+vim.keybinds.gmap("n", "<leader>ps", ":MarkdownPreviewStop<CR>", vim.keybinds.opts)
+vim.keybinds.gmap("n", "<leader>pt", ":MarkdownPreviewToggle<CR>", vim.keybinds.opts)

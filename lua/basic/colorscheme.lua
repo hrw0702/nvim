@@ -1,6 +1,6 @@
 -- "dark" or "light"
+-- vim.o.background = "light"
 vim.o.background = "dark"
-
 local colorscheme = "onedark"
 -- 以安装主题
 -- catppuccin

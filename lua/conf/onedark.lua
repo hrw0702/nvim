@@ -1,7 +1,7 @@
 -- Lua
 require("onedark").setup({
 	-- Main options --
-	style = "light", -- Default theme style. Choose between 'dark', 'darker', 'cool', 'deep', 'warm', 'warmer' and 'light'
+	style = "warmer", -- Default theme style. Choose between 'dark', 'darker', 'cool', 'deep', 'warm', 'warmer' and 'light'
 	transparent = false, -- Show/hide background
 	term_colors = true, -- Change terminal color as per the selected theme style
 	ending_tildes = false, -- Show the end-of-buffer tildes. By default they are hidden
@@ -22,12 +22,26 @@ require("onedark").setup({
 		variables = "none",
 	},
 
-    
 	-- Custom Highlights --
 	colors = {
-	}, -- Override default colors
+		bright_orange = "#ff8800", -- define a new color
+		green = "#00ffaa", -- redefine an existing color
+	},
 	highlights = {
-	}, -- Override highlight groups
+		-- TelescopePreviewBorder = {bg="$green", fg = "$bright_orange", fmt = "bold" },
+		-- TelescopePromptBorder = colors.Cyan,
+		-- TelescopeResultsBorder = colors.Cyan,
+		-- TelescopePreviewBorder = colors.Cyan,
+		-- TelescopeMatching = { fg = c.orange, fmt = "bold" },
+		-- TelescopePromptPrefix = colors.Green,
+		-- TelescopeSelection = { bg = "$green" },
+		-- TelescopeSelectionCaret = colors.Yellow,
+        --
+		-- TSKeyword = { fg = "$green" },
+		-- TSString = { fg = "$bright_orange", bg = "#00ff00", fmt = "bold" },
+		-- TSFunction = { fg = "#0000ff", sp = "$cyan", fmt = "underline,italic" },
+		-- TSFuncBuiltin = { fg = "#0059ff" },
+	},
 
 	-- Plugins Config --
 	diagnostics = {

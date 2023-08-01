@@ -51,6 +51,16 @@ packer.startup({
 		})
 
 		-- =============================================================================
+		-- markdown-preview
+		-- install without yarn or npm
+		use({
+			"iamcco/markdown-preview.nvim",
+			ft = { "markdown" },
+			config = function()
+				require("conf.markdown-preview")
+				vim.fn["mkdp#util#install"]()
+			end,
+		})
 
 		-- nvim-tree
 		use({

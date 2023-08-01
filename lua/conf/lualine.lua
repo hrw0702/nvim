@@ -133,7 +133,7 @@ ins_left({
 		if Mode.map[mode_code] == nil then
 			return mode_code
 		end
-		return "" .. Mode.map[mode_code]
+		return " " .. Mode.map[mode_code]
 	end,
 	-- stylua: ignore
 	color = function()
@@ -160,7 +160,8 @@ ins_left({
 			["!"] = colors.red,
 			t = colors.red,
 		}
-		return { fg = mode_color[vim.fn.mode()] }
+		-- return { bg = mode_color[vim.fn.mode()],fg = Black, }
+		return { bg = mode_color[vim.fn.mode()],gui = "bold" }
 	end,
 	padding = { right = 1 },
 })
@@ -168,7 +169,8 @@ ins_left({
 ins_left({
 	"branch",
 	icon = "",
-	color = { fg = colors.violet, gui = "bold" },
+	-- color = { fg = colors.violet,  gui = "bold" },
+	color = { fg = colors.violet },
 })
 
 ins_left({
@@ -180,12 +182,12 @@ ins_left({
 ins_left({
 	"filename",
 	cond = conditions.buffer_not_empty,
-	color = { fg = colors.magenta, gui = "bold" },
+	color = { fg = colors.magenta },
 })
 
 ins_left({ "location" })
 
-ins_left({ "progress", color = { fg = colors.fg, gui = "bold" } })
+ins_left({ "progress", color = { fg = colors.fg } })
 
 ins_left({
 	"diagnostics",
@@ -236,10 +238,12 @@ ins_right({
 })
 
 ins_right({
-	"fileformat",
+	-- "fileformat",
+	"filetype",
+	colored = true, -- Displays filetype icon in color if set to true
 	fmt = string.upper,
 	icons_enabled = false, -- I think icons are cool but Eviline doesn't have them. sigh
-	color = { fg = colors.green, gui = "bold" },
+	color = { fg = colors.green },
 })
 
 ins_right({

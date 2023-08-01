@@ -42,8 +42,8 @@ require("formatter").setup({
 					try_node_modules = true,
 				}
 			end,
-		}
-	}
+		},
+	},
 })
 
 --配置保存文件自动格式化代码
@@ -51,7 +51,7 @@ vim.api.nvim_exec(
 	[[
     augroup FormatAutogroup
     autocmd!
-    autocmd BufWritePost *.c,*.cpp,*.lua FormatWrite
+    autocmd BufWritePost *.c,*.cpp,*.h,*.lua FormatWrite
     augroup END
 ]],
 	true
