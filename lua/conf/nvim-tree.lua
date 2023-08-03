@@ -105,7 +105,7 @@ require("nvim-tree").setup({ -- BEGIN_DEFAULT_OPTS
 			glyphs = {
 				default = "",
 				symlink = "",
-				bookmark = "󰆤",
+				bookmark = "",
 				modified = "●",
 				folder = {
 					arrow_closed = "",
