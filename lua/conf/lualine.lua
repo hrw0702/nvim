@@ -77,10 +77,11 @@ end
 
 ins_left({
 	function()
-		return "▊"
+		-- return "▊"
+		return ""
 	end,
 	color = { fg = colors.blue }, -- Sets highlighting of component
-	padding = { left = 0, right = 1 }, -- We don't need space before this
+	padding = { left = 0, right = 0 }, -- We don't need space before this
 })
 
 -- NOTE:
@@ -133,7 +134,8 @@ ins_left({
 		if Mode.map[mode_code] == nil then
 			return mode_code
 		end
-		return " " .. Mode.map[mode_code]
+		-- section_separators = { left = '', right = '' },
+		return "" .. Mode.map[mode_code]
 	end,
 	-- stylua: ignore
 	color = function()
@@ -163,7 +165,16 @@ ins_left({
 		-- return { bg = mode_color[vim.fn.mode()],fg = Black, }
 		return { bg = mode_color[vim.fn.mode()],gui = "bold" }
 	end,
-	padding = { right = 1 },
+	padding = { left = 1, right = 1 },
+})
+
+ins_left({
+	function()
+		-- return "▊"
+		return ""
+	end,
+	color = { fg = colors.blue }, -- Sets highlighting of component
+	padding = { left = 0, right = 1 }, -- We don't need space before this
 })
 
 ins_left({
@@ -174,18 +185,18 @@ ins_left({
 })
 
 ins_left({
-	-- filesize component
-	"filesize",
-	cond = conditions.buffer_not_empty,
-})
-
-ins_left({
 	"filename",
 	cond = conditions.buffer_not_empty,
 	color = { fg = colors.magenta },
 })
 
-ins_left({ "location" })
+ins_left({
+	-- filesize component
+	"filesize",
+	cond = conditions.buffer_not_empty,
+})
+
+ins_left({ "location", color = { fg = colors.blue } })
 
 ins_left({ "progress", color = { fg = colors.fg } })
 
@@ -208,7 +219,35 @@ ins_left({
 	end,
 })
 
-ins_left({
+-- Add components to right sections
+ins_right({
+	"diff",
+	-- Is it me or the symbol for modified us really weird
+	symbols = { added = " ", modified = "柳 ", removed = " " },
+	diff_color = {
+		added = { fg = colors.green },
+		modified = { fg = colors.orange },
+		removed = { fg = colors.red },
+	},
+	cond = conditions.hide_in_width,
+})
+ins_right({
+	--  "fileformat",
+	"filetype",
+	colored = true, -- Displays filetype icon in color if set to true
+	fmt = string.upper,
+	icons_enabled = true, -- I think icons are cool but Eviline doesn't have them. sigh
+	color = { fg = colors.green },
+})
+
+ins_right({
+	"o:encoding", -- option component same as &encoding in viml
+	fmt = string.upper, -- I'm not sure why it's upper case either ;)
+	cond = conditions.hide_in_width,
+	color = { fg = colors.green },
+})
+
+ins_right({
 	-- Lsp server name .
 	function()
 		local msg = "No Active Lsp"
@@ -227,40 +266,12 @@ ins_left({
 	end,
 	icon = " LSP:",
 	color = { fg = colors.cyan, gui = "bold" },
-})
-
--- Add components to right sections
-ins_right({
-	"o:encoding", -- option component same as &encoding in viml
-	fmt = string.upper, -- I'm not sure why it's upper case either ;)
-	cond = conditions.hide_in_width,
-	color = { fg = colors.green, gui = "bold" },
-})
-
-ins_right({
-	-- "fileformat",
-	"filetype",
-	colored = true, -- Displays filetype icon in color if set to true
-	fmt = string.upper,
-	icons_enabled = false, -- I think icons are cool but Eviline doesn't have them. sigh
-	color = { fg = colors.green },
-})
-
-ins_right({
-	"diff",
-	-- Is it me or the symbol for modified us really weird
-	symbols = { added = " ", modified = "柳 ", removed = " " },
-	diff_color = {
-		added = { fg = colors.green },
-		modified = { fg = colors.orange },
-		removed = { fg = colors.red },
-	},
-	cond = conditions.hide_in_width,
+	-- padding = { left = 70 },
 })
 
 ins_right({
 	function()
-		return "▊"
+		return ""
 	end,
 	color = { fg = colors.blue },
 	padding = { left = 1 },
