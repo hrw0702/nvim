@@ -1,19 +1,19 @@
 local lualine = require("lualine")
-
+-- onedark主题
 -- Color table for highlights
 -- stylua: ignore
 local colors = {
-    bg       = '#202328',
-    fg       = '#bbc2cf',
-    yellow   = '#E0BE7B',
-    cyan     = '#008080',
+    bg       = '#282c34',
+    fg       = '#abb2bf',
+    yellow   = '#e5c07b',
+    cyan     = '#56b6c2',
     darkblue = '#081633',
-    green    = '#18be65',
+    green    = '#98c379',
     orange   = '#FF8800',
-    violet   = '#a9a1e1',
-    magenta  = '#a678dd',
-    blue     = '#01afef',
-    red      = '#e05f67',
+    violet   = '#c678dd',
+    magenta  = '#be5046',
+    blue     = '#61afef',
+    red      = '#e06c75',
 }
 
 local conditions = {
@@ -141,26 +141,29 @@ ins_left({
 	color = function()
 		-- auto change color according to neovims mode
 		local mode_color = {
-			n = colors.red,
-			i = colors.green,
-			v = colors.blue,
+			n = colors.green,
+			i = colors.blue,
+			v = colors.violet,
 			[""] = colors.blue,
-			V = colors.blue,
-			c = colors.magenta,
-			no = colors.red,
+			V = colors.violet,
+            ['\22'] = colors.violet,
+            ['\22s'] = colors.violet,
+			c = colors.yellow,
+			no = colors.green,
 			s = colors.orange,
 			S = colors.orange,
 			[""] = colors.orange,
 			ic = colors.yellow,
-			R = colors.violet,
+			R = colors.red,
+            ['r'] =colors.magenta, 
 			Rv = colors.violet,
-			cv = colors.red,
-			ce = colors.red,
+			cv = colors.green,
+			ce = colors.green,
 			r = colors.cyan,
 			rm = colors.cyan,
 			["r?"] = colors.cyan,
-			["!"] = colors.red,
-			t = colors.red,
+			["!"] = colors.green,
+			t = colors.cyan,
 		}
 		-- return { bg = mode_color[vim.fn.mode()],fg = Black, }
 		return { bg = mode_color[vim.fn.mode()],gui = "bold" }
@@ -182,13 +185,13 @@ ins_left({
 	-- icon = "",
 	icon = "",
 	-- color = { fg = colors.violet,  gui = "bold" },
-	color = { fg = colors.violet },
+	color = { fg = colors.fg },
 })
 
 ins_left({
 	"filename",
 	cond = conditions.buffer_not_empty,
-	color = { fg = colors.magenta },
+	color = { fg = colors.violet },
 })
 
 ins_left({
@@ -236,14 +239,14 @@ ins_right({
 	--  "fileformat",
 	"filetype",
 	colored = true, -- Displays filetype icon in color if set to true
-	fmt = string.upper,
+	-- fmt = string.upper,
 	icons_enabled = true, -- I think icons are cool but Eviline doesn't have them. sigh
 	color = { fg = colors.green },
 })
 
 ins_right({
 	"o:encoding", -- option component same as &encoding in viml
-	fmt = string.upper, -- I'm not sure why it's upper case either ;)
+	-- fmt = string.upper, -- I'm not sure why it's upper case either ;)
 	cond = conditions.hide_in_width,
 	color = { fg = colors.green },
 })
@@ -266,7 +269,7 @@ ins_right({
 		return msg
 	end,
 	icon = " LSP:",
-	color = { fg = colors.cyan, gui = "bold" },
+	color = { fg = colors.cyan },
 	-- padding = { left = 70 },
 })
 
