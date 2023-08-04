@@ -64,19 +64,26 @@ packer.startup({
 
 		-- nvim-tree
 		use({
-			"kyazdani42/nvim-tree.lua",
+			"nvim-tree/nvim-tree.lua",
 			requires = {
-				"kyazdani42/nvim-web-devicons", -- optional, for file icon
+				"nvim-tree/nvim-web-devicons", -- optional, for file icon
 			},
 			config = function()
 				-- 插件加载完成后自动运行 lua/conf/nvim-tree.lua 文件中的代码
 				require("conf.nvim-tree")
 			end,
 		})
+
+		use({
+			"nvim-tree/nvim-web-devicons",
+			config = function()
+				require("conf.nvim-web-devicons")
+			end,
+		})
 		-- lualine
 		use({
 			"nvim-lualine/lualine.nvim",
-			requires = { "kyazdani42/nvim-web-devicons", opt = true },
+			requires = { "nvim-tree/nvim-web-devicons", opt = true },
 			config = function()
 				require("conf.lualine")
 			end,
@@ -85,7 +92,7 @@ packer.startup({
 		use({
 			"akinsho/bufferline.nvim",
 			requires = {
-				"kyazdani42/nvim-web-devicons",
+				"nvim-tree/nvim-web-devicons",
 				-- 删除 buffer 时不影响现有布局
 				"famiu/bufdelete.nvim",
 			},
@@ -168,7 +175,7 @@ packer.startup({
 
 		use({
 			"folke/trouble.nvim",
-			requires = "kyazdani42/nvim-web-devicons",
+			requires = "nvim-tree/nvim-web-devicons",
 			config = function()
 				require("conf.trouble")
 			end,
