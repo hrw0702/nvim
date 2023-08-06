@@ -3,19 +3,87 @@ local lualine = require("lualine")
 -- Color table for highlights
 -- stylua: ignore
 local colors = {
-    bg       = '#282c34',
-    fg       = '#abb2bf',
-    yellow   = '#e5c07b',
-    cyan     = '#56b6c2',
-    darkblue = '#081633',
-    green    = '#98c379',
-    orange   = '#FF8800',
-    violet   = '#c678dd',
-    magenta  = '#be5046',
-    blue     = '#61afef',
-    red      = '#e06c75',
+    bg        = '#282c34',
+    fg        = '#abb2bf',
+    yellow    = '#e5c07b',
+    cyan      = '#56b6c2',
+    darkblue  = '#081633',
+    green     = '#98c379',
+    orange    = '#FF8800',
+    violet    = '#c678dd',
+    magenta   = '#be5046',
+    blue      = '#61afef',
+    red       = '#e06c75',
+    vim_green = '#A6e22e',
 }
 
+local Mode = {
+
+        -- stylua: ignore
+        map = {
+            ['n']      = 'NORMAL',
+            ['no']     = 'O-PENDING',
+            ['nov']    = 'O-PENDING',
+            ['noV']    = 'O-PENDING',
+            ['no\22'] = 'O-PENDING',
+            ['niI']    = 'NORMAL',
+            ['niR']    = 'NORMAL',
+            ['niV']    = 'NORMAL',
+            ['nt']     = 'NORMAL',
+            ['v']      = 'VISUAL',
+            ['vs']     = 'VISUAL',
+            ['V']      = 'V-LINE',
+            ['Vs']     = 'V-LINE',
+            ['\22']   = 'V-BLOCK',
+            ['\22s']  = 'V-BLOCK',
+            ['s']      = 'SELECT',
+            ['S']      = 'S-LINE',
+            ['\19']   = 'S-BLOCK',
+            ['i']      = 'INSERT',
+            ['ic']     = 'INSERT',
+            ['ix']     = 'INSERT',
+            ['R']      = 'REPLACE',
+            ['Rc']     = 'REPLACE',
+            ['Rx']     = 'REPLACE',
+            ['Rv']     = 'V-REPLACE',
+            ['Rvc']    = 'V-REPLACE',
+            ['Rvx']    = 'V-REPLACE',
+            ['c']      = 'COMMAND',
+            ['cv']     = 'EX',
+            ['ce']     = 'EX',
+            ['r']      = 'REPLACE',
+            ['rm']     = 'MORE',
+            ['r?']     = 'CONFIRM',
+            ['!']      = 'SHELL',
+            ['t']      = 'TERMINAL',
+       },
+}
+
+local mode_color = {
+	n = colors.green,
+	i = colors.blue,
+	v = colors.violet,
+	[""] = colors.blue,
+	V = colors.violet,
+	["\22"] = colors.violet,
+	["\22s"] = colors.violet,
+	c = colors.yellow,
+	no = colors.green,
+	s = colors.orange,
+	S = colors.orange,
+	[""] = colors.orange,
+	ic = colors.yellow,
+	R = colors.red,
+	["r"] = colors.magenta,
+	Rv = colors.violet,
+	cv = colors.green,
+	ce = colors.green,
+	r = colors.cyan,
+	rm = colors.cyan,
+	["r?"] = colors.cyan,
+	["!"] = colors.green,
+	t = colors.cyan,
+}
 local conditions = {
 	buffer_not_empty = function()
 		return vim.fn.empty(vim.fn.expand("%:t")) ~= 1
@@ -77,11 +145,14 @@ end
 
 ins_left({
 	function()
-		-- return "▊"
-		return ""
+		-- return "▊"
+		return ""
 	end,
-	color = { fg = colors.blue }, -- Sets highlighting of component
-	padding = { left = 0, right = 0 }, -- We don't need space before this
+	color = function()
+		-- return { fg = mode_color[vim.fn.mode()], bg = colors.darkblue } -- Sets highlighting of component
+		return { fg = colors.green, bg = colors.darkblue } -- Sets highlighting of component
+	end,
+	padding = { left = 1, right = 1 }, -- We don't need space before this
 })
 
 -- NOTE:
@@ -89,47 +160,6 @@ ins_left({
 	-- mode component
 	function()
 		-- return ''
-		local Mode = {}
-
-        -- stylua: ignore
-        Mode.map = {
-            ['n']      = 'NORMAL',
-            ['no']     = 'O-PENDING',
-            ['nov']    = 'O-PENDING',
-            ['noV']    = 'O-PENDING',
-            ['no\22'] = 'O-PENDING',
-            ['niI']    = 'NORMAL',
-            ['niR']    = 'NORMAL',
-            ['niV']    = 'NORMAL',
-            ['nt']     = 'NORMAL',
-            ['v']      = 'VISUAL',
-            ['vs']     = 'VISUAL',
-            ['V']      = 'V-LINE',
-            ['Vs']     = 'V-LINE',
-            ['\22']   = 'V-BLOCK',
-            ['\22s']  = 'V-BLOCK',
-            ['s']      = 'SELECT',
-            ['S']      = 'S-LINE',
-            ['\19']   = 'S-BLOCK',
-            ['i']      = 'INSERT',
-            ['ic']     = 'INSERT',
-            ['ix']     = 'INSERT',
-            ['R']      = 'REPLACE',
-            ['Rc']     = 'REPLACE',
-            ['Rx']     = 'REPLACE',
-            ['Rv']     = 'V-REPLACE',
-            ['Rvc']    = 'V-REPLACE',
-            ['Rvx']    = 'V-REPLACE',
-            ['c']      = 'COMMAND',
-            ['cv']     = 'EX',
-            ['ce']     = 'EX',
-            ['r']      = 'REPLACE',
-            ['rm']     = 'MORE',
-            ['r?']     = 'CONFIRM',
-            ['!']      = 'SHELL',
-            ['t']      = 'TERMINAL',
-        }
-
 		local mode_code = vim.api.nvim_get_mode().mode
 		if Mode.map[mode_code] == nil then
 			return mode_code
@@ -140,43 +170,21 @@ ins_left({
 	-- stylua: ignore
 	color = function()
 		-- auto change color according to neovims mode
-		local mode_color = {
-			n = colors.green,
-			i = colors.blue,
-			v = colors.violet,
-			[""] = colors.blue,
-			V = colors.violet,
-            ['\22'] = colors.violet,
-            ['\22s'] = colors.violet,
-			c = colors.yellow,
-			no = colors.green,
-			s = colors.orange,
-			S = colors.orange,
-			[""] = colors.orange,
-			ic = colors.yellow,
-			R = colors.red,
-            ['r'] =colors.magenta, 
-			Rv = colors.violet,
-			cv = colors.green,
-			ce = colors.green,
-			r = colors.cyan,
-			rm = colors.cyan,
-			["r?"] = colors.cyan,
-			["!"] = colors.green,
-			t = colors.cyan,
-		}
 		-- return { bg = mode_color[vim.fn.mode()],fg = Black, }
 		return { bg = mode_color[vim.fn.mode()],gui = "bold" }
 	end,
-	padding = { left = 1, right = 1 },
+	padding = { left = 1, right = 0 },
 })
 
 ins_left({
 	function()
 		-- return "▊"
-		return ""
+		return ""
 	end,
-	color = { fg = colors.blue }, -- Sets highlighting of component
+	-- color = { fg = colors.blue }, -- Sets highlighting of component
+	color = function()
+		return { fg = mode_color[vim.fn.mode()] } -- Sets highlighting of component
+	end,
 	padding = { left = 0, right = 1 }, -- We don't need space before this
 })
 
@@ -230,8 +238,8 @@ ins_right({
 	symbols = { added = " ", modified = "柳 ", removed = " " },
 	diff_color = {
 		added = { fg = colors.green },
-		modified = { fg = colors.orange },
-		removed = { fg = colors.red },
+		modified = { fg = colors.yellow },
+		removed = { fg = colors.magenta },
 	},
 	cond = conditions.hide_in_width,
 })
@@ -275,10 +283,10 @@ ins_right({
 
 ins_right({
 	function()
-		return ""
+		return " " .. os.date("%H:%M:%S")
 	end,
-	color = { fg = colors.blue },
-	padding = { left = 1 },
+	color = { fg = colors.green },
+	padding = { left = 1, right = 1 },
 })
 
 -- Now don't forget to initialize lualine
