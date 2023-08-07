@@ -119,6 +119,12 @@ packer.startup({
 			end,
 		})
 
+		use({
+			"fgheng/winbar.nvim",
+			config = function()
+				require("conf.winbar")
+			end,
+		})
 		-- 缩进线插件
 		use({
 			"lukas-reineke/indent-blankline.nvim",
@@ -210,12 +216,18 @@ packer.startup({
 
 		-- 大纲预览
 		use({
-			"stevearc/aerial.nvim",
+			"simrat39/symbols-outline.nvim",
 			config = function()
-				require("conf.aerial")
+				require("conf.outline")
 			end,
-			-- cmd = { "AerialToggle" },
 		})
+		-- use({
+		-- 	"stevearc/aerial.nvim",
+		-- 	config = function()
+		-- 		require("conf.aerial")
+		-- 	end,
+		-- 	-- cmd = { "AerialToggle" },
+		-- })
 		-- 代码格式化
 		use({
 			"mhartington/formatter.nvim",

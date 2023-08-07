@@ -24,6 +24,7 @@ end
 -- 新建浮动终端
 local floatTerm = Terminal:new({
 	hidden = true,
+	-- direction = 'vertical' | 'horizontal' | 'tab' | 'float',
 	direction = "float",
 	float_opts = {
 		-- 'single' | 'double' | 'shadow' | 'curved' | ... other options supported by win open

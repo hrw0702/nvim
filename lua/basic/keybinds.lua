@@ -1,7 +1,3 @@
--- 设置leader键为空格
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
-
 -- 保持本地变量
 -- 之后就可以这样映射按键
 -- vim.keybinds.gmap("模式", "按键", "映射为XX", vim.keybinds.opts)
@@ -15,6 +11,12 @@ vim.keybinds = {
 
 -- "jk" 映射<ESC>键
 vim.keybinds.gmap("i", "jk", "<ESC>", vim.keybinds.opts)
+
+-- 把空格键映射为空
+vim.keybinds.gmap("n", " ", "<Nop>", vim.keybinds.opts)
+-- 设置leader键为空格
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
 
 -- 映射INSERT模式下移动光标
 -- Alt+j j
@@ -58,3 +60,6 @@ vim.keybinds.gmap("n", "<F4>", ":FormatWrite<CR>", vim.keybinds.opts)
 vim.keybinds.gmap("n", "<F5>", ":MarkdownPreview<CR>", vim.keybinds.opts)
 vim.keybinds.gmap("n", "<leader>ps", ":MarkdownPreviewStop<CR>", vim.keybinds.opts)
 vim.keybinds.gmap("n", "<leader>pt", ":MarkdownPreviewToggle<CR>", vim.keybinds.opts)
+
+-- SymbolsOutline 大纲
+vim.keybinds.gmap("n", "<leader>so", ":SymbolsOutline<CR>", vim.keybinds.opts)

@@ -1,8 +1,9 @@
 local lualine = require("lualine")
--- onedark主题
+
 -- Color table for highlights
 -- stylua: ignore
 local colors = {
+    -- onedark主题配色
     bg        = '#282c34',
     fg        = '#abb2bf',
     yellow    = '#e5c07b',
@@ -14,11 +15,10 @@ local colors = {
     magenta   = '#be5046',
     blue      = '#61afef',
     red       = '#e06c75',
-    vim_green = '#A6e22e',
+    vim_green = '#3cb371',
 }
 
 local Mode = {
-
         -- stylua: ignore
         map = {
             ['n']      = 'NORMAL',
@@ -84,12 +84,13 @@ local mode_color = {
 	["!"] = colors.green,
 	t = colors.cyan,
 }
+
 local conditions = {
 	buffer_not_empty = function()
 		return vim.fn.empty(vim.fn.expand("%:t")) ~= 1
 	end,
 	hide_in_width = function()
-		return vim.fn.winwidth(0) > 80
+		return vim.fn.winwidth(0) > 100
 	end,
 	check_git_workspace = function()
 		local filepath = vim.fn.expand("%:p:h")
@@ -198,6 +199,7 @@ ins_left({
 
 ins_left({
 	"filename",
+	-- icon = "",
 	cond = conditions.buffer_not_empty,
 	color = { fg = colors.violet },
 })
@@ -231,35 +233,7 @@ ins_left({
 	end,
 })
 
--- Add components to right sections
-ins_right({
-	"diff",
-	-- Is it me or the symbol for modified us really weird
-	symbols = { added = " ", modified = "柳 ", removed = " " },
-	diff_color = {
-		added = { fg = colors.green },
-		modified = { fg = colors.yellow },
-		removed = { fg = colors.magenta },
-	},
-	cond = conditions.hide_in_width,
-})
-ins_right({
-	--  "fileformat",
-	"filetype",
-	colored = true, -- Displays filetype icon in color if set to true
-	-- fmt = string.upper,
-	icons_enabled = true, -- I think icons are cool but Eviline doesn't have them. sigh
-	color = { fg = colors.green },
-})
-
-ins_right({
-	"o:encoding", -- option component same as &encoding in viml
-	-- fmt = string.upper, -- I'm not sure why it's upper case either ;)
-	cond = conditions.hide_in_width,
-	color = { fg = colors.green },
-})
-
-ins_right({
+ins_left({
 	-- Lsp server name .
 	function()
 		local msg = "No Active Lsp"
@@ -278,14 +252,46 @@ ins_right({
 	end,
 	icon = " LSP:",
 	color = { fg = colors.cyan },
+	-- 宽度不够时隐藏
+	cond = conditions.hide_in_width,
 	-- padding = { left = 70 },
+})
+ins_right({
+	"diff",
+	-- Is it me or the symbol for modified us really weird
+	symbols = { added = " ", modified = "柳 ", removed = " " },
+	diff_color = {
+		added = { fg = colors.green },
+		modified = { fg = colors.yellow },
+		removed = { fg = colors.magenta },
+	},
+	cond = conditions.hide_in_width,
+	-- padding = { left = 5, right = 20 },
+})
+-- Add components to right sections
+ins_right({
+	--  "fileformat",
+	"filetype",
+	colored = true, -- Displays filetype icon in color if set to true
+	-- fmt = string.upper,
+	icons_enabled = true, -- I think icons are cool but Eviline doesn't have them. sigh
+	color = { fg = colors.vim_green },
+})
+
+ins_right({
+	"o:encoding", -- option component same as &encoding in viml
+	-- fmt = string.upper, -- I'm not sure why it's upper case either ;)
+	-- icon = "",
+	cond = conditions.hide_in_width,
+	color = { fg = colors.green },
 })
 
 ins_right({
 	function()
 		return " " .. os.date("%H:%M:%S")
 	end,
-	color = { fg = colors.green },
+	-- cond = conditions.hide_in_width,
+	color = { fg = colors.cyan },
 	padding = { left = 1, right = 1 },
 })
 
