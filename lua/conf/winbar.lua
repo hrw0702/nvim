@@ -15,13 +15,12 @@ local colors = {
 
 require("winbar").setup({
 	enabled = true,
-
 	show_file_path = true,
 	show_symbols = true,
 
 	colors = {
 		-- You can customize colors like #c946fd,#98c379
-		path =  colors.cyan,
+		path = colors.cyan,
 		file_name = colors.blue,
 		symbols = colors.darkblue,
 	},
