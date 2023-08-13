@@ -198,6 +198,49 @@ local {} = {}
 
 -- Tutorial Snippets go here --
 
--- End Refactoring --
+local myFirstSnippet = s("myFirstSnippet", {
+	t("Hi! This is my first snippets in LuaSnip."),
+	i(1, "placeholder_text"),
+	t("This is another text node."),
+})
+table.insert(snippets, myFirstSnippet)
 
+local mySecondSnippet = s(
+	"mySecondSnippet",
+	fmt(
+		[[
+local {} = function({})
+    {}
+end
+]],
+		{
+			i(1, "myVar"),
+			c(2, { t("choice arg"), i(1, "myArg"), i(2, "myArg2") }),
+			i(3, "-- TODO: something"),
+		}
+	)
+)
+table.insert(snippets, mySecondSnippet)
+
+local myFirstAutoSnippet = s(
+	{ trig = "digit(%d%d)", dscr = "digit number", regTrig = true },
+
+	f(function(_, snip)
+		return snip.captures[1]
+	end)
+)
+table.insert(snippets, myFirstAutoSnippet)
+
+local myFourSnippet = s("four", {
+	t("-- Param: "),
+	i(1, "text 1 "),
+	i(2, { "text 2 ", "text 3 " }),
+
+	f(function(args, snip)
+		return args[1][1] .. args[1][2] .. args[2][1] .. " END"
+	end, { 2, 1 }),
+})
+table.insert(snippets, myFourSnippet)
+
+-- End Refactoring --
 return snippets, autosnippets

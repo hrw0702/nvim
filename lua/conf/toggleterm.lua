@@ -6,7 +6,33 @@ Toggleterm.setup({
 	--  开启的终端默认进入插入模式
 	start_in_insert = true,
 	-- 设置终端打开的大小
-	size = 18,
+	size = function(term)
+		if term.direction == "horizontal" then
+			return 12
+		elseif term.direction == "vertical" then
+			return vim.o.columns * 0.4
+		end
+	end,
+
+	-- hide the number column in toggleterm buffers
+	hide_numbers = true,
+
+	direction = "horizontal",
+	highlights = {
+		-- highlights which map to a highlight group name and a table of it's values
+		-- NOTE: this is only a subset of values, any group placed here will be set for the terminal window split
+		Normal = {
+			guibg = "Normal",
+		},
+		-- NormalFloat = {
+		-- 	link = "Normal",
+		-- },
+		-- FloatBorder = {
+		-- 	guifg = "<VALUE-HERE>",
+		-- 	guibg = "<VALUE-HERE>",
+		-- },
+	},
+	-- size = 18,
 	-- 打开普通终端时，关闭拼写检查
 	on_open = function()
 		vim.cmd("setlocal nospell")

@@ -34,15 +34,46 @@ ls.config.set_config({
 
 -- More Settings --
 -- inoremap <c-u> <cmd>lua require("luasnip.extras.select_choice")()
-vim.keymap.set({ "i", "s" }, "<C-p>", function()
+--
+-- key Maps
+-- feel free to change the keys to new ones, those are just my current mappings
+vim.keymap.set("i", "<C-j>", function()
 	if ls.choice_active() then
-		ls.change_choice(1)
+		return ls.change_choice(1)
+	else
+		return _G.dynamic_node_external_update(1) -- feel free to update to any index i
 	end
-end)
-vim.keymap.set({ "i", "s" }, "<C-n>", function()
+end, { noremap = true })
+vim.keymap.set("s", "<C-j>", function()
 	if ls.choice_active() then
-		ls.change_choice(-1)
+		return ls.change_choice(1)
+	else
+		return _G.dynamic_node_external_update(1)
 	end
-end)
+end, { noremap = true })
+vim.keymap.set("i", "<C-k>", function()
+	if ls.choice_active() then
+		return ls.change_choice(-1)
+	else
+		return _G.dynamic_node_external_update(2)
+	end
+end, { noremap = true })
+vim.keymap.set("s", "<C-k>", function()
+	if ls.choice_active() then
+		return ls.change_choice(-1)
+	else
+		return _G.dynamic_node_external_update(2)
+	end
+end, { noremap = true })
+-- vim.keymap.set({ "i", "s" }, "<C-j>", function()
+-- 	if ls.choice_active() then
+-- 		ls.change_choice(1)
+-- 	end
+-- end)
+-- vim.keymap.set({ "i", "s" }, "<C-k>", function()
+-- 	if ls.choice_active() then
+-- 		ls.change_choice(-1)
+-- 	end
+-- end)
 vim.keymap.set("n", "<Leader><CR>", "<cmd>LuaSnipEdit<cr>", { silent = true, noremap = true })
 vim.cmd([[autocmd BufEnter */snippets/*.lua nnoremap <silent> <buffer> <CR> /-- End Refactoring --<CR>O<Esc>O]])

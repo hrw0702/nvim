@@ -125,7 +125,7 @@ local config = {
 	},
 	inactive_sections = {
 		-- these are to remove the defaults
-		-- lualine_a = {},
+		lualine_a = {},
 		lualine_b = {},
 		lualine_y = {},
 		lualine_z = {},
@@ -156,7 +156,6 @@ ins_left({
 	padding = { left = 1, right = 1 }, -- We don't need space before this
 })
 
--- NOTE:
 ins_left({
 	-- mode component
 	function()
@@ -172,7 +171,7 @@ ins_left({
 	color = function()
 		-- auto change color according to neovims mode
 		-- return { bg = mode_color[vim.fn.mode()],fg = Black, }
-		return { bg = mode_color[vim.fn.mode()],gui = "bold" }
+		return { fg = colors.bg,bg = mode_color[vim.fn.mode()],gui = "bold" }
 	end,
 	padding = { left = 1, right = 0 },
 })
@@ -198,10 +197,21 @@ ins_left({
 })
 
 ins_left({
+	--  "fileformat",
+	"filetype",
+	colored = true, -- Displays filetype icon in color if set to true
+	-- fmt = string.upper,
+	-- cond = conditions.buffer_not_empty,
+	-- 只显示图标
+	icon_only = true,
+	icons_enabled = true, -- I think icons are cool but Eviline doesn't have them. sigh
+	color = { fg = colors.vim_green },
+})
+ins_left({
 	"filename",
 	-- icon = "",
-	cond = conditions.buffer_not_empty,
 	color = { fg = colors.violet },
+	padding = { left = 0, right = 2 }, -- We don't need space before this
 })
 
 ins_left({
@@ -275,15 +285,6 @@ ins_right({
 	},
 	cond = conditions.hide_in_width,
 	-- padding = { left = 5, right = 20 },
-})
-
-ins_right({
-	--  "fileformat",
-	"filetype",
-	colored = true, -- Displays filetype icon in color if set to true
-	-- fmt = string.upper,
-	icons_enabled = true, -- I think icons are cool but Eviline doesn't have them. sigh
-	color = { fg = colors.vim_green },
 })
 
 ins_right({
