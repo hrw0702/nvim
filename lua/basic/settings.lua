@@ -21,14 +21,14 @@ vim.wo.signcolumn = "yes"
 -- 右侧参考线，超过表示代码太长了，考虑换行
 -- vim.wo.colorcolumn = "80"
 -- 缩进2个空格等于一个Tab
-vim.o.tabstop = 2
-vim.bo.tabstop = 2
-vim.o.softtabstop = 2
+vim.o.tabstop = 4
+vim.bo.tabstop = 4
+vim.o.softtabstop = 4
 vim.o.shiftround = true
 
 -- >> << 时移动长度
-vim.o.shiftwidth = 2
-vim.bo.shiftwidth = 2
+vim.o.shiftwidth = 4
+vim.bo.shiftwidth = 4
 
 -- 新行对齐当前行，空格替代tab
 vim.o.expandtab = true
@@ -51,7 +51,7 @@ vim.o.incsearch = true
 vim.o.showmode = false
 
 -- 命令行高为2，提供足够的显示空间
-vim.o.cmdheight = 2
+vim.o.cmdheight = 1
 
 -- 当文件被外部程序修改时，自动加载
 vim.o.autoread = true
@@ -96,6 +96,25 @@ vim.opt.termguicolors = true
 -- 不可见字符的显示，这里只把空格显示为一个点
 -- vim.o.list = true
 -- vim.o.listchars = "space:·"
+
+-- 代码手工折叠: "manual","indent","syntax","marker"
+-- zf: 创建折叠
+-- za: 打开/关闭当前的折叠
+-- zc: 关闭当前打开的折叠
+-- zo: 打开当前的折叠
+-- zm: 关闭所有的折叠
+-- zM: 关闭所有折叠及其嵌套的折叠
+-- zr: 打开所有的折叠
+-- zR: 打开所有折叠及其嵌套的折叠
+-- zd: 删除当前的折叠
+-- zE: 删除所有的折叠
+-- zj: 移动至下一个折叠
+-- zk: 移动至上一个折叠
+-- zn: 禁用折叠
+-- zN: 启用折叠
+vim.opt.foldenable = true
+vim.opt.foldmethod = "manual"
+vim.wo.foldlevel = 99
 
 -- 补全增强
 vim.o.wildmenu = true

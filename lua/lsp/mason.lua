@@ -1,13 +1,33 @@
+local lspconfig_status_ok, lspconfig = pcall(require, "lspconfig")
+if not lspconfig_status_ok then
+	return
+end
+
 local servers = {
+	-- C C++
 	"clangd",
-	--	"lua_ls",
-	-- "cssls",
-	-- "html",
-	-- "tsserver",
+	-- CMake
+	"cmake",
+	-- Lua
+	-- "lua_ls",
+	-- CSS
+	"cssls",
+	-- Html
+	"html",
+	-- Markdown
+	"marksman",
+	-- TypeScipt
+	"tsserver",
+	-- Python
 	"pyright",
-	-- "bashls",
+	-- Bash
+	"bashls",
+	-- Json
 	"jsonls",
-	-- "yamlls",
+	-- Yamlls
+	"yamlls",
+	-- Rust
+	"rust_analyzer",
 }
 
 local settings = {
@@ -23,16 +43,12 @@ local settings = {
 	max_concurrent_installers = 4,
 }
 
+-- 自动安装文件
 require("mason").setup(settings)
 require("mason-lspconfig").setup({
 	ensure_installed = servers,
 	automatic_installation = true,
 })
-
-local lspconfig_status_ok, lspconfig = pcall(require, "lspconfig")
-if not lspconfig_status_ok then
-	return
-end
 
 local opts = {}
 

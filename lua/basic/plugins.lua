@@ -8,9 +8,8 @@ packer.startup({
 		use({
 			"wbthomason/packer.nvim",
 		})
+
 		-- 安装其它插件
-		-- Neosolarized theme
-		--		use("overcache/NeoSolarized")
 		-- 优秀的暗色主题
 		-- =============================================================================
 		use({
@@ -19,36 +18,57 @@ packer.startup({
 			as = "catppuccin",
 			config = function()
 				-- 插件加载完成后自动运行 lua/conf/catppuccin.lua 文件中的代码
-				require("conf.catppuccin")
+				require("colorscheme.catppuccin")
 			end,
 		})
 
 		use({
 			"marko-cerovac/material.nvim",
 			config = function()
-				require("conf.material")
+				require("colorscheme.material")
 			end,
 		})
 
 		use({
 			"navarasu/onedark.nvim",
 			config = function()
-				require("conf.onedark")
+				require("colorscheme.onedark")
 			end,
 		})
 		use({
 			"EdenEast/nightfox.nvim",
 			config = function()
-				require("conf.nightfox")
+				require("colorscheme.nightfox")
 			end,
 		})
 
 		use({
 			"neanias/everforest-nvim",
 			config = function()
-				require("conf.everforest")
+				require("colorscheme.everforest")
 			end,
 		})
+
+		use({
+			"shaunsingh/solarized.nvim",
+			config = function()
+				require("colorscheme.solarized")
+			end,
+		})
+
+		use({
+			"loctvl842/monokai-pro.nvim",
+			config = function()
+				require("colorscheme.monokai-pro")
+			end,
+		})
+
+		-- use({
+		-- 	"savq/melange-nvim",
+		-- 	config = function()
+		-- 		require("colorscheme.melange")
+		-- 	end,
+		-- })
 
 		-- =============================================================================
 		-- markdown-preview
@@ -229,12 +249,12 @@ packer.startup({
 		-- 	-- cmd = { "AerialToggle" },
 		-- })
 		-- 代码格式化
-		use({
-			"mhartington/formatter.nvim",
-			config = function()
-				require("conf.formatter")
-			end,
-		})
+		-- use({
+		-- 	"mhartington/formatter.nvim",
+		-- 	config = function()
+		-- 		require("conf.formatter")
+		-- 	end,
+		-- })
 
 		-- 配置文件在 lsp目录
 		-- LSP 基础服务
@@ -258,7 +278,10 @@ packer.startup({
 			-- 	require("conf.mason-lspconfig")
 			-- end,
 		})
-		use({ "jose-elias-alvarez/null-ls.nvim" })
+		-- use({ "jose-elias-alvarez/null-ls.nvim" })
+		use({
+			"nvimdev/guard.nvim",
+		})
 
 		-- LSP UI 美化
 		use({
@@ -307,6 +330,14 @@ packer.startup({
 			config = function()
 				require("conf.nvim-cmp")
 			end,
+		})
+
+		-- 排序和过滤 nvim-cmp 结果
+		use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
+		-- use({ "romgrk/fzy-lua-native", run = "make" })
+		use({
+			"tzachar/cmp-fuzzy-buffer",
+			requires = { "hrsh7th/nvim-cmp", "tzachar/fuzzy.nvim" },
 		})
 
 		-- 模糊查找

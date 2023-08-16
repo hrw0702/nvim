@@ -1,4 +1,4 @@
--- "dark" or "light"
+-- 主题色调："dark" or "light"
 -- vim.o.background = "light"
 vim.o.background = "dark"
 local colorscheme = "onedark"
@@ -7,6 +7,7 @@ local colorscheme = "onedark"
 -- nightfox,dayfox,dawnfox,duskfox,nordfox,terafox,carbonfox
 -- onedark
 -- everforest
+-- monokai-pro
 --
 -- tokyonight
 -- OceanicNext
@@ -14,6 +15,7 @@ local colorscheme = "onedark"
 -- zephyr
 -- nord
 -- carbonfox
+-- melange
 --
 local status_ok, _ = pcall(vim.cmd, "colorscheme " .. colorscheme)
 if not status_ok then

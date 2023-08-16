@@ -53,8 +53,9 @@ vim.keybinds.gmap("n", "<S-h>", ":BufferLineCyclePrev<CR>", vim.keybinds.opts)
 vim.keybinds.gmap("n", "<S-l>", ":BufferLineCycleNext<CR>", vim.keybinds.opts)
 
 -- formatter 代码格式化
-vim.keybinds.gmap("n", "<leader>fr", ":Format<CR>", vim.keybinds.opts)
-vim.keybinds.gmap("n", "<F4>", ":FormatWrite<CR>", vim.keybinds.opts)
+-- vim.keybinds.gmap("n", "<leader>fr", ":Format<CR>", vim.keybinds.opts)
+vim.keybinds.gmap("n", "<leader>fr", ":GuardFmt<CR>", vim.keybinds.opts)
+-- vim.keybinds.gmap("n", "<F4>", ":FormatWrite<CR>", vim.keybinds.opts)
 
 -- MarkdownPreview
 vim.keybinds.gmap("n", "<F5>", ":MarkdownPreview<CR>", vim.keybinds.opts)

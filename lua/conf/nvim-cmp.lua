@@ -8,12 +8,14 @@ if not snip_status_ok then
 end
 
 require("luasnip/loaders/from_vscode").lazy_load()
-
+local compare = require("cmp.config.compare")
 local lspkind = require("lspkind")
 local check_backspace = function()
 	local col = vim.fn.col(".") - 1
 	return col == 0 or vim.fn.getline("."):sub(col, col):match("%s")
 end
+
+local WIDE_HEIGHT = 40
 
 --   פּ ﯟ   some other good icons
 local kind_icons = {
@@ -43,6 +45,9 @@ local kind_icons = {
 	Operator = "",
 	TypeParameter = "",
 }
+
+-- vscode icons
+
 -- local kind_icons = {
 -- 	Text = "",
 -- 	Method = "",
@@ -97,10 +102,11 @@ local kind_text = {
 	Event = "Event",
 	Operator = "Operator",
 	TypeParameter = "TypeParameter",
-	Snippet = "LuaSnip",
 }
 -- find more here: https://www.nerdfonts.com/cheat-sheet
+
 cmp.setup({
+	maxwidth = 50,
 	snippet = {
 		expand = function(args)
 			luasnip.lsp_expand(args.body) -- For `luasnip` users.
@@ -165,8 +171,14 @@ cmp.setup({
 		format = function(entry, vim_item)
 			-- From kind_icons array
 			-- vim_item.menu = string.format("[%s]", kind_text[vim_item.kind])
-			print(vim_item.kind)
+			-- print(vim_item.kind)
+
+			if string.len(vim_item.abbr) > 60 then
+				vim_item.abbr = string.sub(vim_item.abbr, 1, 60)
+			end
+
 			vim_item.kind = string.format("%s [%s]", kind_icons[vim_item.kind], kind_text[vim_item.kind])
+			print(vim_item.menu)
 			-- vim_item.kind = string.format("%s", kind_icons[vim_item.kind]) -- This concatonates the icons with the name of the item kind
 			-- Source
 			-- vim_item.menu = ({
@@ -174,27 +186,53 @@ cmp.setup({
 			-- 	luasnip = "[LuaSnip]",
 			-- 	nvim_lsp = "[LSP]",
 			-- 	path = "[Path]",
+			-- 	fuzzy_buffer = "[FuzzyBuffer]",
 			-- })[entry.source.name]
 			return vim_item
 		end,
 	},
-	-- formatting = {
-	-- 	fields = { "kind", "abbr", "menu" },
-	-- 	format = function(entry, vim_item)
-	-- 		local kind = require("lspkind").cmp_format({ mode = "symbol_text", maxwidth = 50 })(entry, vim_item)
-	-- 		local strings = vim.split(kind.kind, "%s", { trimempty = true })
-	-- 		-- kind.kind = " " .. (strings[1] or "") .. " "
-	-- 		vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
-	-- 		kind.menu = "    (" .. (strings[2] or "") .. ")"
-	-- 		return kind
-	-- 	end,
-	-- },
+	matching = {
+		-- 是否允许模糊匹配
+		disallow_fuzzy_matching = true,
+		-- 是否允许完全模糊匹配
+		disallow_fullfuzzy_matching = true,
+		-- 是否允许不带前缀匹配的模糊匹配
+		disallow_partial_fuzzy_matching = true,
+		-- 是否允许部分匹配
+		disallow_partial_matching = false,
+		-- 是否允许前缀不匹配
+		disallow_prefix_unmatching = false,
+	},
+
+	view = {
+		-- "custom","wildmenu","native"
+		entries = "custom",
+		selection_order = "top_down",
+	},
+
+	sorting = {
+		priority_weight = 2,
+		comparators = {
+			require("cmp_fuzzy_buffer.compare"),
+			compare.offset,
+			compare.exact,
+			-- compare.scopes,
+			compare.score,
+			compare.recently_used,
+			-- compare.locality,
+			compare.kind,
+			compare.sort_text,
+			compare.length,
+			compare.order,
+		},
+	},
 
 	sources = {
-		{ name = "nvim_lsp" }, -- For nvim-lsp
-		{ name = "luasnip" }, -- For ultisnips user.
-		{ name = "buffer" }, -- for buffer word completion
+		{ name = "nvim_lsp", keyword_length = 1 }, -- For nvim-lsp
+		{ name = "luasnip", keyword_length = 2 }, -- For ultisnips user.
+		{ name = "buffer", keyword_length = 2 }, -- for buffer word completion
 		{ name = "path" }, -- for path completion
+		-- { name = "fuzzy_buffer" }, -- for fuzzy_buffer completion
 	},
 
 	-- 字符触发个数
@@ -206,10 +244,28 @@ cmp.setup({
 		behavior = cmp.ConfirmBehavior.Replace,
 		select = false,
 	},
+
 	window = {
-		completion = cmp.config.window.bordered(),
-		documentation = cmp.config.window.bordered(),
+		completion = {
+			cmp.config.window.bordered(),
+			border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+			-- 弹出窗口高亮设置
+			-- winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,CursorLine:PmenuSel,Search:None",
+			winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,CursorLine:PmenuSel,Search:None",
+			-- scrolloff = 0,
+			col_offset = 0,
+			side_padding = 1,
+			scrollbar = true,
+		},
+		documentation = {
+			cmp.config.window.bordered(),
+			max_height = math.floor(WIDE_HEIGHT * (WIDE_HEIGHT / vim.o.lines)),
+			max_width = math.floor((WIDE_HEIGHT * 2) * (vim.o.columns / (WIDE_HEIGHT * 2 * 16 / 9))),
+			border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+			winhighlight = "FloatBorder:Pmenu",
+		},
 	},
+
 	experimental = {
 		ghost_text = false,
 		native_menu = false,
@@ -220,14 +276,15 @@ cmp.setup({
 cmp.setup.cmdline("/", {
 	mapping = cmp.mapping.preset.cmdline(),
 	sources = {
-		{ name = "buffer" },
+		-- { name = "buffer" },
+		{ name = "fuzzy_buffer" },
 	},
 })
 
 cmp.setup.cmdline("?", {
 	mapping = cmp.mapping.preset.cmdline(),
 	sources = {
-		{ name = "buffer" },
+		{ name = "fuzzy_buffer" },
 	},
 })
 
@@ -242,14 +299,15 @@ cmp.setup.cmdline(":", {
 })
 
 -- Customization for Pmenu
--- bg = "#282C34"
-vim.api.nvim_set_hl(0, "PmenuSel", { bg = "#282C34", fg = "NONE" })
+-- bg = "#282C34"Pmenu
+vim.api.nvim_set_hl(0, "PmenuSel", { fg = "#000000", bg = "#9fbd73" })
 vim.api.nvim_set_hl(0, "Pmenu", { fg = "#C5CDD9", bg = "NONE" })
 
 vim.api.nvim_set_hl(0, "CmpItemAbbrDeprecated", { fg = "#282c34", bg = "#9fbd73", strikethrough = true })
-vim.api.nvim_set_hl(0, "CmpItemAbbrMatch", { fg = "#82AAFF", bg = "NONE", bold = true })
-vim.api.nvim_set_hl(0, "CmpItemAbbrMatchFuzzy", { fg = "#82AAFF", bg = "NONE", bold = true })
-vim.api.nvim_set_hl(0, "CmpItemMenu", { fg = "#C792EA", bg = "NONE", italic = false })
+vim.api.nvim_set_hl(0, "CmpItemAbbrMatch", { fg = "#82AAFF", bg = "NONE", bold = false })
+vim.api.nvim_set_hl(0, "CmpItemAbbrMatchFuzzy", { fg = "#82AAFF", bg = "NONE", bold = false })
+-- vim.api.nvim_set_hl(0, "CmpItemMenu", { fg = "#C792EA", bg = "NONE", italic = false })
+vim.api.nvim_set_hl(0, "CmpItemMenu", { fg = "#58b5a8", bg = "NONE", italic = false })
 -- bg = "#B5585F"
 vim.api.nvim_set_hl(0, "CmpItemKindField", { fg = "#b5585f", bg = "NONE" })
 vim.api.nvim_set_hl(0, "CmpItemKindProperty", { fg = "#b5585f", bg = "NONE" })
