@@ -8,6 +8,8 @@ local colorscheme = "onedark"
 -- onedark
 -- everforest
 -- monokai-pro
+-- solarized
+-- NeoSolarized
 --
 -- tokyonight
 -- OceanicNext

@@ -57,6 +57,13 @@ packer.startup({
 		})
 
 		use({
+			"Tsuzat/NeoSolarized.nvim",
+			config = function()
+				require("colorscheme.NeoSolarized")
+			end,
+		})
+
+		use({
 			"loctvl842/monokai-pro.nvim",
 			config = function()
 				require("colorscheme.monokai-pro")
@@ -241,23 +248,10 @@ packer.startup({
 				require("conf.outline")
 			end,
 		})
-		-- use({
-		-- 	"stevearc/aerial.nvim",
-		-- 	config = function()
-		-- 		require("conf.aerial")
-		-- 	end,
-		-- 	-- cmd = { "AerialToggle" },
-		-- })
-		-- 代码格式化
-		-- use({
-		-- 	"mhartington/formatter.nvim",
-		-- 	config = function()
-		-- 		require("conf.formatter")
-		-- 	end,
-		-- })
 
-		-- 配置文件在 lsp目录
 		-- LSP 基础服务
+		-------------------------------------------------------------------------------
+		-- 配置文件在 lsp目录
 		use({
 			"neovim/nvim-lspconfig",
 			-- config = function()
@@ -294,7 +288,7 @@ packer.startup({
 		-- LSP 进度提示
 		use({
 			"j-hui/fidget.nvim",
-			"tag = legacy",
+			tag = "legacy",
 			config = function()
 				require("conf.fidget")
 			end,
@@ -307,6 +301,7 @@ packer.startup({
 				require("conf.lsp_signature")
 			end,
 		})
+		-------------------------------------------------------------------------------
 
 		-- 自动代码补全系列插件
 		use({
