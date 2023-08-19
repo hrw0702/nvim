@@ -1,15 +1,14 @@
 -- 主题色调："dark" or "light"
 -- vim.o.background = "light"
 vim.o.background = "dark"
-local colorscheme = "onedark"
+local colorscheme = "neo"
 -- 以安装主题
 -- catppuccin
 -- nightfox,dayfox,dawnfox,duskfox,nordfox,terafox,carbonfox
 -- onedark
 -- everforest
 -- monokai-pro
--- solarized
--- NeoSolarized
+-- neo (solarized)
 --
 -- tokyonight
 -- OceanicNext

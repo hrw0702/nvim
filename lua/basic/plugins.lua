@@ -50,16 +50,9 @@ packer.startup({
 		})
 
 		use({
-			"shaunsingh/solarized.nvim",
+			"maxmx03/solarized.nvim",
 			config = function()
 				require("colorscheme.solarized")
-			end,
-		})
-
-		use({
-			"Tsuzat/NeoSolarized.nvim",
-			config = function()
-				require("colorscheme.NeoSolarized")
 			end,
 		})
 
