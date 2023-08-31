@@ -30,12 +30,6 @@ packer.startup({
 		})
 
 		use({
-			"navarasu/onedark.nvim",
-			config = function()
-				require("colorscheme.onedark")
-			end,
-		})
-		use({
 			"EdenEast/nightfox.nvim",
 			config = function()
 				require("colorscheme.nightfox")
@@ -48,11 +42,10 @@ packer.startup({
 				require("colorscheme.everforest")
 			end,
 		})
-
 		use({
-			"maxmx03/solarized.nvim",
+			"projekt0n/github-nvim-theme",
 			config = function()
-				require("colorscheme.solarized")
+				require("colorscheme.github-theme")
 			end,
 		})
 
@@ -64,11 +57,18 @@ packer.startup({
 		})
 
 		-- use({
-		-- 	"savq/melange-nvim",
+		-- 	"maxmx03/solarized.nvim",
 		-- 	config = function()
-		-- 		require("colorscheme.melange")
+		-- 		require("colorscheme.solarized")
 		-- 	end,
 		-- })
+
+		use({
+			"navarasu/onedark.nvim",
+			config = function()
+				require("colorscheme.onedark")
+			end,
+		})
 
 		-- =============================================================================
 		-- markdown-preview
@@ -100,6 +100,7 @@ packer.startup({
 				require("conf.nvim-web-devicons")
 			end,
 		})
+
 		-- lualine
 		use({
 			"nvim-lualine/lualine.nvim",
@@ -128,6 +129,12 @@ packer.startup({
 			config = function()
 				-- 插件加载完成后自动运行 lua/conf/nvim-treesitter.lua 文件中的代码
 				require("conf.nvim-treesitter")
+			end,
+		})
+		use({
+			"nvim-treesitter/playground",
+			config = function()
+				require("conf.playground")
 			end,
 		})
 		-- nvim-colorizer.lua 颜色高亮

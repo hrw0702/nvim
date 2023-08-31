@@ -8,8 +8,12 @@ require("nvim-treesitter.configs").setup({
 	-- 启用代码高亮功能
 	highlight = {
 		enable = true,
-		disable = { "c" },
+		disable = { "html" },
 		additional_vim_regex_highlighting = false,
+	},
+
+	context_commentstring = {
+		enable = true,
 	},
 	-- 启用增量选择
 	incremental_selection = {
@@ -27,8 +31,8 @@ require("nvim-treesitter.configs").setup({
 	},
 })
 -- 开启折叠 Folding
--- vim.wo.foldmethod = "expr"
--- vim.wo.foldexpr = "nvim_treesitter#foldexpr()"
+vim.wo.foldmethod = "expr"
+vim.wo.foldexpr = "nvim_treesitter#foldexpr()"
 -- 默认不要折叠
 -- https://stackoverflow.com/questions/8316139/how-to-set-the-default-to-unfolded-when-you-open-a-file
--- vim.wo.foldlevel = 99
+vim.wo.foldlevel = 99

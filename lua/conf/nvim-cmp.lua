@@ -134,7 +134,7 @@ cmp.setup({
 
 		-- 接受当前选择的项目。如果未选择，则“选择”第一项
 		-- `select` 设置 `false` 仅确认明确选择的项目
-		["<CR>"] = cmp.mapping.confirm({ select = true }),
+		["<CR>"] = cmp.mapping.confirm({ select = false }),
 		["<A-n>"] = cmp.mapping(function(fallback)
 			-- if cmp.visible() then
 			-- 	-- cmp.select_next_item()
@@ -173,8 +173,8 @@ cmp.setup({
 			-- vim_item.menu = string.format("[%s]", kind_text[vim_item.kind])
 			-- print(vim_item.kind)
 
-			if string.len(vim_item.abbr) > 60 then
-				vim_item.abbr = string.sub(vim_item.abbr, 1, 60)
+			if string.len(vim_item.abbr) > 40 then
+				vim_item.abbr = string.sub(vim_item.abbr, 1, 40)
 			end
 
 			vim_item.kind = string.format("%s [%s]", kind_icons[vim_item.kind], kind_text[vim_item.kind])

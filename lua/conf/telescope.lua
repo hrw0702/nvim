@@ -5,6 +5,7 @@
 -- https://github.com/BurntSushi/ripgrep
 
 -- require("telescope").setup()
+local actions = require("telescope.actions")
 
 local options = {
 	defaults = {
@@ -54,6 +55,8 @@ local options = {
 		buffer_previewer_maker = require("telescope.previewers").buffer_previewer_maker,
 		mappings = {
 			n = { ["q"] = require("telescope.actions").close },
+			i = { ["<esc>"] = actions.close },
+
 		},
 	},
 
