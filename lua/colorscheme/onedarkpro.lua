@@ -11,6 +11,7 @@ local c = {
 	fg = "#abb2bf",
 	blue = "#61afef",
 	cyan = "#56b6c2",
+	dark_green = "#109868",
 	green = "#98c379",
 	orange = "#d19a66",
 	purple = "#c678dd",
@@ -68,6 +69,7 @@ onedarkpro.setup({
 		-- nvim-cmp 滚动条颜色
 		PmenuThumb = { fg = c.none, bg = c.purple },
 		CursorLineNr = { fg = c.fg, bg = c.diff_add, bold = true },
+		IndentBlanklineContextChar = { fg = c.white, bold = true },
 		--
 		-- -- syntax:
 		-- "int float double"
@@ -140,14 +142,15 @@ onedarkpro.setup({
 		--
 		["@lsp.type.comment"] = { fg = gray, italic = true },
 		["@lsp.type.enum"] = { fg = c.cyan },
-		["@lsp.type.class"] = { fg = c.git_add },
+		["@lsp.type.class"] = { fg = c.orange, bold = false },
+		["@function.builtin"] = { fg = "#0059ff" },
 		-- ["@lsp.type.enumMember"] = hl.treesitter["@constant.builtin"],
 		-- ["@lsp.type.interface"] = hl.treesitter["@type"],
 		-- ["@lsp.type.typeParameter"] = hl.treesitter["@type"],
 		-- ["@lsp.type.keyword"] = hl.treesitter["@keyword"],
 		-- ["@lsp.type.namespace"] = hl.treesitter["@namespace"],
 		["@lsp.type.parameter"] = { fg = c.fg, italic = true },
-		["@lsp.type.property"] = { fg = c.dark_cyan, italic = true },
+		["@lsp.type.property"] = { fg = c.dark_green, italic = true },
 		["@lsp.type.variable"] = { fg = c.fg },
 		["@lsp.type.macro"] = { fg = c.cyan },
 		-- ["@lsp.type.method"] = hl.treesitter["@method"],
@@ -182,7 +185,6 @@ onedarkpro.setup({
 		-- ["@keyword"] = { fg = "$green" },
 		-- ["@string"] = { fg = c.red, fmt = "bold" },
 		-- ["@function"] = { fg = "#0000ff", sp = "$cyan", fmt = "underline,italic" },
-		-- ["@function.builtin"] = { fg = "#0059ff" },
 
 		--       Comment = { fg = "#FF0000", bg = "#FFFF00", italic = true },
 		-- ["@Comment"] = { fg = "#ff0000", italic,bold,undercurl = true },

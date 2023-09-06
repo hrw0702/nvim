@@ -56,23 +56,9 @@ packer.startup({
 			end,
 		})
 
-		-- use({
-		-- 	"maxmx03/solarized.nvim",
-		-- 	config = function()
-		-- 		require("colorscheme.solarized")
-		-- 	end,
-		-- })
-
-		-- use({
-		-- 	"navarasu/onedark.nvim",
-		-- 	config = function()
-		-- 		require("colorscheme.onedark")
-		-- 	end,
-		-- })
-
 		use({
 			"olimorris/onedarkpro.nvim",
-			as = "onedarkpro",
+			as = "onedark",
 			config = function()
 				require("colorscheme.onedarkpro")
 			end,
