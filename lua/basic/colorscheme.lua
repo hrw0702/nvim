@@ -7,6 +7,7 @@ local colorscheme = "onedark"
 -- nightfox,dayfox,dawnfox,duskfox,nordfox,terafox,carbonfox
 -- everforest
 -- onedark
+-- onedarkpro: "onedark","onelight","onedark_vivid","onedark_dark"
 -- solarized
 -- monokai-pro, monokai-pro-pro, monokai-pro-octagon, monokai-pro-machine
 -- monokai-pro-ristretto, monokai-pro-spectrum, monokai-pro-classic

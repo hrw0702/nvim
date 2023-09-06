@@ -1,152 +1,154 @@
--- dark = {
--- 	black = "#181a1f",
--- 	bg0 = "#282c34",
--- 	bg1 = "#31353f",
--- 	bg2 = "#393f4a",
--- 	bg3 = "#3b3f4c",
--- 	bg_d = "#21252b",
--- 	bg_blue = "#73b8f1",
--- 	bg_yellow = "#ebd09c",
--- 	fg = "#abb2bf",
--- 	purple = "#c678dd",
--- 	green = "#98c379",
--- 	orange = "#d19a66",
--- 	blue = "#61afef",
--- 	yellow = "#e5c07b",
--- 	cyan = "#56b6c2",
--- 	red = "#e86671",
--- 	grey = "#5c6370",
--- 	light_grey = "#848b98",
--- 	dark_cyan = "#2b6f77",
--- 	dark_red = "#993939",
--- 	dark_yellow = "#93691d",
--- 	dark_purple = "#8a3fa0",
--- 	diff_add = "#31392b",
--- 	diff_delete = "#382b2c",
--- 	diff_change = "#1c3448",
--- 	diff_text = "#2c5372",
--- }
-local c = require("onedark.colors")
-require("onedark").setup({
-	-- Main options --
-	style = "dark", -- Default theme style. Choose between 'dark', 'darker', 'cool', 'deep', 'warm', 'warmer' and 'light'
-	transparent = false, -- Show/hide background
-	term_colors = true, -- Change terminal color as per the selected theme style
-	ending_tildes = false, -- Show the end-of-buffer tildes. By default they are hidden
-	cmp_itemkind_reverse = false, -- reverse item kind highlights in cmp menu
+local onedarkpro = require("onedarkpro")
+local colors = require("onedarkpro.helpers")
 
-	-- toggle theme style ---
-	toggle_style_key = "<leader>ts", -- keybind to toggle theme style. Leave it nil to disable it, or set it to a string, for example "<leader>ts"
-	toggle_style_list = { "dark", "light" }, -- List of styles to toggle between
+local c = {
+	background = "dark",
+	bg = "#282c34",
+	bg_statusline = "#22262d",
+	black = "#282c34",
+	gray = "#5c6370",
+	white = "#abb2bf",
+	fg = "#abb2bf",
+	blue = "#61afef",
+	cyan = "#56b6c2",
+	green = "#98c379",
+	orange = "#d19a66",
+	purple = "#c678dd",
+	red = "#e06c75",
+	yellow = "#e5c07b",
+	color_column = "#2d313b",
+	comment = "#7f848e",
+	cursorline = "#2d313b",
+	diff_add = "#003e4a",
+	diff_delete = "#501b20",
+	diff_text = "#005869",
+	fg_gutter = "#3d4350",
+	fg_gutter_inactive = "#abb2bf",
+	float_bg = "#21252b",
+	fold = "#30333d",
+	git_add = "#109868",
+	git_change = "#948B60",
+	git_delete = "#9a353d",
+	git_hunk_add = "#43554d",
+	git_hunk_add_inline = "#3f534f",
+	git_hunk_change_inline = "#41483d",
+	git_hunk_delete = "#502d30",
+	git_hunk_delete_inline = "#6f2e2d",
+	highlight = "#e2be7d",
+	indentline = "#3b4048",
+	inlay_hint = "#4c525c",
+	line_number = "#495162",
+	selection = "#414858",
+	virtual_text_error = "#e8939a",
+	virtual_text_hint = "#7ec7d1",
+	virtual_text_information = "#90c7f4",
+	virtual_text_warning = "#edd2a1",
+}
 
-	-- Change code style ---
-	-- Options are italic, bold, underline, none
-	-- You can configure multiple style with comma separated, For e.g., keywords = 'italic,bold'
-	code_style = {
-		comments = "italic",
-		keywords = "none",
-		functions = "none",
-		strings = "none",
-		variables = "none",
-	},
-
-	-- Lualine options --
-	lualine = {
-		transparent = false, -- lualine center bar transparency
-	},
-
-	-- Custom Highlights --
+onedarkpro.setup({
 	colors = {
-		code_violet = "#8389E0",
-		code_grey = "#BABABA",
-		-- bright_orange = "#ff8800", -- define a new color
-		-- green = "#00ffaa", -- redefine an existing color
+		dark = {
+			telescope_prompt = colors.darken("bg", 1, "onedark"),
+			telescope_results = colors.darken("bg", 4, "onedark"),
+			telescope_preview = colors.darken("bg", 6, "onedark"),
+			telescope_selection = colors.darken("bg", 8, "onedark"),
+		},
+		light = {
+			telescope_prompt = colors.darken("bg", 2, "onelight"),
+			telescope_results = colors.darken("bg", 5, "onelight"),
+			telescope_preview = colors.darken("bg", 7, "onelight"),
+			telescope_selection = colors.darken("bg", 9, "onelight"),
+		},
 	},
-
 	highlights = {
 		-- common:
 		-- vim 错误信息
-		ErrorMsg = { fg = c.blue, fmt = "none" },
-		WarningMsg = { fg = c.yellow, fmt = "none" },
+		ErrorMsg = { fg = c.blue },
+		WarningMsg = { fg = c.yellow },
 		-- nvim-cmp 滚动条颜色
 		PmenuThumb = { fg = c.none, bg = c.purple },
+		CursorLineNr = { fg = c.fg, bg = c.diff_add, bold = true },
 		--
 		-- -- syntax:
 		-- "int float double"
-		Type = { fg = c.fg, fmt = "none" },
+		Type = { fg = c.fg },
 		--
 		-- "struct"
-		Structure = { fg = c.cyan, fmt = "bold" },
+		Structure = { fg = c.cyan },
 		--
-		Identifier = { fg = c.yellow, fmt = "none" },
-		Keyword = { fg = c.dark_yellow, fmt = "none" },
+		Identifier = { fg = c.yellow },
+		Keyword = { fg = c.dark_yellow },
 		-- 'if else then'
-		Conditional = { fg = c.diff_text, fmt = "bold" },
+		Conditional = { fg = c.purple, bold = true },
 
 		-- 'while for'
-		Repeat = { fg = c.diff_text, fmt = "bold" },
+		Repeat = { fg = c.purple, bold = true },
 
 		Macro = { fg = c.orange },
 		Special = { fg = c.yellow },
 
 		-- "%d %p \n"
-		SpecialChar = { fg = c.dark_red },
-		property = { fg = c.dark_cyan },
+		SpecialChar = { fg = c.red },
+		property = { fg = c.red },
 
 		-- treesitter:
-		["@comment"] = { fg = c.bg2, fmt = "italic" },
+		["@comment"] = { fg = c.gray, italic = true },
 		--
 		-- -- "if then else "
-		-- ["@conditional"] = { fg = "$code_grey", fmt = "none" },
-		["@conditional"] = { fg = c.dark_purple, fmt = "italic" },
+		-- ["@conditional"] = { fg = "$code_grey" },
+		["@conditional"] = { fg = c.purple, italic = true },
 		--
 		["@constant"] = { fg = c.orange },
 
 		-- 枚举变量成员
 		["@constant.builtin"] = { fg = c.dark_red },
 
-		["@keyword"] = { fg = c.cyan, fmt = "none" },
+		["@keyword"] = { fg = c.cyan },
 
-		["@keyword.function"] = { fg = c.fg, fmt = "none" },
+		["@keyword.function"] = { fg = c.fg },
 
 		-- 函数参数变量名称
-		["@parameter"] = { fg = c.fg, fmt = "none" },
+		["@parameter"] = { fg = c.fg },
 
 		-- struct 成员
-		["@property"] = { fg = "$code_grey" },
+		["@property"] = { fg = c.light_grey },
 
 		-- "while for"
-		-- ["@repeat"] = { fg = "$code_grey", fmt = "none" },
-		["@repeat"] = { fg = c.dark_purple, fmt = "italic" },
+		-- ["@repeat"] = { fg = "$code_grey" },
+		["@repeat"] = { fg = c.purple, italic = true },
 
 		-- 枚举变量名称
-		["@type"] = { fg = c.cyan, fmt = "bold" },
+		["@type"] = { fg = c.cyan },
 
 		-- 变量
-		["@variable"] = { fg = c.fg, fmt = "none" },
+		["@variable"] = { fg = c.fg },
 
 		-- 变量类型
-		["@type.builtin"] = { fg = c.fg, fmt = "bold" },
+		["@type.builtin"] = { fg = c.fg, bold = true },
 		-- const
-		["@type.qualifier"] = { fg = c.dark_red, fmt = "bold" },
+		["@type.qualifier"] = { fg = c.red },
 		--- 括号
 		["@punctuation.bracket"] = { fg = c.fg },
-		["@string.escape"] = { fg = c.red, fmt = "none" },
+		["@string.escape"] = { fg = c.dark_red },
 		-- static
-		["@StorageClass"] = { fg = c.dark_red, fmt = "bold" },
+		["@StorageClass"] = { fg = c.red },
+
+		-- c return
+		["@keyword.return"] = { fg = c.purple, italic = true },
 
 		-- lsp
 		--
-		["@lsp.type.comment"] = { fg = c.purple },
-		["@lsp.type.enum"] = { fg = c.cyan, fmt = "bold" },
+		["@lsp.type.comment"] = { fg = gray, italic = true },
+		["@lsp.type.enum"] = { fg = c.cyan },
+		["@lsp.type.class"] = { fg = c.git_add },
 		-- ["@lsp.type.enumMember"] = hl.treesitter["@constant.builtin"],
 		-- ["@lsp.type.interface"] = hl.treesitter["@type"],
 		-- ["@lsp.type.typeParameter"] = hl.treesitter["@type"],
 		-- ["@lsp.type.keyword"] = hl.treesitter["@keyword"],
 		-- ["@lsp.type.namespace"] = hl.treesitter["@namespace"],
-		["@lsp.type.parameter"] = { fg = c.fg },
-		["@lsp.type.property"] = { fg = c.dark_yellow },
-		-- ["@lsp.type.variable"] = hl.treesitter["@variable"],
+		["@lsp.type.parameter"] = { fg = c.fg, italic = true },
+		["@lsp.type.property"] = { fg = c.dark_cyan, italic = true },
+		["@lsp.type.variable"] = { fg = c.fg },
 		["@lsp.type.macro"] = { fg = c.cyan },
 		-- ["@lsp.type.method"] = hl.treesitter["@method"],
 		-- ["@lsp.type.number"] = hl.treesitter["@number"],
@@ -154,6 +156,7 @@ require("onedark").setup({
 		-- ["@lsp.type.builtinType"] = hl.treesitter["@type.builtin"],
 		-- ["@lsp.typemod.method.defaultLibrary"] = hl.treesitter["@function"],
 		-- ["@lsp.typemod.function.defaultLibrary"] = hl.treesitter["@function"],
+		["@operator"] = { fg = c.fg },
 		-- ["@lsp.typemod.operator.injected"] = hl.treesitter["@operator"],
 		-- ["@lsp.typemod.string.injected"] = hl.treesitter["@string"],
 		-- ["@lsp.typemod.variable.defaultLibrary"] = hl.treesitter["@variable.builtin"],
@@ -161,7 +164,7 @@ require("onedark").setup({
 		-- ["@lsp.typemod.variable.static"] = hl.treesitter["@constant"],
 
 		-- treesitter: TS
-		-- TSParameter = { fg = c.fg, fmt = "italic" },
+		-- TSParameter = { fg = c.fg,italic = true },
 		-- TSConditional = { fg = c.fg, fmt = "none" },
 		-- TSInclude = { fg = c.yellow },
 		-- TSKeyword = { fg = c.dark_yellow, fmt = "bold" },
@@ -173,40 +176,59 @@ require("onedark").setup({
 		-- TSVariableBuiltin = { fg = c.light_grey, fmt = "none" },
 		--
 		-- telescope:
-		TelescopeBorder = { fg = c.fg, bg = c.dark_cyan, fmt = "none" },
+		TelescopeBorder = { fg = c.fg },
 		TelescopeSelection = { bg = c.green },
 		--
 		-- ["@keyword"] = { fg = "$green" },
 		-- ["@string"] = { fg = c.red, fmt = "bold" },
 		-- ["@function"] = { fg = "#0000ff", sp = "$cyan", fmt = "underline,italic" },
 		-- ["@function.builtin"] = { fg = "#0059ff" },
-	},
 
-	-- Plugins Config --
-	diagnostics = {
-		darker = true, -- darker colors for diagnostic
-		undercurl = true, -- use undercurl instead of underline for diagnostics
-		background = true, -- use background color for virtual text
+		--       Comment = { fg = "#FF0000", bg = "#FFFF00", italic = true },
+		-- ["@Comment"] = { fg = "#ff0000", italic,bold,undercurl = true },
+		--
+		-- TelescopeBorder = {
+		-- 	fg = "${telescope_results}",
+		-- 	bg = "${telescope_results}",
+		-- },
+		-- TelescopePromptBorder = {
+		-- 	fg = "${telescope_prompt}",
+		-- 	bg = "${telescope_prompt}",
+		-- },
+		TelescopePromptCounter = { fg = "${fg}" },
+		TelescopePromptNormal = { fg = "${fg}", bg = "${telescope_prompt}" },
+		TelescopePromptPrefix = {
+			fg = "${purple}",
+			bg = "${telescope_prompt}",
+		},
+		TelescopePromptTitle = {
+			fg = "${telescope_prompt}",
+			bg = "${purple}",
+		},
+		TelescopePreviewTitle = {
+			fg = "${telescope_results}",
+			bg = "${green}",
+		},
+		TelescopeResultsTitle = {
+			fg = "${telescope_results}",
+			bg = "${orange}",
+		},
+		TelescopeMatching = { fg = "${blue}" },
+		TelescopeNormal = { bg = "${telescope_results}" },
+		TelescopePreviewNormal = { bg = "${telescope_preview}" },
+		-- TelescopePreviewBorder = { fg = "${telescope_preview}", bg = "${telescope_preview}" },
+	},
+	options = {
+		bold = true,
+		italic = true,
+		undercurl = true,
+		window_unfocussed_color = true,
 	},
 })
 
--- vim.print(vim.g.onedark_config.code_style)
--- for group_name, group_settings in pairs(vim.g.onedark_config.highlights) do
--- 	vim.api.nvim_command(
--- 		string.format(
--- 			"highlight %s guifg=%s guibg=%s guisp=%s gui=%s",
--- 			group_name,
--- 			group_settings.fg or "none",
--- 			group_settings.bg or "none",
--- 			group_settings.sp or "none",
--- 			group_settings.fmt or "none"
--- 		)
--- 	)
--- end
-vim.api.nvim_command("colorscheme onedark")
-
+vim.cmd("colorscheme onedark")
 -- nvim-cmp
-vim.api.nvim_set_hl(0, "PmenuSel", { fg = "#000000", bg = "#9fbd73" })
+vim.api.nvim_set_hl(0, "PmenuSel", { fg = c.black, bg = "#9fbd73" })
 vim.api.nvim_set_hl(0, "Pmenu", { fg = "#C5CDD9", bg = "NONE" })
 
 vim.api.nvim_set_hl(0, "CmpItemAbbrDeprecated", { fg = "#282c34", bg = "#9fbd73", strikethrough = true })
