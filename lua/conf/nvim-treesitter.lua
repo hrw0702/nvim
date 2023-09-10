@@ -1,9 +1,9 @@
 require("nvim-treesitter.configs").setup({
 	-- 安装 language parser
 	-- :TSInstallInfo 命令查看支持的语言
-	ensure_installed = { "vim", "lua", "c" },
+	ensure_installed = { "vim", "lua", "c","markdown","cpp","bash" },
 
-	sync_install = false,
+	-- sync_install = false,
 
 	-- 启用代码高亮功能
 	highlight = {
@@ -42,5 +42,4 @@ require("nvim-treesitter.configs").setup({
 vim.wo.foldmethod = "expr"
 vim.wo.foldexpr = "nvim_treesitter#foldexpr()"
 -- 默认不要折叠
--- https://stackoverflow.com/questions/8316139/how-to-set-the-default-to-unfolded-when-you-open-a-file
 vim.wo.foldlevel = 99

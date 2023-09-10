@@ -112,7 +112,12 @@ require("lazy").setup({
 		-- treesitter 语法高亮
 		{
 			"nvim-treesitter/nvim-treesitter",
-			run = ":TSUpdate",
+			-- event = { "BufReadPost", "BufNewFile" },
+			build = function()
+				if #vim.api.nvim_list_uis() ~= 0 then
+					vim.api.nvim_command("TSUpdate")
+				end
+			end,
 			config = function()
 				-- 插件加载完成后自动运行 lua/conf/nvim-treesitter.lua 文件中的代码
 				require("conf.nvim-treesitter")
@@ -294,24 +299,25 @@ require("lazy").setup({
 		-- 自动代码补全系列插件
 		{
 			"hrsh7th/nvim-cmp", -- 代码补全核心插件，下面都是增强补全的体验插件
+			-- event = "InsertEnter",
 			dependencies = {
-				{ "onsails/lspkind-nvim" }, -- 为补全添加类似 vscode 的图标
-				{ "hrsh7th/vim-vsnip" }, -- vsnip 引擎，用于获得代码片段支持
-				{ "hrsh7th/cmp-vsnip" }, -- 适用于 vsnip 的代码片段源
-				{ "hrsh7th/cmp-nvim-lsp" }, -- 替换内置 omnifunc，获得更多补全
-				{ "hrsh7th/cmp-nvim-lua" },
-				{ "hrsh7th/cmp-path" }, -- 路径补全
-				{ "ray-x/cmp-treesitter" },
-				{ "hrsh7th/cmp-buffer" }, -- 缓冲区补全
-				{ "hrsh7th/cmp-cmdline" }, -- 命令补全
-				{ "saadparwaiz1/cmp_luasnip" }, -- snippet completions
-				{ "f3fora/cmp-spell" }, -- 拼写建议
-				{ "rafamadriz/friendly-snippets" }, -- 提供多种语言的代码片段
-				{ "lukas-reineke/cmp-under-comparator" }, -- 让补全结果的排序更加智能
-				config = function()
-					require("conf.nvim-cmp")
-				end,
+				"onsails/lspkind-nvim", -- 为补全添加类似 vscode 的图标
+				"hrsh7th/vim-vsnip", -- vsnip 引擎，用于获得代码片段支持
+				"hrsh7th/cmp-vsnip", -- 适用于 vsnip 的代码片段源
+				"hrsh7th/cmp-nvim-lsp", -- 替换内置 omnifunc，获得更多补全
+				"hrsh7th/cmp-nvim-lua",
+				"hrsh7th/cmp-path", -- 路径补全
+				"ray-x/cmp-treesitter",
+				"hrsh7th/cmp-buffer", -- 缓冲区补全
+				"hrsh7th/cmp-cmdline", -- 命令补全
+				"saadparwaiz1/cmp_luasnip", -- snippet completions
+				"f3fora/cmp-spell", -- 拼写建议
+				"rafamadriz/friendly-snippets", -- 提供多种语言的代码片段
+				"lukas-reineke/cmp-under-comparator", -- 让补全结果的排序更加智能
 			},
+			config = function()
+				require("conf.nvim-cmp")
+			end,
 		},
 		-- tabnine 源,提供基于 AI 的智能补全
 		{
@@ -338,6 +344,34 @@ require("lazy").setup({
 			config = function()
 				require("conf.telescope")
 			end,
+		},
+	},
+	defaults = {
+		-- By default, only LazyVim plugins will be lazy-loaded. Your custom plugins will load during startup.
+		-- If you know what you're doing, you can set this to `true` to have all your custom plugins lazy-loaded by default.
+		lazy = false,
+		-- It's recommended to leave version=false for now, since a lot the plugin that support versioning,
+		-- have outdated releases, which may break your Neovim install.
+		version = false, -- always use the latest git commit
+		-- version = "*", -- try installing the latest stable version for plugins that support semver
+	},
+	checker = {
+		enabled = true, -- automatically check for plugin updates
+		notify = false,
+	},
+	performance = {
+		rtp = {
+			-- disable some rtp plugins
+			disabled_plugins = {
+				"gzip",
+				-- "matchit",
+				-- "matchparen",
+				-- "netrwPlugin",
+				"tarPlugin",
+				"tohtml",
+				-- 'tutor',
+				"zipPlugin",
+			},
 		},
 	},
 	-- 使用 DAP 进行代码调试，需要使用 3 个插件：
