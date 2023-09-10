@@ -359,6 +359,9 @@ require("lazy").setup({
 		enabled = true, -- automatically check for plugin updates
 		notify = false,
 	},
+	ui = {
+		border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+	},
 	performance = {
 		rtp = {
 			-- disable some rtp plugins

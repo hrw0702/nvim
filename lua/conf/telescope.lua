@@ -44,6 +44,15 @@ local new_maker_big_file = function(filepath, bufnr, opts)
 	end)
 end
 
+local extensions = {
+    fzf = {
+      fuzzy = true,
+      override_generic_sorter = true,
+      override_file_sorter = true,
+      case_mode = "smart_case",
+    },
+  }
+
 local options = {
 	defaults = {
 		vimgrep_arguments = {
@@ -61,7 +70,7 @@ local options = {
 		entry_prefix = "  ",
 		initial_mode = "insert",
 		selection_strategy = "reset",
-		sorting_strategy = "ascending",
+		sorting_strategy = "descending",
 		layout_strategy = "horizontal",
 		layout_config = {
 			horizontal = {
@@ -99,7 +108,9 @@ local options = {
 			n = { ["q"] = require("telescope.actions").close },
 			i = { ["<esc>"] = actions.close },
 		},
+        extensions = extensions,
 	},
+    require("telescope").load_extension("fzf"),
 
 	extensions_list = { "themes", "terms" },
 }
