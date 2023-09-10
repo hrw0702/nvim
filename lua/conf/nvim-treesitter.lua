@@ -1,8 +1,7 @@
 require("nvim-treesitter.configs").setup({
 	-- 安装 language parser
 	-- :TSInstallInfo 命令查看支持的语言
-	-- ensure_installed = { "vim", "lua", "c" },
-	ensure_installed = "all",
+	ensure_installed = { "vim", "lua", "c" },
 
 	sync_install = false,
 
