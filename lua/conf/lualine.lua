@@ -25,7 +25,6 @@ local colors = {
 	-- light_blue = "#61afef",
 	-- cyan = "#2aa198",
 	-- green = "#859900",
-    
     -- onedark主题配色
     bg        = '#282c34',
     fg        = '#abb2bf',
@@ -256,11 +255,12 @@ ins_left({
 ins_left({
 	"diagnostics",
 	sources = { "nvim_diagnostic" },
-	symbols = { error = " ", warn = " ", info = " " },
+	symbols = { error = " ", warn = " ", info = " ", hint = " " },
 	diagnostics_color = {
 		color_error = { fg = colors.red },
 		color_warn = { fg = colors.yellow },
 		color_info = { fg = colors.cyan },
+		color_hint = { fg = colors.blue },
 	},
 })
 
@@ -277,7 +277,8 @@ ins_left({
 	function()
 		local msg = "No Active Lsp"
 		local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
-		local clients = vim.lsp.get_active_clients()
+		-- local clients = vim.lsp.get_active_clients()
+		local clients = vim.lsp.get_clients()
 		if next(clients) == nil then
 			return msg
 		end

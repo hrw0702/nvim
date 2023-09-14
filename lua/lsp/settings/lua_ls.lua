@@ -1,20 +1,3 @@
--- return {
--- 	settings = {
--- 		Lua = {
--- 			diagnostics = {
--- 				globals = { "vim" },
--- 			},
--- 			workspace = {
--- 				library = {
--- 					[vim.fn.expand("$VIMRUNTIME/lua")] = true,
--- 					-- Neovim 配置目录
--- 					[vim.fn.stdpath("$HOME/.config/nvim") .. "/lua"] = true,
--- 				},
--- 			},
--- 		},
--- 	},
--- }
-
 local runtime_path = vim.split(package.path, ";")
 table.insert(runtime_path, "lua/?.lua")
 table.insert(runtime_path, "lua/?/init.lua")
@@ -29,13 +12,15 @@ return {
 			},
 			diagnostics = {
 				-- Get the language server to recognize the `vim` global
-				globals = { "vim" },
+				globals = { "vim", "require" },
 			},
 			workspace = {
 				-- Make the server aware of Neovim runtime files
 				library = vim.api.nvim_get_runtime_file("", true),
 				-- Neovim 配置目录
-				[vim.fn.stdpath("$HOME/.config/nvim") .. "/lua"] = true,
+				-- [vim.fn.stdpath("$HOME/.config/nvim") .. "/lua"] = true,
+				[vim.fn.stdpath("config") .. "/lua"] = true,
+				checkThirdParty = false,
 			},
 			-- Do not send telemetry data containing a randomized but unique identifier
 			telemetry = {

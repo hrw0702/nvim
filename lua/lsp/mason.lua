@@ -9,7 +9,7 @@ local servers = {
 	-- CMake
 	"cmake",
 	-- Lua
-	-- "lua_ls",
+	"lua_ls",
 	-- CSS
 	"cssls",
 	-- Html

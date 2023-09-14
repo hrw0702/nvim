@@ -204,12 +204,12 @@ onedarkpro.setup({
 		-- treesitter:
 		["@comment"] = { fg = c.base01, italic = true },
 		["@include"] = { fg = c.magenta },
-		["@string"] = { fg = c.yellow },
+		["@string"] = { fg = c.green },
 		["@number"] = { fg = c.violet },
 		--
 		-- -- "if then else "
 		-- ["@conditional"] = { fg = "$code_grey" },
-		["@conditional"] = { fg = c.green, italic = true },
+		["@conditional"] = { fg = c.yellow, italic = true },
 		--
 		["@constant"] = { fg = c.base1 },
 
@@ -231,7 +231,7 @@ onedarkpro.setup({
 
 		-- "while for"
 		-- ["@repeat"] = { fg = "$code_grey" },
-		["@repeat"] = { fg = c.green, italic = true },
+		["@repeat"] = { fg = c.yellow, italic = true },
 
 		-- 枚举变量名称
 		["@type"] = { fg = c.cyan },
@@ -255,8 +255,7 @@ onedarkpro.setup({
 
 		-- lsp
 		--
-		["@lsp.type.comment"] = { fg = gray, italic = true },
-		["@lsp.type.variable"] = { fg = c.base1 },
+		["@lsp.type.comment"] = { fg = c.base01, italic = true },
 		["@lsp.type.enum"] = { fg = c.cyan, bold = false },
 		["@lsp.type.class"] = { fg = c.cyan, bold = false },
 		["@lsp.mod.classScope"] = { fg = c.base0 },
@@ -288,7 +287,7 @@ onedarkpro.setup({
 
 		-- treesitter: TS
 		-- TSParameter = { fg = c.fg,italic = true },
-		-- TSConditional = { fg = c.fg, fmt = "none" },
+		-- TSeonditional = { fg = c.fg, fmt = "none" },
 		-- TSInclude = { fg = c.yellow },
 		-- TSKeyword = { fg = c.dark_yellow, fmt = "bold" },
 		-- TSKeywordOperator = { fg = c.fg, fmt = "none" },
@@ -299,16 +298,16 @@ onedarkpro.setup({
 		-- TSVariableBuiltin = { fg = c.light_grey, fmt = "none" },
 		--
 		-- telescope:
-		TelescopeBorder = { fg = c.fg },
+		-- TelescopeBorder = { fg = c.fg },
 		TelescopeSelection = { fg = c.green, bg = c.base03 },
 		--
 		TelescopeBorder = {
-			fg = base01,
-			bg = base03,
+			fg = c.fg,
+			bg = c.base03,
 		},
 		TelescopePromptBorder = {
-			fg = base01,
-			bg = base03,
+			fg = c.fg,
+			bg = c.base03,
 		},
 		TelescopePromptCounter = {
 			fg = c.fg,

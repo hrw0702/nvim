@@ -73,6 +73,10 @@ local function copy(args)
 	return args[1]
 end
 
+local function get_filename()
+	return vim.fn.fnamemodify(vim.fn.expand("%"), ":t")
+end
+
 cs("para", {
 	-- Simple static text.
 	t("// @Parameters: "),
@@ -111,6 +115,34 @@ cs( -- [wow test],wow snippet
 			i(1, "1"),
 			i(2, "2"),
 			i(0, "0"),
+		}
+	)
+)
+cs(
+	{
+		trig = "cr",
+		name = "Document description",
+		dscr = "c Document description and Copyright.",
+	},
+	fmt(
+		[[
+    /*
+     * @File:           {} 
+     * @Description:    {} 
+     * @Version:        {} 
+     * @Date:           {} 
+     * @Author:         HRW 
+     * @Copyright:      (C) HRW. {}. All Rights Reserved.
+     */
+    ]],
+		{
+			f(function(_, snip)
+				return snip.env.TM_FILENAME
+			end),
+			i(1, "document description"),
+			i(2, "V1.0"),
+			i(3, { os.date("%Y-%m-%d %X") }),
+			i(4, { os.date("%Y") }),
 		}
 	)
 )

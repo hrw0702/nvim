@@ -345,6 +345,18 @@ require("lazy").setup({
 				require("conf.telescope")
 			end,
 		},
+	-- 使用 DAP 进行代码调试，需要使用 3 个插件：
+	-- nvim-dap ：基础插件
+	-- nvim-dap-virtual-text：显示内联信息
+	-- nvim-dap-ui：显示调试界面
+
+        -- neodev
+        {
+            "folke/neodev.nvim",
+            config = function()
+                require("conf.neodev")
+            end,
+        }
 	},
 	defaults = {
 		-- By default, only LazyVim plugins will be lazy-loaded. Your custom plugins will load during startup.
@@ -360,7 +372,7 @@ require("lazy").setup({
 		notify = false,
 	},
 	ui = {
-		border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+		border = "rounded", 
 	},
 	performance = {
 		rtp = {
@@ -377,8 +389,4 @@ require("lazy").setup({
 			},
 		},
 	},
-	-- 使用 DAP 进行代码调试，需要使用 3 个插件：
-	-- nvim-dap ：基础插件
-	-- nvim-dap-virtual-text：显示内联信息
-	-- nvim-dap-ui：显示调试界面
 })
