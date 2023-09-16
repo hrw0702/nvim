@@ -16,11 +16,20 @@ return {
 			},
 			workspace = {
 				-- Make the server aware of Neovim runtime files
-				library = vim.api.nvim_get_runtime_file("", true),
-				-- Neovim 配置目录
-				-- [vim.fn.stdpath("$HOME/.config/nvim") .. "/lua"] = true,
-				[vim.fn.stdpath("config") .. "/lua"] = true,
-				checkThirdParty = false,
+				library = {
+					vim.api.nvim_get_runtime_file("", true),
+					-- Neovim 配置目录
+					-- [vim.fn.stdpath("$HOME/.config/nvim") .. "/lua"] = true,
+					[vim.fn.stdpath("config") .. "/lua"] = true,
+					"${3rd}/busted/library",
+					"${3rd}/luassert/library",
+					"${3rd}/luv/library",
+				},
+				checkThirdParty = {
+					enable = false,
+				},
+                maxPreload = 5000,
+                preloadFileSize = 10000,
 			},
 			-- Do not send telemetry data containing a randomized but unique identifier
 			telemetry = {

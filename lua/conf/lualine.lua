@@ -124,6 +124,8 @@ local conditions = {
 -- Config
 local config = {
 	options = {
+        -- 固定（全局）状态栏
+        globalstatus = true,
 		-- Disable sections and component separators
 		component_separators = "",
 		section_separators = "",

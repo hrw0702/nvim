@@ -106,7 +106,7 @@ local kind_text = {
 -- find more here: https://www.nerdfonts.com/cheat-sheet
 
 cmp.setup({
-	maxwidth = 50,
+	-- maxwidth = 50,
 	snippet = {
 		expand = function(args)
 			luasnip.lsp_expand(args.body) -- For `luasnip` users.
@@ -178,7 +178,6 @@ cmp.setup({
 			end
 
 			vim_item.kind = string.format("%s [%s]", kind_icons[vim_item.kind], kind_text[vim_item.kind])
-			print(vim_item.menu)
 			-- vim_item.kind = string.format("%s", kind_icons[vim_item.kind]) -- This concatonates the icons with the name of the item kind
 			-- Source
 			-- vim_item.menu = ({
@@ -188,6 +187,11 @@ cmp.setup({
 			-- 	path = "[Path]",
 			-- 	fuzzy_buffer = "[FuzzyBuffer]",
 			-- })[entry.source.name]
+
+			-- the maximum length of the menu item, if it's logger than this value, it will be truncated
+			local maxwidth = 80
+			vim_item.abbr = string.sub(vim_item.abbr, 1, maxwidth)
+
 			return vim_item
 		end,
 	},
@@ -232,7 +236,8 @@ cmp.setup({
 		{ name = "luasnip", keyword_length = 2 }, -- For ultisnips user.
 		{ name = "buffer", keyword_length = 2 }, -- for buffer word completion
 		{ name = "path" }, -- for path completion
-		-- { name = "fuzzy_buffer" }, -- for fuzzy_buffer completion
+		{ name = "fuzzy_buffer" }, -- for fuzzy_buffer completion
+		{ name = "cmp_tabnine" }, -- for fuzzy_buffer completion
 	},
 
 	-- 字符触发个数
@@ -297,64 +302,3 @@ cmp.setup.cmdline(":", {
 		{ name = "path" },
 	}),
 })
-
--- Customization for Pmenu
--- bg = "#282C34"Pmenu
-vim.api.nvim_set_hl(0, "PmenuSel", { fg = "#000000", bg = "#9fbd73" })
-vim.api.nvim_set_hl(0, "Pmenu", { fg = "#C5CDD9", bg = "NONE" })
-
-vim.api.nvim_set_hl(0, "CmpItemAbbrDeprecated", { fg = "#282c34", bg = "#9fbd73", strikethrough = true })
-vim.api.nvim_set_hl(0, "CmpItemAbbrMatch", { fg = "#82AAFF", bg = "NONE", bold = false })
-vim.api.nvim_set_hl(0, "CmpItemAbbrMatchFuzzy", { fg = "#82AAFF", bg = "NONE", bold = false })
--- vim.api.nvim_set_hl(0, "CmpItemMenu", { fg = "#C792EA", bg = "NONE", italic = false })
-vim.api.nvim_set_hl(0, "CmpItemMenu", { fg = "#58b5a8", bg = "NONE", italic = false })
--- bg = "#B5585F"
-vim.api.nvim_set_hl(0, "CmpItemKindField", { fg = "#b5585f", bg = "NONE" })
-vim.api.nvim_set_hl(0, "CmpItemKindProperty", { fg = "#b5585f", bg = "NONE" })
-vim.api.nvim_set_hl(0, "CmpItemKindEvent", { fg = "#b5585f", bg = "NONE" })
--- bg = "#9FBD73"
-vim.api.nvim_set_hl(0, "CmpItemKindText", { fg = "#9fbd73", bg = "NONE" })
-vim.api.nvim_set_hl(0, "CmpItemKindEnum", { fg = "#9fbd73", bg = "NONE" })
-vim.api.nvim_set_hl(0, "CmpItemKindKeyword", { fg = "#9fbd73", bg = "NONE" })
--- bg = "#D4BB6C"
-vim.api.nvim_set_hl(0, "CmpItemKindConstant", { fg = "#d4bb6c", bg = "NONE" })
-vim.api.nvim_set_hl(0, "CmpItemKindConstructor", { fg = "#d4bb6c", bg = "NONE" })
-vim.api.nvim_set_hl(0, "CmpItemKindReference", { fg = "#d4bb6c", bg = "NONE" })
--- bg = "#A377BF"#56b6c2
-vim.api.nvim_set_hl(0, "CmpItemKindFunction", { fg = "#a377bf", bg = "NONE" })
-vim.api.nvim_set_hl(0, "CmpItemKindStruct", { fg = "#a377bf", bg = "NONE" })
-vim.api.nvim_set_hl(0, "CmpItemKindClass", { fg = "#a377bf", bg = "NONE" })
-vim.api.nvim_set_hl(0, "CmpItemKindModule", { fg = "#a377bf", bg = "NONE" })
-vim.api.nvim_set_hl(0, "CmpItemKindOperator", { fg = "#a377bf", bg = "NONE" })
--- bg = "#7E8294"
-vim.api.nvim_set_hl(0, "CmpItemKindVariable", { fg = "#C5CDD9", bg = "NONE" })
-vim.api.nvim_set_hl(0, "CmpItemKindFile", { fg = "#C5CDD9", bg = "NONE" })
--- bg = "#D4A959"#61afef'
-vim.api.nvim_set_hl(0, "CmpItemKindUnit", { fg = "#d4a959", bg = "NONE" })
-vim.api.nvim_set_hl(0, "CmpItemKindSnippet", { fg = "#d4a959", bg = "NONE" })
-vim.api.nvim_set_hl(0, "CmpItemKindFolder", { fg = "#d4a959", bg = "NONE" })
--- bg = "#6C8ED4"
-vim.api.nvim_set_hl(0, "CmpItemKindMethod", { fg = "#6c8ed4", bg = "NONE" })
-vim.api.nvim_set_hl(0, "CmpItemKindValue", { fg = "#6c8ed4", bg = "NONE" })
-vim.api.nvim_set_hl(0, "CmpItemKindEnumMember", { fg = "#6c8ed4", bg = "NONE" })
--- bg = "#58B5A8"
-vim.api.nvim_set_hl(0, "CmpItemKindInterface", { fg = "#58b5a8", bg = "NONE" })
-vim.api.nvim_set_hl(0, "CmpItemKindColor", { fg = "#58b5a8", bg = "NONE" })
-vim.api.nvim_set_hl(0, "CmpItemKindTypeParameter", { fg = "#58b5a8", bg = "NONE" })
-
--- -- gray
--- vim.api.nvim_set_hl(0, "CmpItemAbbrDeprecated", { bg = "NONE", strikethrough = true, fg = "#808080" })
--- -- blue
--- vim.api.nvim_set_hl(0, "CmpItemAbbrMatch", { bg = "NONE", fg = "#569CD6" })
--- vim.api.nvim_set_hl(0, "CmpItemAbbrMatchFuzzy", { link = "CmpIntemAbbrMatch" })
--- -- light blue
--- vim.api.nvim_set_hl(0, "CmpItemKindVariable", { bg = "NONE", fg = "#9CDCFE" })
--- vim.api.nvim_set_hl(0, "CmpItemKindInterface", { link = "CmpItemKindVariable" })
--- vim.api.nvim_set_hl(0, "CmpItemKindText", { link = "CmpItemKindVariable" })
--- -- pink
--- vim.api.nvim_set_hl(0, "CmpItemKindFunction", { bg = "NONE", fg = "#C586C0" })
--- vim.api.nvim_set_hl(0, "CmpItemKindMethod", { link = "CmpItemKindFunction" })
--- -- front
--- vim.api.nvim_set_hl(0, "CmpItemKindKeyword", { bg = "NONE", fg = "#D4D4D4" })
--- vim.api.nvim_set_hl(0, "CmpItemKindProperty", { link = "CmpItemKindKeyword" })
--- vim.api.nvim_set_hl(0, "CmpItemKindUnit", { link = "CmpItemKindKeyword" })

@@ -267,6 +267,9 @@ require("lazy").setup({
 		-- { "jose-elias-alvarez/null-ls.nvim" },
 		{
 			"nvimdev/guard.nvim",
+			dependencies = {
+				"nvimdev/guard-collection",
+			},
 		},
 
 		-- LSP UI 美化
@@ -345,18 +348,19 @@ require("lazy").setup({
 				require("conf.telescope")
 			end,
 		},
-	-- 使用 DAP 进行代码调试，需要使用 3 个插件：
-	-- nvim-dap ：基础插件
-	-- nvim-dap-virtual-text：显示内联信息
-	-- nvim-dap-ui：显示调试界面
+		-- 使用 DAP 进行代码调试，需要使用 3 个插件：
+		-- nvim-dap ：基础插件
+		-- nvim-dap-virtual-text：显示内联信息
+		-- nvim-dap-ui：显示调试界面
 
-        -- neodev
-        {
-            "folke/neodev.nvim",
-            config = function()
-                require("conf.neodev")
-            end,
-        }
+		-- neodev
+		{
+			"folke/neodev.nvim",
+			config = function()
+				require("conf.neodev")
+			end,
+		},
+		{ "folke/neoconf.nvim" },
 	},
 	defaults = {
 		-- By default, only LazyVim plugins will be lazy-loaded. Your custom plugins will load during startup.
@@ -372,7 +376,7 @@ require("lazy").setup({
 		notify = false,
 	},
 	ui = {
-		border = "rounded", 
+		border = "rounded",
 	},
 	performance = {
 		rtp = {

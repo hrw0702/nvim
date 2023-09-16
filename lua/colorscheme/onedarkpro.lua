@@ -1,9 +1,10 @@
 local onedarkpro = require("onedarkpro")
 local colors = require("onedarkpro.helpers")
-local config = require("onedarkpro.config").config
+-- local config = require("onedarkpro.config").config
 
 local c = {
 	base03 = "#002b36",
+	bg = "#002b36",
 	base02 = "#073642",
 	base01 = "#586e75",
 	base00 = "#657b83",
@@ -23,6 +24,8 @@ local c = {
 	cyan = "#2aa198",
 	green = "#859900",
 
+	comment = "#586e75",
+	selection = "#005869",
 	cursorline = "#073642",
 	git_add = "#109868",
 	git_change = "#948B60",
@@ -138,6 +141,9 @@ onedarkpro.setup({
 		},
 	},
 	highlights = {
+		TabLineSel = { bg = c.magenta, fg = c.bg }, -- tab pages line, active tab page label
+		TabLine = { fg = c.white, bg = c.magenta },
+		BufferLinePickSelected = { fg = c.red, bg = c.magenta, bold = true },
 		-- gitsign
 		GitSignsAdd = { fg = c.git_add, bg = c.base02 },
 		GitSignsAddCursorLine = { fg = c.git_add, bg = c.base02 },
@@ -160,6 +166,7 @@ onedarkpro.setup({
 		NvimTreeFolderName = { fg = c.blue },
 		NvimTreeOpenedFolderName = { fg = c.blue },
 		-- editor
+		Visual = { bg = c.selection }, -- Visual mode selection
 		-- ColorColumn = { bg = c.base02 },
 		-- color_column = { bg = c.base02 },
 		--
@@ -174,9 +181,11 @@ onedarkpro.setup({
 		PmenuThumb = { fg = c.magenta, bg = c.cyan },
 		CursorLineNr = { fg = c.base2, bg = c.cyan },
 		CursorLine = { bg = c.base02 },
-		IndentBlanklineContextChar = { fg = c.base0 },
+		IndentBlanklineContextChar = { fg = c.base01 },
 		--
 		-- -- syntax:
+		Comment = { fg = c.comment },
+		cDefine = { fg = c.git_add },
 		Number = { fg = c.violet },
 		-- "int float double"
 		Type = { fg = c.fg, bold = true },
@@ -193,6 +202,7 @@ onedarkpro.setup({
 		-- 'while for'
 		Repeat = { fg = c.yellow, italic = true },
 
+		Constant = { fg = c.violet },
 		Macro = { fg = c.orange },
 		Special = { fg = c.yellow },
 
@@ -202,7 +212,7 @@ onedarkpro.setup({
 		Include = { fg = c.magenta },
 
 		-- treesitter:
-		["@comment"] = { fg = c.base01, italic = true },
+		["@comment"] = { fg = c.comment, italic = true },
 		["@include"] = { fg = c.magenta },
 		["@string"] = { fg = c.green },
 		["@number"] = { fg = c.violet },
@@ -255,7 +265,7 @@ onedarkpro.setup({
 
 		-- lsp
 		--
-		["@lsp.type.comment"] = { fg = c.base01, italic = true },
+		["@lsp.type.comment"] = { fg = c.comment, italic = true },
 		["@lsp.type.enum"] = { fg = c.cyan, bold = false },
 		["@lsp.type.class"] = { fg = c.cyan, bold = false },
 		["@lsp.mod.classScope"] = { fg = c.base0 },
@@ -341,6 +351,10 @@ onedarkpro.setup({
 
 		-- nvim-cmp 浮动窗口
 		NormalFloat = { bg = c.base02 }, -- Normal text in floating windows.
+		FloatBorder = {
+			bg = c.bg,
+			fg = c.fg,
+		},
 	},
 	options = {
 		bold = true,

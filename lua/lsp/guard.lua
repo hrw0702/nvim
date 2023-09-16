@@ -8,10 +8,10 @@ local ft = require("guard.filetype")
 
 ft("c"):fmt("clang-format")
 ft("lua"):fmt("stylua")
-ft("rust"):fmt("rustfmt")
--- ft("python"):fmt("black"):append("isort")
+-- ft("rust"):fmt("rustfmt")
+ft("python"):fmt("black"):append("isort")
 ft("typescript,javascript,typescriptteact"):fmt("prettier")
-ft("go"):fmt("gofumpt"):append("goimports")
+-- ft("go"):fmt("gofumpt"):append("goimports")
 ft("sh"):fmt("shfmt")
 
 -- Call setup() LAST!
