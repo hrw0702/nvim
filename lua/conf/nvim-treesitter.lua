@@ -8,7 +8,7 @@ require("nvim-treesitter.configs").setup({
 	-- 启用代码高亮功能
 	highlight = {
 		enable = true,
-		disable = { "html","c", },
+		disable = { "html" },
 
 		-- disable = function(lang, buf)
 		-- 	local max_filesize = 100 * 1024 -- 100 KB

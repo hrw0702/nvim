@@ -33,7 +33,8 @@ local kind_icons = {
 	Value = "",
 	Enum = "",
 	Keyword = "",
-	Snippet = "",
+	Snippet = "",
+	-- Snippet = "",
 	Color = "",
 	File = "",
 	Reference = "",
@@ -173,24 +174,24 @@ cmp.setup({
 			-- vim_item.menu = string.format("[%s]", kind_text[vim_item.kind])
 			-- print(vim_item.kind)
 
-			if string.len(vim_item.abbr) > 40 then
-				vim_item.abbr = string.sub(vim_item.abbr, 1, 40)
-			end
-
 			vim_item.kind = string.format("%s [%s]", kind_icons[vim_item.kind], kind_text[vim_item.kind])
 			-- vim_item.kind = string.format("%s", kind_icons[vim_item.kind]) -- This concatonates the icons with the name of the item kind
+
 			-- Source
 			-- vim_item.menu = ({
 			-- 	buffer = "[Buffer]",
 			-- 	luasnip = "[LuaSnip]",
 			-- 	nvim_lsp = "[LSP]",
 			-- 	path = "[Path]",
+			-- 	nvim_lua = "[LuaApi]",
 			-- 	fuzzy_buffer = "[FuzzyBuffer]",
 			-- })[entry.source.name]
 
 			-- the maximum length of the menu item, if it's logger than this value, it will be truncated
-			local maxwidth = 80
-			vim_item.abbr = string.sub(vim_item.abbr, 1, maxwidth)
+			local maxwidth = 50
+			if string.len(vim_item.abbr) > maxwidth then
+				vim_item.abbr = string.sub(vim_item.abbr, 1, maxwidth)
+			end
 
 			return vim_item
 		end,
@@ -238,6 +239,7 @@ cmp.setup({
 		{ name = "path" }, -- for path completion
 		{ name = "fuzzy_buffer" }, -- for fuzzy_buffer completion
 		{ name = "cmp_tabnine" }, -- for fuzzy_buffer completion
+		{ name = "nvim_lua" }, -- for fuzzy_buffer completion
 	},
 
 	-- 字符触发个数
