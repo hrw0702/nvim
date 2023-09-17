@@ -95,6 +95,7 @@ end
 
 -- complicated function for dynamicNode.
 local function jdocsnip(args, _, old_state)
+	-- vim.notify("args: " .. vim.inspect(args))
 	-- !!! old_state is used to preserve user-input here. DON'T DO IT THAT WAY!
 	-- Using a restoreNode instead is much easier.
 	-- View this only as an example on how old_state functions.
@@ -119,10 +120,13 @@ local function jdocsnip(args, _, old_state)
 	end
 
 	local insert = 2
-	for indx, arg in ipairs(vim.split(args[2][1], ", ", true)) do
+	for indx, arg in ipairs(vim.split(args[2][1], ",", true)) do
 		-- Get actual name parameter.
-		arg = vim.split(arg, " ", true)[2]
-        vim.print(arg)
+		local arg_t = {}
+		arg_t = vim.split(arg, " ", true)
+		-- arg = vim.split(arg, " ", true)[2]
+		arg = arg_t[#arg_t]
+
 		if arg then
 			local inode
 			-- if there was some text in this parameter, use it as static_text for this new snippet.
@@ -146,23 +150,10 @@ local function jdocsnip(args, _, old_state)
 			inode = i(insert)
 		end
 
-		vim.list_extend(nodes, { t({ " * ", " * @return " }), inode, t({ "", "" }) })
+		vim.list_extend(nodes, { t({ " * ", " * @return " .. args[1][1] .. " " }), inode, t({ "", "" }) })
 		param_nodes.ret = inode
 		insert = insert + 1
 	end
-
-	-- if vim.tbl_count(args[3]) ~= 1 then
-	-- 	local exc = string.gsub(args[3][2], " throws ", "")
-	-- 	local ins
-	-- 	if old_state and old_state.ex then
-	-- 		ins = i(insert, old_state.ex:get_text())
-	-- 	else
-	-- 		ins = i(insert)
-	-- 	end
-	-- 	vim.list_extend(nodes, { t({ " * ", " * @throws " .. exc .. " " }), ins, t({ "", "" }) })
-	-- 	param_nodes.ex = ins
-	-- 	insert = insert + 1
-	-- end
 
 	vim.list_extend(nodes, { t({ " */" }) })
 
@@ -264,7 +255,7 @@ cs(
 )
 
 cs("fn", {
-	d(6, jdocsnip, { 2, 4,5 }),
+	d(6, jdocsnip, { 2, 4 }),
 	t({ "", "" }),
 	c(1, {
 		t(""),
@@ -290,11 +281,11 @@ cs("fn", {
 		sn(nil, {
 			t("", ""),
 			-- t({ "", " throws " }),
-			i(1),
+			-- i(1),
 		}),
 	}),
 	t({ " {", "\t" }),
-	i(0),
+	i(0, "// TODO"),
 	t({ "", "}" }),
 })
 
