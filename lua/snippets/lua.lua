@@ -195,6 +195,22 @@ local {} = {}
 	),
 	"jj"
 ) --}}}
+cs("trig8", {
+	t("text1: "),
+	i(1),
+	t({ "", "text2: " }),
+	i(2),
+	t({ "", "copy: " }),
+	d(3, function(args) -- the returned snippetNode doesn't need a position; it's inserted
+        print(vim.inspect(args))
+		-- "inside" the dynamicNode.
+		return sn(nil, {
+			-- jump-indices are local to each snippetNode, so restart at 1.
+			i(1, args[1]),
+		})
+	end, { 1,2 }),
+})
+
 
 -- Tutorial Snippets go here --
 

@@ -23,8 +23,10 @@ local c = {
 	light_blue = "#61afef",
 	cyan = "#2aa198",
 	green = "#859900",
+	light_green = "#7f8700",
 
 	comment = "#586e75",
+	indentline = "#586e75",
 	selection = "#005869",
 	cursorline = "#073642",
 	git_add = "#109868",
@@ -145,6 +147,12 @@ onedarkpro.setup({
 		BufferLinePickSelected = { fg = c.red, bg = c.magenta, bold = true },
 
 		StatusLine = { fg = c.base0 },
+
+		-- DiagnosticSign
+		DiagnosticSignError = { fg = c.red, bg = c.base02 },
+		DiagnosticSignWarn = { fg = c.yellow, bg = c.base02 },
+		DiagnosticSignInfo = { fg = c.blue, bg = c.base02 },
+		DiagnosticSignHint = { fg = c.cyan, bg = c.base02 },
 		-- gitsign
 		GitSignsAdd = { fg = c.git_add, bg = c.base02 },
 		GitSignsAddCursorLine = { fg = c.git_add, bg = c.base02 },
@@ -182,7 +190,8 @@ onedarkpro.setup({
 		PmenuThumb = { fg = c.magenta, bg = c.cyan },
 		CursorLineNr = { fg = c.base2, bg = c.cyan },
 		CursorLine = { bg = c.base02 },
-		IndentBlanklineContextChar = { fg = c.base01 },
+		IndentBlanklineContextChar = { fg = c.indentline },
+		IndentLine = { fg = c.base02 },
 		--
 		-- -- syntax:
 		Comment = { fg = c.comment },
@@ -236,7 +245,7 @@ onedarkpro.setup({
 		["@attribute"] = { fg = c.green },
 		["@keyword.function"] = { fg = c.fg },
 		["@keyword.operator"] = { fg = c.cyan },
-		["@operator.c"] = { fg = c.base0},
+		["@operator.c"] = { fg = c.base0 },
 
 		-- 函数参数变量名称
 		["@parameter"] = { fg = c.base1 },
@@ -275,7 +284,7 @@ onedarkpro.setup({
 		["@lsp.type.comment"] = { fg = c.comment, italic = true },
 		["@lsp.type.comment.c"] = { fg = c.orange },
 		["@lsp.type.enum"] = { fg = c.cyan, bold = false },
-		["@lsp.type.class"] = { fg = c.cyan, bold = false },
+		["@lsp.type.class"] = { fg = c.fg, bold = true },
 		["@lsp.mod.classScope"] = { fg = c.base0 },
 		["@lsp.type.definition"] = { fg = c.cyan, bold = true },
 
@@ -296,6 +305,7 @@ onedarkpro.setup({
 		-- ["@lsp.type.builtinType"] = hl.treesitter["@type.builtin"],
 		["@lsp.typemod.macro.globalScope"] = { fg = c.cyan },
 		["@lsp.typemod.function.defaultLibrary"] = { fg = c.light_blue },
+		["@lsp.typemod.parameter.functionScope.c"] = { fg = c.base0 },
 		["@lsp.type.operator"] = { fg = c.base0 },
 		-- ["@lsp.typemod.operator.injected"] = hl.treesitter["@operator"],
 		-- ["@lsp.typemod.string.injected"] = hl.treesitter["@string"],

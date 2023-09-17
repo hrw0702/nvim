@@ -1,16 +1,5 @@
-local ls = require("luasnip") --{{{
--- local s = ls.s
--- local i = ls.i
--- local t = ls.t
---
--- local d = ls.dynamic_node
--- local c = ls.choice_node
--- local f = ls.function_node
--- local sn = ls.snippet_node
---
--- local fmt = require("luasnip.extras.fmt").fmt
--- local rep = require("luasnip.extras").rep
--- some shorthands...
+local ls = require("luasnip")
+
 local s = ls.snippet
 local sn = ls.snippet_node
 local t = ls.text_node
@@ -31,12 +20,12 @@ local types = require("luasnip.util.types")
 local conds = require("luasnip.extras.conditions")
 local conds_expand = require("luasnip.extras.conditions.expand")
 
-local snippets, autosnippets = {}, {} --}}}
+local snippets, autosnippets = {}, {}
 
 local group = vim.api.nvim_create_augroup("c Snippets", { clear = true })
 local file_pattern = "*.c"
 
-local function cs(trigger, nodes, opts) --{{{
+local function cs(trigger, nodes, opts)
 	local snippet = s(trigger, nodes)
 	local target_table = snippets
 
@@ -95,6 +84,7 @@ end
 
 -- complicated function for dynamicNode.
 local function jdocsnip(args, _, old_state)
+    vim.notify(vim.inspect(old_state))
 	-- vim.notify("args: " .. vim.inspect(args))
 	-- !!! old_state is used to preserve user-input here. DON'T DO IT THAT WAY!
 	-- Using a restoreNode instead is much easier.
@@ -267,6 +257,7 @@ cs("fn", {
 		-- t("String"),
 		t("char"),
 		t("int"),
+		t("float"),
 		t("double"),
 		-- t("boolean"),
 		i(nil, ""),

@@ -185,6 +185,7 @@ cmp.setup({
 			-- 	path = "[Path]",
 			-- 	nvim_lua = "[LuaApi]",
 			-- 	fuzzy_buffer = "[FuzzyBuffer]",
+			-- 	cmp_tabnine = "[TN]",
 			-- })[entry.source.name]
 
 			-- the maximum length of the menu item, if it's logger than this value, it will be truncated
@@ -218,6 +219,7 @@ cmp.setup({
 	sorting = {
 		priority_weight = 2,
 		comparators = {
+			require("cmp_tabnine.compare"),
 			require("cmp_fuzzy_buffer.compare"),
 			compare.offset,
 			compare.exact,
