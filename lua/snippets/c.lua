@@ -83,8 +83,7 @@ local function copy(args)
 end
 
 -- complicated function for dynamicNode.
-local function jdocsnip(args, _, old_state)
-    vim.notify(vim.inspect(old_state))
+local function docsnip(args, _, old_state)
 	-- vim.notify("args: " .. vim.inspect(args))
 	-- !!! old_state is used to preserve user-input here. DON'T DO IT THAT WAY!
 	-- Using a restoreNode instead is much easier.
@@ -157,9 +156,13 @@ end
 local function bash(_, _, command)
 	local file = io.popen(command, "r")
 	local res = {}
-	for line in file:lines() do
-		table.insert(res, line)
+
+	if file ~= nil then
+		for line in file:lines() do
+			table.insert(res, line)
+		end
 	end
+
 	return res
 end
 
@@ -244,41 +247,48 @@ cs(
 	)
 )
 
-cs("fn", {
-	d(6, jdocsnip, { 2, 4 }),
-	t({ "", "" }),
-	c(1, {
-		t(""),
-		-- t("public "),
-		-- t("private "),
-	}),
-	c(2, {
-		t("void"),
-		-- t("String"),
-		t("char"),
-		t("int"),
-		t("float"),
-		t("double"),
-		-- t("boolean"),
-		i(nil, ""),
-	}),
-	t(" "),
-	i(3, "myFunc"),
-	t("("),
-	i(4),
-	t(")"),
-	c(5, {
-		t(""),
-		sn(nil, {
-			t("", ""),
-			-- t({ "", " throws " }),
-			-- i(1),
+cs(
+	{
+		trig = "fn",
+		name = "Function Snippet",
+		dscr = "Automatically generate comment: \n@description \n@parameters [in]\n@return",
+	},
+	{
+		d(6, docsnip, { 2, 4 }),
+		t({ "", "" }),
+		c(1, {
+			t(""),
+			t("struct "),
+			t(""),
 		}),
-	}),
-	t({ " {", "\t" }),
-	i(0, "// TODO"),
-	t({ "", "}" }),
-})
+		c(2, {
+			t("void"),
+			-- t("String"),
+			t("char"),
+			t("int"),
+			t("float"),
+			t("double"),
+			-- t("boolean"),
+			i(nil, ""),
+		}),
+		t(" "),
+		i(3, "myFunc"),
+		t("("),
+		i(4),
+		t(")"),
+		c(5, {
+			t(""),
+			sn(nil, {
+				t("", ""),
+				-- t({ "", " throws " }),
+				-- i(1),
+			}),
+		}),
+		t({ " {", "\t" }),
+		i(0, "// TODO"),
+		t({ "", "}" }),
+	}
+)
 
 cs(
 	"cnode",
