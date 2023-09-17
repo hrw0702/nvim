@@ -36,7 +36,6 @@ local c = {
 	git_hunk_delete = "#502d30",
 	git_hunk_delete_inline = "#6f2e2d",
 }
-
 -- local light_color = {
 -- 	brblack = "#1c1c1c",
 -- 	black = "#262626",
@@ -144,6 +143,8 @@ onedarkpro.setup({
 		TabLineSel = { bg = c.magenta, fg = c.bg }, -- tab pages line, active tab page label
 		TabLine = { fg = c.white, bg = c.magenta },
 		BufferLinePickSelected = { fg = c.red, bg = c.magenta, bold = true },
+
+		StatusLine = { fg = c.base0 },
 		-- gitsign
 		GitSignsAdd = { fg = c.git_add, bg = c.base02 },
 		GitSignsAddCursorLine = { fg = c.git_add, bg = c.base02 },
@@ -185,7 +186,10 @@ onedarkpro.setup({
 		--
 		-- -- syntax:
 		Comment = { fg = c.comment },
-		cDefine = { fg = c.git_add },
+		PreCondit = { fg = c.orange },
+		cDefine = { fg = c.orange },
+		-- cBlock= { fg = c.git_add },
+		-- cCppParen= { fg = c.git_add },
 		Number = { fg = c.violet },
 		-- "int float double"
 		Type = { fg = c.fg, bold = true },
@@ -202,7 +206,7 @@ onedarkpro.setup({
 		-- 'while for'
 		Repeat = { fg = c.yellow, italic = true },
 
-		Constant = { fg = c.violet },
+		Constant = { fg = c.cyan },
 		Macro = { fg = c.orange },
 		Special = { fg = c.yellow },
 
@@ -229,7 +233,10 @@ onedarkpro.setup({
 		["@keyword"] = { fg = c.fg, bold = true },
 
 		["@function"] = { fg = c.cyan },
+		["@attribute"] = { fg = c.green },
 		["@keyword.function"] = { fg = c.fg },
+		["@keyword.operator"] = { fg = c.cyan },
+		["@operator.c"] = { fg = c.base0},
 
 		-- 函数参数变量名称
 		["@parameter"] = { fg = c.base1 },
@@ -266,6 +273,7 @@ onedarkpro.setup({
 		-- lsp
 		--
 		["@lsp.type.comment"] = { fg = c.comment, italic = true },
+		["@lsp.type.comment.c"] = { fg = c.orange },
 		["@lsp.type.enum"] = { fg = c.cyan, bold = false },
 		["@lsp.type.class"] = { fg = c.cyan, bold = false },
 		["@lsp.mod.classScope"] = { fg = c.base0 },
@@ -288,7 +296,7 @@ onedarkpro.setup({
 		-- ["@lsp.type.builtinType"] = hl.treesitter["@type.builtin"],
 		["@lsp.typemod.macro.globalScope"] = { fg = c.cyan },
 		["@lsp.typemod.function.defaultLibrary"] = { fg = c.light_blue },
-		["@lsp.type.operator"] = { fg = c.white },
+		["@lsp.type.operator"] = { fg = c.base0 },
 		-- ["@lsp.typemod.operator.injected"] = hl.treesitter["@operator"],
 		-- ["@lsp.typemod.string.injected"] = hl.treesitter["@string"],
 		-- ["@lsp.typemod.variable.defaultLibrary"] = hl.treesitter["@variable.builtin"],
