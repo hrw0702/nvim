@@ -1,5 +1,3 @@
--- https://github.com/akinsho/toggleterm.nvim
-
 local Toggleterm = require("toggleterm")
 
 Toggleterm.setup({
@@ -32,7 +30,6 @@ Toggleterm.setup({
 		-- 	guibg = "<VALUE-HERE>",
 		-- },
 	},
-	-- size = 18,
 	-- 打开普通终端时，关闭拼写检查
 	on_open = function()
 		vim.cmd("setlocal nospell")
