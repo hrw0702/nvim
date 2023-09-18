@@ -57,6 +57,14 @@ require("lazy").setup({
 			end,
 		},
 
+        -- 当前窗口高亮
+		{
+			"levouh/tint.nvim",
+			config = function()
+				require("conf.tint")
+			end,
+		},
+
 		-- =============================================================================
 		-- markdown-preview
 		-- install without yarn or npm

@@ -144,11 +144,12 @@ onedarkpro.setup({
 	highlights = {
 		TabLineSel = { bg = c.magenta, fg = c.bg }, -- tab pages line, active tab page label
 		TabLine = { fg = c.white, bg = c.magenta },
-		BufferLinePickSelected = { fg = c.red, bg = c.magenta, bold = true },
+		BufferLineBufferSelected = { fg = c.magenta, italic = true, bold = true },
 
 		StatusLine = { fg = c.base0 },
 
 		-- DiagnosticSign
+		DiagnosticVirtualTextWarn = { fg = c.yellow, bg = c.base02 },
 		DiagnosticSignError = { fg = c.red, bg = c.base02 },
 		DiagnosticSignWarn = { fg = c.yellow, bg = c.base02 },
 		DiagnosticSignInfo = { fg = c.blue, bg = c.base02 },
