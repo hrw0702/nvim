@@ -4,48 +4,7 @@ vim.opt.termguicolors = true
 
 require("bufferline").setup({
 	options = {
-		highlights = {
-			fill = {
-				fg = "#eee8d5",
-				bg = "#d33682",
-			},
-			background = {
-				fg = "#eee8d5",
-				bg = "#d33682",
-			},
-			tab = {
-				fg = "#eee8d5",
-				bg = "#d33682",
-			},
-			tab_selected = {
-				fg = "#eee8d5",
-				bg = "#d33682",
-			},
-            buffer_selected = {
-				fg = "#eee8d5",
-				bg = "#d33682",
-                bold = true,
-                italic = true,
-            },
-              pick_selected = {
-				fg = "#eee8d5",
-				bg = "#d33682",
-                bold = true,
-                italic = true,
-            },
-            pick_visible = {
-				fg = "#eee8d5",
-				bg = "#d33682",
-                bold = true,
-                italic = true,
-            },
-            pick = {
-				fg = "#eee8d5",
-				bg = "#d33682",
-                bold = true,
-                italic = true,
-            },
-		},
+		highlights = {},
 		themable = true,
 		-- 为每个 buffer 都配置一个序数
 		numbers = "ordinal",
