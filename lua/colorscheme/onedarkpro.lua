@@ -150,6 +150,7 @@ onedarkpro.setup({
 
 		-- DiagnosticSign
 		DiagnosticVirtualTextWarn = { fg = c.yellow, bg = c.base02 },
+		DiagnosticWarn = { fg = c.yellow, bg = c.base02 },
 		DiagnosticSignError = { fg = c.red, bg = c.base02 },
 		DiagnosticSignWarn = { fg = c.yellow, bg = c.base02 },
 		DiagnosticSignInfo = { fg = c.blue, bg = c.base02 },
@@ -241,6 +242,7 @@ onedarkpro.setup({
 		["@constant.builtin"] = { fg = c.dark_red },
 
 		["@keyword"] = { fg = c.fg, bold = true },
+		["@keyword.lua"] = { fg = c.fg, bold = true },
 
 		["@function"] = { fg = c.cyan },
 		["@attribute"] = { fg = c.green },
