@@ -26,7 +26,9 @@ local colors = {
 	-- cyan = "#2aa198",
 	-- green = "#859900",
     -- onedark主题配色
-    bg        = '#282c34',
+	bg = "#073642",
+    black = "#000000",
+    -- bg        = '#282c34',
     fg        = '#abb2bf',
     yellow    = '#e5c07b',
     cyan      = '#56b6c2',
@@ -37,7 +39,7 @@ local colors = {
     magenta   = '#be5046',
     blue      = '#61afef',
     red       = '#e06c75',
-    -- vim_green = '#3cb371',
+    vim_green = '#3cb371',
 }
 
 local Mode = {
@@ -85,18 +87,15 @@ local mode_color = {
 	n = colors.green,
 	i = colors.blue,
 	v = colors.violet,
-	[""] = colors.blue,
+	[""] = colors.violet,
 	V = colors.violet,
-	["\22"] = colors.violet,
-	["\22s"] = colors.violet,
 	c = colors.yellow,
-	o = colors.green,
+	no = colors.green,
 	s = colors.orange,
 	S = colors.orange,
-	-- [""] = colors.orange,
+	[""] = colors.orange,
 	ic = colors.yellow,
 	R = colors.red,
-	-- ["r"] = colors.magenta,
 	Rv = colors.violet,
 	cv = colors.green,
 	ce = colors.green,
@@ -129,13 +128,13 @@ local config = {
 		-- Disable sections and component separators
 		component_separators = "",
 		section_separators = "",
-		-- theme = {
-		--     -- We are going to use lualine_c an lualine_x as left and
-		--     -- right section. Both are highlighted by c theme .  So we
-		--     -- are just setting default looks o statusline
-		--     normal = { c = { fg = colors.fg, bg = colors.bg } },
-		--     inactive = { c = { fg = colors.fg, bg = colors.bg } },
-		-- },
+		theme = {
+			--     -- We are going to use lualine_c an lualine_x as left and
+			--     -- right section. Both are highlighted by c theme .  So we
+			--     -- are just setting default looks o statusline
+			normal = { c = { fg = colors.fg, bg = colors.bg } },
+			inactive = { c = { fg = colors.fg, bg = colors.bg } },
+		},
 	},
 	sections = {
 		-- these are to remove the defaults
@@ -175,7 +174,7 @@ ins_left({
 	end,
 	color = function()
 		-- return { fg = mode_color[vim.fn.mode()], bg = colors.darkblue } -- Sets highlighting of component
-		return { fg = colors.green, bg = colors.darkblue } -- Sets highlighting of component
+		return { fg = colors.green, bg = colors.darkblue} -- Sets highlighting of component
 	end,
 	padding = { left = 1, right = 1 }, -- We don't need space before this
 })
@@ -195,7 +194,8 @@ ins_left({
 	color = function()
 		-- auto change color according to neovims mode
 		-- return { bg = mode_color[vim.fn.mode()],fg = Black, }
-		return { fg = colors.bg,bg = mode_color[vim.fn.mode()],gui = "bold" }
+		-- return { fg = colors.bg,bg = mode_color[vim.fn.mode()],gui = "bold" }
+		return { fg = colors.black,bg = mode_color[vim.fn.mode()],gui = "bold" }
 	end,
 	padding = { left = 1, right = 0 },
 })
@@ -208,7 +208,7 @@ ins_left({
 	-- color = { fg = colors.blue }, -- Sets highlighting of component
 	color = function()
 		-- return { bg = colors.bg,fg = mode_color[vim.fn.mode()],gui = "bold" }
-		return { fg = mode_color[vim.api.nvim_get_mode().mode],bg="#002129" } -- Sets highlighting of component
+		return { fg = mode_color[vim.api.nvim_get_mode().mode], bg = colors.bg } -- Sets highlighting of component
 	end,
 	padding = { left = 0, right = 1 }, -- We don't need space before this
 })
