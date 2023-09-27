@@ -37,7 +37,7 @@ local colors = {
     magenta   = '#be5046',
     blue      = '#61afef',
     red       = '#e06c75',
-    vim_green = '#3cb371',
+    -- vim_green = '#3cb371',
 }
 
 local Mode = {
@@ -90,13 +90,13 @@ local mode_color = {
 	["\22"] = colors.violet,
 	["\22s"] = colors.violet,
 	c = colors.yellow,
-	no = colors.green,
+	o = colors.green,
 	s = colors.orange,
 	S = colors.orange,
-	[""] = colors.orange,
+	-- [""] = colors.orange,
 	ic = colors.yellow,
 	R = colors.red,
-	["r"] = colors.magenta,
+	-- ["r"] = colors.magenta,
 	Rv = colors.violet,
 	cv = colors.green,
 	ce = colors.green,
@@ -124,8 +124,8 @@ local conditions = {
 -- Config
 local config = {
 	options = {
-        -- 固定（全局）状态栏
-        globalstatus = true,
+		-- 固定（全局）状态栏
+		globalstatus = true,
 		-- Disable sections and component separators
 		component_separators = "",
 		section_separators = "",
@@ -207,7 +207,8 @@ ins_left({
 	end,
 	-- color = { fg = colors.blue }, -- Sets highlighting of component
 	color = function()
-		return { fg = mode_color[vim.fn.mode()] } -- Sets highlighting of component
+		-- return { bg = colors.bg,fg = mode_color[vim.fn.mode()],gui = "bold" }
+		return { fg = mode_color[vim.api.nvim_get_mode().mode],bg="#002129" } -- Sets highlighting of component
 	end,
 	padding = { left = 0, right = 1 }, -- We don't need space before this
 })
@@ -223,13 +224,13 @@ ins_left({
 ins_left({
 	--  "fileformat",
 	"filetype",
-	colored = true, -- Displays filetype icon in color if set to true
+	-- colored = true, -- Displays filetype icon in color if set to true
 	-- fmt = string.upper,
 	-- cond = conditions.buffer_not_empty,
 	-- 只显示图标
 	icon_only = true,
 	icons_enabled = true, -- I think icons are cool but Eviline doesn't have them. sigh
-	color = { fg = colors.vim_green },
+	-- color = { fg = colors.vim_green },
 })
 ins_left({
 	"filename",
