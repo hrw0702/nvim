@@ -146,7 +146,7 @@ onedarkpro.setup({
 		TabLine = { fg = c.white, bg = c.magenta },
 		BufferLineBufferSelected = { fg = c.magenta, italic = true, bold = true },
 
-		StatusLine = { fg = c.base0 },
+		StatusLine = { fg = c.base0},
 
 		-- DiagnosticSign
 		DiagnosticVirtualTextWarn = { fg = c.yellow, bg = c.base02 },
@@ -248,7 +248,7 @@ onedarkpro.setup({
 		["@attribute"] = { fg = c.green },
 		["@keyword.function"] = { fg = c.fg },
 		["@keyword.operator"] = { fg = c.cyan },
-		["@operator.c"] = { fg = c.base0 },
+		["@operator"] = { fg = c.cyan},
 
 		-- 函数参数变量名称
 		["@parameter"] = { fg = c.base1 },
@@ -284,8 +284,12 @@ onedarkpro.setup({
 
 		-- lsp
 		--
-		["@lsp.type.comment"] = { fg = c.comment, italic = true },
-		["@lsp.type.comment.c"] = { fg = c.orange },
+		-- ["@lsp.type.comment"] = { fg = c.comment, italic = true },
+        -- 定义宏的时候，取消颜色
+		["@lsp.type.comment"] = {},
+		-- ["@lsp.type.comment.c"] = { fg = c.orange },
+        -- 定义宏的时候，取消颜色
+		["@lsp.type.comment.c"] = {},
 		["@lsp.type.enum"] = { fg = c.cyan, bold = false },
 		["@lsp.type.class"] = { fg = c.fg, bold = true },
 		["@lsp.mod.classScope"] = { fg = c.base0 },
