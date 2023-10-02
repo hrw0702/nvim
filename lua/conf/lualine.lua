@@ -174,7 +174,7 @@ ins_left({
 	end,
 	color = function()
 		-- return { fg = mode_color[vim.fn.mode()], bg = colors.darkblue } -- Sets highlighting of component
-		return { fg = colors.green, bg = colors.darkblue} -- Sets highlighting of component
+		return { fg = colors.black, bg = colors.vim_green } -- Sets highlighting of component
 	end,
 	padding = { left = 1, right = 1 }, -- We don't need space before this
 })
