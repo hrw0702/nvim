@@ -57,7 +57,7 @@ require("lazy").setup({
 			end,
 		},
 
-        -- 当前窗口高亮
+		-- 当前窗口高亮
 		{
 			"levouh/tint.nvim",
 			config = function()
@@ -78,23 +78,37 @@ require("lazy").setup({
 		},
 
 		-- nvim-tree
+		-- {
+		-- 	"nvim-tree/nvim-tree.lua",
+		-- 	dependencies = {
+		-- 		"nvim-tree/nvim-web-devicons", -- optional, for file icon
+		-- 	},
+		-- 	config = function()
+		-- 		-- 插件加载完成后自动运行 lua/conf/nvim-tree.lua 文件中的代码
+		-- 		require("conf.nvim-tree")
+		-- 	end,
+		-- },
 		{
-			"nvim-tree/nvim-tree.lua",
+			"nvim-neo-tree/neo-tree.nvim",
+			branch = "main",
 			dependencies = {
-				"nvim-tree/nvim-web-devicons", -- optional, for file icon
+				"nvim-lua/plenary.nvim",
+				"nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+				"MunifTanjim/nui.nvim",
+				"s1n7ax/nvim-window-picker",
 			},
 			config = function()
 				-- 插件加载完成后自动运行 lua/conf/nvim-tree.lua 文件中的代码
-				require("conf.nvim-tree")
+				require("conf.neo-tree")
 			end,
 		},
 
-		{
-			"nvim-tree/nvim-web-devicons",
-			config = function()
-				require("conf.nvim-web-devicons")
-			end,
-		},
+		-- {
+		-- 	"nvim-tree/nvim-web-devicons",
+		-- 	config = function()
+		-- 		require("conf.nvim-web-devicons")
+		-- 	end,
+		-- },
 
 		-- lualine
 		{
@@ -155,6 +169,8 @@ require("lazy").setup({
 		-- 缩进线插件
 		{
 			"lukas-reineke/indent-blankline.nvim",
+			main = "ibl",
+			opts = {},
 
 			config = function()
 				-- 插件加载完成后自动运行 lua/conf/indent-blankline.lua 文件中的代码
