@@ -129,3 +129,5 @@ vim.o.pumheight = 10
 
 -- 自动缩进的策略为 plugin
 vim.o.filetype = "plugin"
+
+vim.g.python3_host_prog = "/usr/bin/python3"
