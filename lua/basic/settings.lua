@@ -131,3 +131,7 @@ vim.o.pumheight = 10
 vim.o.filetype = "plugin"
 
 vim.g.python3_host_prog = "/usr/bin/python3"
+-- disable Node.js provider (optional)
+vim.g.loaded_node_provider = 0
+-- disable Perl provider (optional)
+vim.g.loaded_perl_provider = 0
