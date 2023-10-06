@@ -295,6 +295,22 @@ require("lazy").setup({
 				"nvimdev/guard-collection",
 			},
 		},
+		-- formatter
+		-- {
+		-- 	"stevearc/conform.nvim",
+		-- 	event = { "BufReadPre", "BufNewFile" },
+		-- 	config = function()
+		-- 		require("conf.conform")
+		-- 	end,
+		-- },
+		--
+		-- {
+		-- 	"mfussenegger/nvim-lint",
+		-- 	event = { "BufReadPre", "BufNewFile" },
+		-- 	config = function()
+		-- 		require("conf.nvim-lint")
+		-- 	end,
+		-- },
 
 		-- LSP UI 美化
 		{
