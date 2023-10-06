@@ -53,6 +53,7 @@ vim.keybinds.gmap("n", "<S-h>", ":BufferLineCyclePrev<CR>", vim.keybinds.opts)
 vim.keybinds.gmap("n", "<S-l>", ":BufferLineCycleNext<CR>", vim.keybinds.opts)
 
 -- formatter 代码格式化
+-- vim.keybinds.gmap("n", "<leader>fr", ":lua require("conform").format { lsp_fallback = true }<CR>", vim.keybinds.opts)
 -- vim.keybinds.gmap("n", "<leader>fr", ":Format<CR>", vim.keybinds.opts)
 vim.keybinds.gmap("n", "<leader>fr", ":GuardFmt<CR>", vim.keybinds.opts)
 -- vim.keybinds.gmap("n", "<F4>", ":FormatWrite<CR>", vim.keybinds.opts)
@@ -64,3 +65,15 @@ vim.keybinds.gmap("n", "<leader>pt", ":MarkdownPreviewToggle<CR>", vim.keybinds.
 
 -- SymbolsOutline 大纲
 vim.keybinds.gmap("n", "<leader>so", ":SymbolsOutline<CR>", vim.keybinds.opts)
+
+-- reload nvim packerages
+vim.keymap.set("n", "<leader>sv", function()
+  vim.cmd([[
+      update $MYVIMRC
+      source $MYVIMRC
+    ]])
+  vim.notify("Nvim config successfully reloaded!", vim.log.levels.INFO, { title = "nvim-config" })
+end, {
+  silent = true,
+  desc = "reload init.lua",
+})
