@@ -12,7 +12,7 @@ require("ibl").setup({
 	},
 	indent = {
 		char = "│",
-		-- tab_char = ">",
+		tab_char = "│",
 		-- highlight = "IblIndent",
 		smart_indent_cap = true,
 		priority = 1024,
@@ -28,25 +28,29 @@ require("ibl").setup({
 		show_end = false,
 		injected_languages = true,
 		highlight = "IblScope",
-		priority = 1024,
+		priority = 500,
 		include = {
-			node_type = {},
-		},
-		exclude = {
-			language = {},
 			node_type = {
 				["*"] = {
-					"source_file",
-					"program",
-				},
-				lua = {
-					"chunk",
-				},
-				python = {
-					"module",
+					"*",
 				},
 			},
 		},
+		-- exclude = :
+		-- 	language = {},
+		-- 	node_type = {
+		-- 		["*"] = {
+		-- 			"source_file",
+		-- 			"program",
+		-- 		},
+		-- 		-- lua = {
+		-- 		-- 	"chunk",
+		-- 		-- },
+		-- 		python = {
+		-- 			"module",
+		-- 		},
+		-- 	},
+		-- },
 	},
 	exclude = {
 		filetypes = {
