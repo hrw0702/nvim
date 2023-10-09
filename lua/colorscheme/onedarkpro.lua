@@ -26,8 +26,9 @@ local c = {
 	light_green = "#7f8700",
 
 	comment = "#586e75",
-	indentline = "#586e75",
-	selection = "#005869",
+	indentline = "#073642",
+	scope_indentline = "#657b83",
+	selection = "#300924",
 	cursorline = "#073642",
 	git_add = "#109868",
 	git_change = "#948B60",
@@ -146,7 +147,7 @@ onedarkpro.setup({
 		TabLine = { fg = c.white, bg = c.magenta },
 		BufferLineBufferSelected = { fg = c.magenta, italic = true, bold = true },
 
-		StatusLine = { fg = c.base0},
+		StatusLine = { fg = c.base0 },
 
 		-- DiagnosticSign
 		DiagnosticVirtualTextWarn = { fg = c.yellow, bg = c.base02 },
@@ -192,8 +193,11 @@ onedarkpro.setup({
 		PmenuThumb = { fg = c.magenta, bg = c.cyan },
 		CursorLineNr = { fg = c.base2, bg = c.cyan },
 		CursorLine = { bg = c.base02 },
-		IndentBlanklineContextChar = { fg = c.indentline },
-		IndentLine = { fg = c.base02 },
+		-- indent-blankline
+		IblIndent = { fg = c.indentline},
+		-- 当前选中范围
+		IblScope = { fg = c.scope_indentline},
+
 		--
 		-- -- syntax:
 		Comment = { fg = c.comment },
@@ -241,14 +245,15 @@ onedarkpro.setup({
 		-- 枚举变量成员
 		["@constant.builtin"] = { fg = c.dark_red },
 
-		["@keyword"] = { fg = c.fg, bold = true },
+		-- ["@keyword"] = { fg = c.fg, bold = true },
+		["@keyword"] = { fg = c.yellow, bold = false },
 		["@keyword.lua"] = { fg = c.fg, bold = true },
 
 		["@function"] = { fg = c.cyan },
 		["@attribute"] = { fg = c.green },
 		["@keyword.function"] = { fg = c.fg },
 		["@keyword.operator"] = { fg = c.cyan },
-		["@operator"] = { fg = c.cyan},
+		["@operator"] = { fg = c.cyan },
 
 		-- 函数参数变量名称
 		["@parameter"] = { fg = c.base1 },
@@ -263,7 +268,7 @@ onedarkpro.setup({
 		["@repeat"] = { fg = c.yellow, italic = true },
 
 		-- 枚举变量名称
-		["@type"] = { fg = c.cyan },
+		["@type"] = { fg = c.cyan, bold = false },
 
 		-- 变量
 		["@variable"] = { fg = c.base1 },
@@ -285,13 +290,16 @@ onedarkpro.setup({
 		-- lsp
 		--
 		-- ["@lsp.type.comment"] = { fg = c.comment, italic = true },
-        -- 定义宏的时候，取消颜色
+		-- 定义宏的时候，取消颜色
 		["@lsp.type.comment"] = {},
 		-- ["@lsp.type.comment.c"] = { fg = c.orange },
-        -- 定义宏的时候，取消颜色
+		-- 定义宏的时候，取消颜色
 		["@lsp.type.comment.c"] = {},
 		["@lsp.type.enum"] = { fg = c.cyan, bold = false },
-		["@lsp.type.class"] = { fg = c.fg, bold = true },
+		["@lsp.type.class"] = { fg = c.fg, bold = false },
+		["@lsp.typemod.class.declaration.c"] = { fg = c.magenta, bold = false },
+		["@lsp.typemod.class.fileScope.c"] = { fg = c.fg, italic = true, bold = true},
+		["@lsp.typemod.class.globalScope.c"] = { fg = c.cyan, bold = false },
 		["@lsp.mod.classScope"] = { fg = c.base0 },
 		["@lsp.type.definition"] = { fg = c.cyan, bold = true },
 
