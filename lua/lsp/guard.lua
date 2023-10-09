@@ -6,7 +6,7 @@ local ft = require("guard.filetype")
 --        :lint('lint-tool-1')
 --        :append('lint-tool-2')
 
-ft("c"):fmt("clang-format")
+ft("c", "cc", "cpp"):fmt("clang-format")
 ft("lua"):fmt("stylua")
 -- ft("rust"):fmt("rustfmt")
 ft("python"):fmt("black"):append("isort")
