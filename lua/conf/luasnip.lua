@@ -37,28 +37,28 @@ ls.config.set_config({
 --
 -- key Maps
 -- feel free to change the keys to new ones, those are just my current mappings
-vim.keymap.set("i", "<S-j>", function()
+vim.keymap.set("i", "<C-j>", function()
 	if ls.choice_active() then
 		return ls.change_choice(1)
 	else
 		return _G.dynamic_node_external_update(1) -- feel free to update to any index i
 	end
 end, { noremap = true })
-vim.keymap.set("s", "<S-j>", function()
+vim.keymap.set("s", "<C-j>", function()
 	if ls.choice_active() then
 		return ls.change_choice(1)
 	else
 		return _G.dynamic_node_external_update(1)
 	end
 end, { noremap = true })
-vim.keymap.set("i", "<S-k>", function()
+vim.keymap.set("i", "<C-k>", function()
 	if ls.choice_active() then
 		return ls.change_choice(-1)
 	else
 		return _G.dynamic_node_external_update(2)
 	end
 end, { noremap = true })
-vim.keymap.set("s", "<S-k>", function()
+vim.keymap.set("s", "<C-k>", function()
 	if ls.choice_active() then
 		return ls.change_choice(-1)
 	else
