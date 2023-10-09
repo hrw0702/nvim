@@ -15,7 +15,7 @@ require("ibl").setup({
 		tab_char = "│",
 		-- highlight = "IblIndent",
 		smart_indent_cap = true,
-		priority = 1024,
+		priority = 1,
 	},
 	whitespace = {
 		-- highlight = "IblWhitespace",
@@ -26,7 +26,7 @@ require("ibl").setup({
 		char = nil,
 		show_start = false,
 		show_end = false,
-		injected_languages = true,
+		injected_languages = false,
 		highlight = "IblScope",
 		priority = 500,
 		include = {
