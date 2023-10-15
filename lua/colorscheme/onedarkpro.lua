@@ -300,6 +300,9 @@ onedarkpro.setup({
 		["@lsp.typemod.class.declaration.c"] = { fg = c.magenta, bold = false },
 		["@lsp.typemod.class.fileScope.c"] = { fg = c.fg, italic = true, bold = true},
 		["@lsp.typemod.class.globalScope.c"] = { fg = c.cyan, bold = false },
+		["@lsp.typemod.enum.declaration.c"] = { fg = c.magenta, bold = false },
+		["@lsp.typemod.enum.fileScope.c"] = { fg = c.fg, italic = true, bold = true},
+		["@lsp.typemod.enum.globalScope.c"] = { fg = c.cyan, bold = false },
 		["@lsp.mod.classScope"] = { fg = c.base0 },
 		["@lsp.type.definition"] = { fg = c.cyan, bold = true },
 
