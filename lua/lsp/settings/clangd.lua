@@ -2,6 +2,8 @@
 -- init_options = {
 --   clangdFileStatus = true
 -- },
+vim.lsp.set_log_level("off")
+
 local lsp_status = require("lsp-status")
 local cmp = require("completion")
 
