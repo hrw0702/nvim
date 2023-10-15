@@ -66,6 +66,15 @@ vim.keybinds.gmap("n", "<leader>pt", ":MarkdownPreviewToggle<CR>", vim.keybinds.
 -- SymbolsOutline 大纲
 vim.keybinds.gmap("n", "<leader>so", ":SymbolsOutline<CR>", vim.keybinds.opts)
 
+-- neovide fullscreen
+vim.keymap.set("n", "<C-F11>", function()
+    vim.g.neovide_fullscreen = not vim.g.neovide_fullscreen
+end, {
+  silent = true,
+  desc = "Toggle Neovide Fullscreen",
+})
+
+
 -- reload nvim packerages
 vim.keymap.set("n", "<leader>sv", function()
   vim.cmd([[
