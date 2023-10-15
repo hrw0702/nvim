@@ -1,4 +1,12 @@
 -- 基础配置
+-- neovide
+
+if vim.g.neovide then
+	vim.o.guifont = "FiraCode Nerd Font:h12"
+	vim.g.neovide_fullscreen = true
+	vim.g.neovide_remember_window_size = true
+	vim.g.neovide_remember_window_position = true
+end
 -- utf8
 vim.g.encoding = "UTF-8"
 vim.o.fileencoding = "utf-8"
@@ -135,3 +143,17 @@ vim.g.python3_host_prog = "/usr/bin/python3"
 vim.g.loaded_node_provider = 0
 -- disable Perl provider (optional)
 vim.g.loaded_perl_provider = 0
+
+-- wsl 下 neovim 和系统之间复制配置
+vim.g.clipboard = {
+	name = "WslClipboard",
+	copy = {
+		["+"] = "clip.exe",
+		["*"] = "clip.exe",
+	},
+	paste = {
+		["+"] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+		["*"] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+	},
+	cache_enabled = 0,
+}
