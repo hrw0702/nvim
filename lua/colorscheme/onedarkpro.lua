@@ -252,8 +252,8 @@ onedarkpro.setup({
 		["@function"] = { fg = c.cyan },
 		["@attribute"] = { fg = c.green },
 		["@keyword.function"] = { fg = c.fg },
-		["@keyword.operator"] = { fg = c.cyan },
-		["@operator"] = { fg = c.cyan },
+		["@keyword.operator"] = { fg = c.cyan},
+		["@operator"] = { fg = c.cyan},
 
 		-- 函数参数变量名称
 		["@parameter"] = { fg = c.base1 },
