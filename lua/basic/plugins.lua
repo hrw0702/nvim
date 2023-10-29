@@ -378,7 +378,10 @@ require("lazy").setup({
 		},
 
 		-- 排序和过滤 nvim-cmp 结果
-		{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+		{
+			"nvim-telescope/telescope-fzf-native.nvim",
+			build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
+		},
 		{
 			"tzachar/cmp-fuzzy-buffer",
 			dependencies = { "hrsh7th/nvim-cmp", "tzachar/fuzzy.nvim" },
