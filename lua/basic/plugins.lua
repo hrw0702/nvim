@@ -371,6 +371,7 @@ require("lazy").setup({
 			end,
 		},
 		-- tabnine 源,提供基于 AI 的智能补全
+        -- 不能安装时进入插件目录运行 install.sh
 		{
 			"tzachar/cmp-tabnine",
 			build = "./install.sh",
