@@ -1,21 +1,5 @@
 -- https://github.com/folke/todo-comments.nvim
 
--- require("todo-comments").setup({
--- 	keywords = {
--- 		-- alt ： 别名
--- 		FIX = {
--- 			icon = " ",
--- 			color = "#DC2626",
--- 			alt = { "FIXME", "BUG", "FIXIT", "ISSUE", "!" },
--- 		},
--- 		TODO = { icon = " ", color = "#10B981" },
--- 		HACK = { icon = " ", color = "#7C3AED" },
--- 		WARN = { icon = " ", color = "#FBBF24", alt = { "WARNING", "XXX" } },
--- 		PERF = { icon = " ", color = "#FC9868", alt = { "OPTIM", "PERFORMANCE", "OPTIMIZE" } },
--- 		NOTE = { icon = " ", color = "#2563EB", alt = { "INFO" } },
--- 	},
--- })
-
 require("todo-comments").setup({
 	signs = true, -- show icons in the signs column
 	sign_priority = 8, -- sign priority
@@ -27,12 +11,18 @@ require("todo-comments").setup({
 			alt = { "FIXME", "BUG", "FIXIT", "ISSUE" }, -- a set of other keywords that all map to this FIX keywords
 			-- signs = false, -- configure signs for some keywords individually
 		},
+        -- TODO:
+        -- HACK:
+        -- WARN:
+        -- PERF:
+        -- NOTE:
+        -- TEST:
 		TODO = { icon = " ", color = "info" },
 		HACK = { icon = " ", color = "warning" },
 		WARN = { icon = " ", color = "warning", alt = { "WARNING", "XXX" } },
-		PERF = { icon = " ", alt = { "OPTIM", "PERFORMANCE", "OPTIMIZE" } },
-		NOTE = { icon = " ", color = "hint", alt = { "INFO" } },
-		TEST = { icon = "⏲ ", color = "test", alt = { "TESTING", "PASSED", "FAILED" } },
+		PERF = { icon = " ", alt = { "OPTIM", "PERFORMANCE", "OPTIMIZE" } },
+		NOTE = { icon = " ", color = "hint", alt = { "INFO" } },
+		TEST = { icon = "󰙨 ", color = "test", alt = { "TESTING", "PASSED", "FAILED" } },
 	},
 	gui_style = {
 		fg = "NONE", -- The gui style to use for the fg highlight group.
@@ -83,4 +73,4 @@ require("todo-comments").setup({
 	},
 })
 
-vim.keybinds.gmap("n", "<leader>ft", "<cmd>TodoTelescope theme=dropdown<CR>", vim.keybinds.opts)
+vim.keybinds.gmap("n", "<leader>td", "<cmd>TodoTelescope theme=dropdown<CR>", vim.keybinds.opts)
