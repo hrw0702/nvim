@@ -20,7 +20,8 @@ return {
 					vim.api.nvim_get_runtime_file("", true),
 					-- Neovim 配置目录
 					-- [vim.fn.stdpath("$HOME/.config/nvim") .. "/lua"] = true,
-					[vim.fn.stdpath("config") .. "/lua"] = true,
+					-- [vim.fn.stdpath("config") .. "/lua"] = true,
+					[vim.fn.stdpath("config") .. "/lua"],
 					"${3rd}/busted/library",
 					"${3rd}/luassert/library",
 					"${3rd}/luv/library",

@@ -3,7 +3,10 @@ require("neo-tree").setup({
 	popup_border_style = "rounded",
 	enable_git_status = true,
 	enable_diagnostics = true,
-	enable_normal_mode_for_inputs = false, -- Enable normal mode for input dialogs.
+
+	-- enable_normal_mode_for_inputs = false, -- Enable normal mode for input dialogs.
+	enable_normal_mode_for_inputs = ":exe 'norm F.' | :startinsert",
+
 	open_files_do_not_replace_types = { "terminal", "trouble", "qf" }, -- when opening files, do not use windows containing these filetypes or buftypes
 	sort_case_insensitive = false, -- used when sorting files and directories in the tree
 	sort_function = nil, -- use a custom function for sorting files and directories in the tree
@@ -42,7 +45,7 @@ require("neo-tree").setup({
 			highlight = "NeoTreeFileIcon",
 		},
 		modified = {
-			symbol = "[+]",
+			symbol = "",
 			highlight = "NeoTreeModified",
 		},
 		name = {
@@ -52,14 +55,25 @@ require("neo-tree").setup({
 		},
 		git_status = {
 			symbols = {
+				-- -- Change type
+				-- added = "✚", -- or "✚", but this is redundant info if you use git_status_colors on the name
+				-- modified = "", -- or "", but this is redundant info if you use git_status_colors on the name
+				-- deleted = "✖", -- this can only be used in the git_status source
+				-- renamed = "➜", -- this can only be used in the git_status source
+				-- -- Status type
+				-- untracked = "",
+				-- ignored = "",
+				-- unstaged = "",
+				-- staged = "",
+				-- conflict = "",
 				-- Change type
-				added = "", -- or "✚", but this is redundant info if you use git_status_colors on the name
-				modified = "", -- or "", but this is redundant info if you use git_status_colors on the name
-				deleted = "✖", -- this can only be used in the git_status source
-				renamed = "➜", -- this can only be used in the git_status source
+				added = "", -- or "✚", but this is redundant info if you use git_status_colors on the name
+				modified = "", -- or "", but this is redundant info if you use git_status_colors on the name
+				deleted = "󰆴", -- this can only be used in the git_status source
+				renamed = "", -- this can only be used in the git_status source
 				-- Status type
 				untracked = "",
-				ignored = "",
+				ignored = "",
 				unstaged = "",
 				staged = "",
 				conflict = "",
@@ -256,6 +270,16 @@ require("neo-tree").setup({
 				["os"] = { "order_by_size", nowait = false },
 				["ot"] = { "order_by_type", nowait = false },
 			},
+		},
+	},
+	event_handlers = {
+		{
+			event = "neo_tree_popup_input_ready",
+			---@param args { bufnr: integer, winid: integer }
+			handler = function(args)
+				vim.cmd("stopinsert")
+				vim.keymap.set("i", "<esc>", vim.cmd.stopinsert, { noremap = true, buffer = args.bufnr })
+			end,
 		},
 	},
 	git_status = {

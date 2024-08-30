@@ -1,6 +1,6 @@
 local outline = require("symbols-outline")
 
-local opts = {
+local config= {
 	highlight_hovered_item = true,
 	show_guides = true,
 	auto_preview = false,

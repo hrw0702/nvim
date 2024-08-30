@@ -266,12 +266,12 @@ require("lazy").setup({
 		},
 
 		-- 大纲预览
-		{
-			"simrat39/symbols-outline.nvim",
-			config = function()
-				require("conf.outline")
-			end,
-		},
+		-- {
+		-- 	"simrat39/symbols-outline.nvim",
+		-- 	config = function()
+		-- 		require("conf.outline")
+		-- 	end,
+		-- },
 
 		-- LSP 基础服务
 		-------------------------------------------------------------------------------
@@ -379,10 +379,39 @@ require("lazy").setup({
 		},
 
 		-- 排序和过滤 nvim-cmp 结果
-		{
-			"nvim-telescope/telescope-fzf-native.nvim",
-			build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
-		},
+        -- { 'nvim-telescope/telescope-fzf-native.nvim',
+        --     build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release' 
+        -- },
+        {
+            'nvim-telescope/telescope-fzf-native.nvim',
+            -- build = 'make'
+            build =
+            "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build"
+
+        },
+
+        {
+            'tzachar/fuzzy.nvim',
+            dependencies= {'nvim-telescope/telescope-fzf-native.nvim'},
+        },
+
+            {
+                'romgrk/fzy-lua-native', build = 'make'
+            },
+        {
+             "vhyrro/luarocks.nvim",
+             priority = 1000, -- Very high priority is required, luarocks.nvim should run as the first plugin in your config.
+             config = true,
+        },
+
+        -- {
+        --     'tzachar/fuzzy.nvim', dependencies= {'romgrk/fzy-lua-native'},
+        -- },
+        {
+            'tzachar/fuzzy.nvim',
+            dependencies= {'natecraddock/telescope-zf-native.nvim'},
+        },
+
 		{
 			"tzachar/cmp-fuzzy-buffer",
 			dependencies = { "hrsh7th/nvim-cmp", "tzachar/fuzzy.nvim" },

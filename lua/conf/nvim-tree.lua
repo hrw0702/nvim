@@ -154,10 +154,10 @@ require("nvim-tree").setup({ -- BEGIN_DEFAULT_OPTS
 			max = vim.diagnostic.severity.ERROR,
 		},
 		icons = {
-			hint = "",
-			info = "",
-			warning = "",
-			error = "",
+			hint = "󰛨",
+			info = "",
+			warning = "",
+			error = "",
 		},
 	},
 	filters = {

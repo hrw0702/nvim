@@ -21,8 +21,10 @@ require("nvim-treesitter.configs").setup({
 	},
 
 	context_commentstring = {
-		enable = true,
+		-- enable = true,
+        enable_autocmd = false,
 	},
+
 	-- 启用增量选择
 	incremental_selection = {
 		enable = false,
