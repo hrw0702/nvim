@@ -28,8 +28,8 @@ require("winbar").setup({
 	icons = {
 		file_icon_default = "",
 		seperator = ">",
-		editor_state = "●",
-		lock_icon = "",
+		editor_state = "",
+		lock_icon = "",
 	},
 
 	exclude_filetype = {
