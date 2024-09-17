@@ -1,4 +1,18 @@
 local lazy_status = require "lazy.status"
+local custom = require "custom"
+local icons = custom.icons
+
+local colors = {
+  yellow = "#b58900",
+  orange = "#cb4b16",
+  red = "#dc322f",
+  magenta = "#d33682",
+  violet = "#6c71c4",
+  blue = "#268bd2",
+  cyan = "#2aa198",
+  green = "#859900",
+  bg = "#073642",
+}
 
 local function indent()
   if vim.o.expandtab then
@@ -23,7 +37,7 @@ local function lsp()
       return " " .. client.name
     end)
     :totable()
-  local info = table.concat(clients, " ")
+  local info = " LSP:" .. string.sub(table.concat(clients, " "), 4, -1)
   if info == "" then
     return "No attached LSP server"
   else
@@ -75,7 +89,8 @@ return {
       lualine_a = {
         {
           "mode",
-          icon = "",
+          icon = "",
+          separator = { right = "" },
         },
       },
       lualine_b = {
@@ -96,9 +111,28 @@ return {
         },
       },
       lualine_c = {
-        dap_or_lsp,
+        {
+          "diagnostics",
+          symbols = {
+            error = icons.diagnostic.error,
+            warn = icons.diagnostic.warn,
+            info = icons.diagnostic.info,
+            hint = icons.diagnostic.hint,
+          },
+          diagnostics_color = {
+            color_error = { fg = colors.red },
+            color_warn = { fg = colors.yellow },
+            color_info = { fg = colors.cyan },
+            color_hint = { fg = colors.blue },
+          },
+        },
+        -- dap_or_lsp,
       },
       lualine_x = {
+        {
+          lsp,
+          color = { fg = colors.green },
+        },
         {
           lazy_status.updates,
           cond = lazy_status.has_updates,
@@ -119,7 +153,6 @@ return {
         "fileformat",
       },
       lualine_y = {
-        "diagnostics",
         {
           "progress",
           icon = "",
