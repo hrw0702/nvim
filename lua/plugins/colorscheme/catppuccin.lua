@@ -139,8 +139,10 @@ return {
       return {
         MsgSeparator = { bg = color.mantle },
 
-        LineNr = { fg = color.base01, bg = color.base02 },
-        LineNrNC = { fg = color.base01, bg = color.base02 },
+        FloatBorder = { fg = color.blue, bg = color.bg},
+        LineNr = { fg = color.base1, bg = color.base02 },
+        CursorLineNr = { fg = color.base3, bg = color.cyan, style = { "bold" } },
+        LineNrNC = { fg = color.base1, bg = color.base02 },
         SignColumn = { bg = color.base02 }, -- column where |signs| are displayed
 
         TabLine = { bg = color.pink, fg = color.text },
@@ -169,9 +171,14 @@ return {
         GitSignsAddInline = { bg = color.git_hunk_add_inline },
         GitSignsChangeInline = { bg = color.git_hunk_change_inline },
         GitSignsDeleteInline = { bg = color.git_hunk_delete_inline },
+        DiagnosticSignOk = { bg = color.base02 },
+        DiagnosticSignInfo = { bg = color.base02 },
+        DiagnosticSignHint = { bg = color.base02 },
+        DiagnosticSignError = { bg = color.base02 },
+        DiagnosticSignWarn = { bg = color.base02 },
 
         -- -- syntax:
-        Boolean = {fg=color.yellow},
+        Boolean = { fg = color.yellow },
         Comment = { fg = color.comment },
         PreCondit = { fg = color.orange },
         cDefine = { fg = color.orange },
