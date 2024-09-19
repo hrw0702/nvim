@@ -81,7 +81,7 @@ return {
 
         FloatBorder = { fg = color.blue, bg = color.bg },
         LineNr = { fg = color.base01, bg = color.base02 },
-        CursorLineNr = { fg = color.base3, bg = color.cyan, style = { "bold" } },
+        CursorLineNr = { fg = color.base2, bg = color.violet, style = { "bold" } },
         LineNrNC = { fg = color.base1, bg = color.base02 },
         SignColumn = { bg = color.base02 }, -- column where |signs| are displayed
 
