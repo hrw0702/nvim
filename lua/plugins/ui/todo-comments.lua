@@ -5,7 +5,9 @@ local color = custom.colors
 ---@type LazyPluginSpec
 return {
   "folke/todo-comments.nvim",
+  -- allow plugin
   enabled = true,
+
   event = "VeryLazy",
   opts = {
 
