@@ -1,18 +1,7 @@
 local lazy_status = require "lazy.status"
 local custom = require "custom"
 local icons = custom.icons
-
-local colors = {
-  yellow = "#b58900",
-  orange = "#cb4b16",
-  red = "#dc322f",
-  magenta = "#d33682",
-  violet = "#6c71c4",
-  blue = "#268bd2",
-  cyan = "#2aa198",
-  green = "#859900",
-  bg = "#073642",
-}
+local colors = custom.colors
 
 local function indent()
   if vim.o.expandtab then
@@ -90,6 +79,7 @@ return {
         {
           "mode",
           icon = "",
+          -- icon = "",
           separator = { right = "" },
         },
       },
@@ -126,25 +116,24 @@ return {
             color_hint = { fg = colors.blue },
           },
         },
+        {
+          "progress",
+          icon = "",
+          color = { fg = colors.violet, bg = colors.base02 },
+        },
+        {
+          "location",
+          icon = "",
+          color = { fg = colors.base2, bg = colors.base02 },
+        },
         -- dap_or_lsp,
       },
       lualine_x = {
         {
-          lsp,
-          color = { fg = colors.green },
-        },
-        {
           lazy_status.updates,
           cond = lazy_status.has_updates,
-          color = { fg = "#ff9e64" },
+          color = { fg = colors.orange },
         },
-        {
-          name = "overseer-placeholder",
-          function()
-            return ""
-          end,
-        },
-        "copilot",
         indent,
         {
           "encoding",
@@ -152,16 +141,12 @@ return {
         },
         "fileformat",
       },
-      lualine_y = {
-        {
-          "progress",
-          icon = "",
-        },
-      },
+      lualine_y = {},
       lualine_z = {
         {
-          "location",
-          icon = "",
+          lsp,
+          color = { fg = colors.green, bg = colors.base02 },
+          -- color = { fg = colors.green },
         },
       },
     },
