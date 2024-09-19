@@ -1,10 +1,10 @@
--- 基础配置
+-- @hrw0702 基础配置
 -- utf8
 vim.g.encoding = "UTF-8"
 vim.o.fileencoding = "utf-8"
 
 -- 全局状态栏
--- vim.opt.laststatus = 3
+vim.opt.laststatus = 3
 -- jk移动时光标下上方保留8行
 vim.o.scrolloff = 8
 vim.o.sidescrolloff = 8
@@ -50,10 +50,10 @@ vim.o.hlsearch = false
 vim.o.incsearch = true
 
 -- 使用增强状态栏后不再需要 vim 的模式提示
--- vim.o.showmode = false
+vim.o.showmode = false
 
 -- 命令行高为2，提供足够的显示空间
--- vim.o.cmdheight = 1
+vim.o.cmdheight = 1
 
 -- 当文件被外部程序修改时，自动加载
 vim.o.autoread = true
@@ -128,7 +128,7 @@ vim.o.pumheight = 10
 -- always show tabline
 
 -- -- 自动缩进的策略为 plugin
--- vim.o.filetype = "plugin"
+vim.o.filetype = "plugin"
 
 -- vim.g.python3_host_prog = "/usr/bin/python3"
 -- -- disable Node.js provider (optional)

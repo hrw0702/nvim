@@ -3,6 +3,10 @@ return {
   "stevearc/conform.nvim",
   opts = {
     formatters_by_ft = {
+      c = { "clang-format" },
+      cpp = { "clang-format" },
+      markdown = { "prettier" },
+      sh = { "shfmt" },
       lua = { "stylua" },
       nix = { "nixfmt" },
       python = { "isort", "black" },
