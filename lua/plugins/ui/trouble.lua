@@ -1,7 +1,7 @@
 ---@type LazyPluginSpec
 return {
   "folke/trouble.nvim",
-  enabled = false,
+  enabled = true,
   init = function()
     -- HACK: Hijack quickfix to open trouble
     vim.api.nvim_create_autocmd("FileType", {
@@ -22,11 +22,17 @@ return {
   keys = {
     {
       "<leader>q",
-      function()
-        require("trouble").toggle "quickfix"
-      end,
+      "<Cmd>Trouble diagnostics <CR>",
+      -- function()
+      -- require("trouble").toggle "quickfix"
+      -- end,
       desc = "Quickfix",
     },
   },
-  opts = {},
+  opts = {
+    auto_close = true,
+    focus = true,
+    keys = { ["<cr>"] = "jump_close" },
+    win = { size = { width = 0.3, height = 0.4 } },
+  },
 }

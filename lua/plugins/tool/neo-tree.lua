@@ -15,23 +15,23 @@ return {
     "s1n7ax/nvim-window-picker",
     "ofseed/nvim-lsp-file-operations",
   },
-  init = function()
-    vim.api.nvim_create_autocmd("BufEnter", {
-      group = vim.api.nvim_create_augroup("load_neo_tree", {}),
-      desc = "Loads neo-tree when openning a directory",
-      callback = function(args)
-        local stats = vim.uv.fs_stat(args.file)
-
-        if not stats or stats.type ~= "directory" then
-          return
-        end
-
-        require "neo-tree"
-
-        return true
-      end,
-    })
-  end,
+  -- init = function()
+  --   vim.api.nvim_create_autocmd("BufEnter", {
+  --     group = vim.api.nvim_create_augroup("load_neo_tree", {}),
+  --     desc = "Loads neo-tree when openning a directory",
+  --     callback = function(args)
+  --       local stats = vim.uv.fs_stat(args.file)
+  --
+  --       if not stats or stats.type ~= "directory" then
+  --         return
+  --       end
+  --
+  --       require "neo-tree"
+  --
+  --       return true
+  --     end,
+  --   })
+  -- end,
   opts = {
     default_source = "last",
     popup_border_style = custom.border,
@@ -46,24 +46,24 @@ return {
       },
     },
     source_selector = {
-      winbar = true,
+      winbar = false,
       sources = {
         {
           source = "filesystem",
           display_name = "  Files ",
         },
-        {
-          source = "buffers",
-          display_name = "  Buffers ",
-        },
-        {
-          source = "git_status",
-          display_name = "  Git ",
-        },
-        {
-          source = "document_symbols",
-          display_name = "  Symbols",
-        },
+        -- {
+        --   source = "buffers",
+        --   display_name = "  Buffers ",
+        -- },
+        -- {
+        --   source = "git_status",
+        --   display_name = "  Git ",
+        -- },
+        -- {
+        --   source = "document_symbols",
+        --   display_name = "  Symbols",
+        -- },
       },
     },
     window = {

@@ -11,12 +11,12 @@ return {
   opts = {},
   keys = {
     {
-      "<S-l>",
+      "<c-l>",
       "<cmd>BufferLineCycleNext<CR>",
       desc = "Buffer Next",
     },
     {
-      "<S-h>",
+      "<c-h>",
       "<cmd>BufferLineCyclePrev<CR>",
       desc = "Buffer Prev",
     },

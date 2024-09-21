@@ -2,11 +2,12 @@ local custom = require "custom"
 
 -- Set diagnostic options
 vim.diagnostic.config {
-  virtual_text = {
-    spacing = 4,
-    prefix = "●",
-    severity = vim.diagnostic.severity.ERROR,
-  },
+  -- virtual_text = {
+  --   spacing = 4,
+  --   prefix = "●",
+  --   severity = vim.diagnostic.severity.ERROR,
+  -- },
+  virtual_text = false,
   float = {
     severity_sort = false,
     source = "if_many",

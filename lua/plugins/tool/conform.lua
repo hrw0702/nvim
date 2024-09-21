@@ -1,39 +1,51 @@
 ---@type LazyPluginSpec
 return {
   "stevearc/conform.nvim",
-  opts = {
-    formatters_by_ft = {
-      c = { "clang-format" },
-      cpp = { "clang-format" },
-      markdown = { "prettier" },
-      sh = { "shfmt" },
-      lua = { "stylua" },
-      nix = { "nixfmt" },
-      python = { "isort", "black" },
-      go = { "gofumpt", "goimports" },
-
-      html = { "prettier" },
-      css = { "prettier" },
-      less = { "prettier" },
-      scss = { "prettier" },
-      javascript = { "prettier" },
-      typescript = { "prettier" },
-      javascriptreact = { "prettier" },
-      typescriptreact = { "prettier" },
-      vue = { "prettier" },
-      json = { "prettier" },
-      jsonc = { "prettier" },
-      yaml = { "prettier" },
-    },
-  },
+  cmd = "ConformInfo",
   keys = {
     {
       "<leader>F",
       function()
-        require("conform").format { lsp_fallback = true }
+        require("conform").format { lsp_format = "fallback" }
       end,
       desc = "Format Document",
       mode = { "n", "v" },
     },
   },
+  config = function()
+    require("conform").setup {
+      formatters_by_ft = {
+        cpp = { "clang_format" },
+        python = { "ruff_fix", "ruff_format" },
+        lua = { "stylua" },
+        rust = { "rustfmt" },
+        html = { "prettier" },
+        astro = { "prettier" },
+        javascript = { "prettier" },
+        typescript = { "prettier" },
+        markdown = { "prettier" },
+        javascriptreact = { "prettier" },
+        typescriptreact = { "prettier" },
+        yaml = { "prettier" },
+        typst = { "typstyle" },
+        nix = { "nixfmt" },
+        haskell = { "fourmolu" },
+      },
+      formatters = {
+        clang_format = {
+          command = "clang-format",
+          prepend_args = {
+            "-style=file:/home/hrw0702/C_Program/.clang-format",
+          },
+        },
+        prettier = {
+          prepend_args = {
+            "--tab-width 2",
+          },
+        },
+      },
+    }
+    vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
+    vim.o.formatprg = "v:lua.require'conform'.formatprg()"
+  end,
 }

@@ -116,19 +116,14 @@ return {
             color_hint = { fg = colors.blue },
           },
         },
-        {
-          "progress",
-          icon = "",
-          color = { fg = colors.violet, bg = colors.base02 },
-        },
-        {
-          "location",
-          icon = "",
-          color = { fg = colors.base2, bg = colors.base02 },
-        },
         -- dap_or_lsp,
       },
       lualine_x = {
+        {
+          lsp,
+          color = { fg = colors.green, bg = colors.base02 },
+          -- color = { fg = colors.green },
+        },
         {
           lazy_status.updates,
           cond = lazy_status.has_updates,
@@ -141,12 +136,25 @@ return {
         },
         "fileformat",
       },
-      lualine_y = {},
+      lualine_y = {
+        {
+          "progress",
+          icon = "",
+          color = { fg = colors.violet, bg = colors.base02 },
+        },
+      },
       lualine_z = {
         {
-          lsp,
-          color = { fg = colors.green, bg = colors.base02 },
-          -- color = { fg = colors.green },
+          "location",
+          icon = "",
+          color = { fg = colors.base2, bg = colors.base02 },
+        },
+        {
+          function()
+            return os.date "%H:%M"
+          end,
+          icon = "󱑒",
+          color = { fg = colors.base2, bg = colors.cyan },
         },
       },
     },
@@ -167,7 +175,7 @@ return {
       "man",
       "quickfix",
       "nvim-tree",
-      "neo-tree",
+      -- "neo-tree",
       "toggleterm",
       "symbols-outline",
       "aerial",
