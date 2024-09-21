@@ -1,198 +1,187 @@
-local custom = require "custom"
+local opts = function()
+  local luasnip = require "luasnip"
+  local cmp = require "cmp"
+  local WIDE_HEIGHT = 40
 
----@type LazyPluginSpec
-return {
-  "hrsh7th/nvim-cmp",
-  event = {
-    "InsertEnter",
-    "CmdlineEnter",
-  },
-  dependencies = {
-    { "hrsh7th/cmp-buffer" },
-    { "hrsh7th/cmp-nvim-lsp" },
-    { "hrsh7th/cmp-nvim-lsp-signature-help" },
-    { "hrsh7th/cmp-buffer" },
-    { "hrsh7th/cmp-path" },
-    { "hrsh7th/cmp-cmdline" },
-    -- { "saadparwaiz1/cmp_luasnip" },
-    { "lukas-reineke/cmp-under-comparator" },
-    { "kristijanhusak/vim-dadbod-completion", enabled = false },
-  },
-  opts = function()
-    local cmp = require "cmp"
-    local luasnip = require "luasnip"
-    local lspkind = require "lspkind"
+  cmp.setup {
+    inlay_hints = { enabled = true },
+    preselect = cmp.PreselectMode.None,
+    window = {
+      completion = {
+        cmp.config.window.bordered(),
+        border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+        -- 弹出窗口高亮设置
+        -- winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,CursorLine:PmenuSel,Search:None",
+        -- winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,CursorLine:PmenuSel,Search:None",
+        -- scrolloff = 0,
+        col_offset = 0,
+        side_padding = 1,
+        scrollbar = true,
+      },
+      documentation = {
+        cmp.config.window.bordered(),
+        max_height = math.floor(WIDE_HEIGHT * (WIDE_HEIGHT / vim.o.lines)),
+        max_width = math.floor(
+          (WIDE_HEIGHT * 2) * (vim.o.columns / (WIDE_HEIGHT * 2 * 16 / 9))
+        ),
+        border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+        -- winhighlight = "FloatBorder:Pmenu",
+      },
+    },
+    -- window = {
+    --   completion = cmp.config.window.bordered(),
+    --   documentation = cmp.config.window.bordered(),
+    --
+    -- },
+    completion = {
+      completeopt = vim.o.completeopt,
+    },
 
-    -- local has_words_before = function()
-    --   local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-    --   return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match "%s" == nil
-    -- end
+    view = {
+      entries = { name = "custom", selection_order = "near_cursor" },
+    },
 
-    return {
-      ---@type cmp.ConfigSchema
-      global = {
-        completion = {
-          completeopt = vim.o.completeopt,
-        },
-        window = {
-          completion = {
-            winblend = 0,
-            border = custom.border,
-            col_offset = -3,
-          },
-          documentation = {
-            border = custom.border,
-          },
-        },
-        snippet = {
-          expand = function(args)
-            luasnip.lsp_expand(args.body)
+    snippet = {
+      expand = function(args)
+        luasnip.lsp_expand(args.body)
+      end,
+    },
+
+    mapping = cmp.mapping.preset.insert {
+      ["<C-p>"] = cmp.mapping(cmp.mapping.select_prev_item(), { "i", "c" }),
+      ["<C-n>"] = cmp.mapping(cmp.mapping.select_next_item(), { "i", "c" }),
+      ["<C-d>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), { "i", "c" }),
+      ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
+      ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
+      ["<C-e>"] = cmp.mapping {
+        i = cmp.mapping.close(),
+        c = cmp.mapping.close(),
+      },
+      ["<CR>"] = cmp.mapping.confirm { select = true },
+      ["<Tab>"] = cmp.mapping(function(fallback)
+        if cmp.visible() then
+          cmp.select_next_item()
+        elseif luasnip.expand_or_locally_jumpable() then
+          luasnip.jump(1)
+        else
+          fallback()
+        end
+      end, { "i", "s", "c" }),
+
+      ["<S-Tab>"] = cmp.mapping(function(fallback)
+        if cmp.visible() then
+          cmp.select_prev_item()
+        elseif luasnip.jumpable(-1) then
+          luasnip.jump(-1)
+        else
+          fallback()
+        end
+      end, { "i", "s", "c" }),
+    },
+
+    -- Set source precedence
+    sources = {
+      { name = "lazydev" },
+      { name = "nvim_lsp" }, -- For nvim-lsp
+      { name = "luasnip" }, -- For luasnip user
+      {
+        name = "buffer",
+        option = {
+          get_bufnrs = function()
+            local bufs = {}
+            for _, win in ipairs(vim.api.nvim_list_wins()) do
+              bufs[vim.api.nvim_win_get_buf(win)] = true
+            end
+            return vim.tbl_keys(bufs)
           end,
         },
-        mapping = {
-          ["<C-p>"] = cmp.mapping(cmp.mapping.select_prev_item(), { "i", "c" }),
-          ["<C-n>"] = cmp.mapping(cmp.mapping.select_next_item(), { "i", "c" }),
-          ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), { "i", "c" }),
-          ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
-          ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
-          ["<C-e>"] = cmp.mapping(cmp.mapping.close(), { "i", "c" }),
-          ["<C-g>"] = cmp.mapping(cmp.mapping.close_docs(), { "i", "c" }),
-          ["<CR>"] = cmp.mapping.confirm(),
-          ["<Tab>"] = cmp.mapping(function(fallback)
-            if luasnip.expand_or_locally_jumpable() then
-              luasnip.jump(1)
-            -- elseif has_words_before() then
-            --   cmp.complete()
-            else
-              fallback() --Fallback to tabout of `ultimate-autopair` as expected
-            end
-          end, {
-            "i",
-            "s",
-            "c",
-          }),
-          ["<S-Tab>"] = cmp.mapping(function(fallback)
-            if luasnip.jumpable(-1) then
-              luasnip.jump(-1)
-            else
-              fallback()
-            end
-          end, {
-            "i",
-            "s",
-            "c",
-          }),
-        },
-        sources = cmp.config.sources(
-          -- Group sources
-          {
-            { name = "lazydev" },
-          },
-          {
-            { name = "nvim_lsp" },
-          },
-          {
-            { name = "luasnip" },
-          },
-          {
-            {
-              name = "buffer",
-              option = {
-                get_bufnrs = function()
-                  return vim
-                    .iter(vim.api.nvim_list_bufs())
-                    :filter(function(buf)
-                      return vim.bo[buf].buftype == ""
-                    end)
-                    :totable()
-                end,
-              },
-            },
-            { name = "path" },
-            { name = "orgmode" },
-          }
-        ),
-        formatting = {
-          format = lspkind.cmp_format(custom.cmp_format),
-          fields = {
-            "kind",
-            "abbr",
-            "menu",
-          },
-        },
-        sorting = {
-          priority_weight = 2,
-          comparators = {
-            function(...)
-              return require("cmp_buffer"):compare_locality(...)
-            end,
-            cmp.config.compare.offset,
-            cmp.config.compare.exact,
-            -- cmp.config.compare.scopes,
-            cmp.config.compare.score,
-            require("cmp-under-comparator").under,
-            cmp.config.compare.recently_used,
-            cmp.config.compare.locality,
-            cmp.config.compare.kind,
-            -- cmp.config.compare.sort_text,
-            cmp.config.compare.length,
-            cmp.config.compare.order,
-          },
-        },
       },
-      cmdline = {
-        [":"] = {
-          completion = {
-            completeopt = "menu,menuone,noselect",
-          },
-          sources = cmp.config.sources({
-            { name = "lazydev" },
-          }, {
-            { name = "path" },
-          }, {
-            { name = "cmdline" },
-          }),
-        },
-        ["/"] = {
-          completion = {
-            completeopt = "menu,menuone,noselect",
-          },
-          sources = {
-            { name = "buffer" },
-          },
-        },
-      },
-    }
-  end,
-  config = function(_, opts)
-    local cmp = require "cmp"
+      { name = "async_path" },
+    },
 
-    cmp.setup.global(opts.global)
-    for type, cmdlineopts in pairs(opts.cmdline) do
-      cmp.setup.cmdline(type, cmdlineopts)
-    end
-
-    vim.api.nvim_create_autocmd("BufRead", {
-      desc = "Setup cmp buffer crates source",
-      pattern = "Cargo.toml",
-      callback = function()
-        cmp.setup.buffer {
-          sources = {
-            { name = "crates" },
-          },
+    --lspkind
+    formatting = {
+      fields = { "kind", "abbr", "menu" },
+      format = function(entry, vim_item)
+        local kind = require("lspkind").cmp_format {
+          mode = "symbol",
+          maxwidth = 50,
+        }(entry, vim_item)
+        local strings = vim.split(kind.kind, "%s", { trimempty = true })
+        local menu = {
+          luasnip = "[SNP]",
+          nvim_lsp = "[LSP]",
+          nvim_lua = "[VIM]",
+          buffer = "[BUF]",
+          async_path = "[PTH]",
+          calc = "[CLC]",
+          latex_symbols = "[TEX]",
+          orgmode = "[ORG]",
         }
+        kind.kind = (strings[1] or "")
+        kind.menu = menu[entry.source.name]
+        return kind
       end,
-    })
-    -- vim.api.nvim_create_autocmd("Filetype", {
-    --   desc = "Setup cmp buffer sql source",
-    --   pattern = "sql",
-    --   callback = function()
-    --     cmp.setup.buffer {
-    --       sources = {
-    --         { name = "vim-dadbod-completion" },
-    --       },
-    --     }
-    --   end,
-    -- })
-  end,
+    },
+    sorting = {
+      comparators = {
+        cmp.config.compare.offset,
+        cmp.config.compare.exact,
+        cmp.config.compare.score,
+        require("cmp-under-comparator").under,
+        cmp.config.compare.recently_used,
+        cmp.config.compare.locality,
+        cmp.config.compare.kind,
+        cmp.config.compare.length,
+        cmp.config.compare.order,
+      },
+    },
+  }
+
+  -- for cmp-smdline
+  cmp.setup.cmdline(":", {
+    completion = {
+      completeopt = "menu,menuone,noselect",
+    },
+    sources = cmp.config.sources({
+      { name = "async_path" },
+    }, {
+      { name = "cmdline" },
+    }, {
+      { name = "cmdline_history" },
+    }),
+  })
+
+  -- for cargo specially
+  -- vim.api.nvim_create_autocmd("BufRead", {
+  --   desc = "Setup cmp buffer crates source",
+  --   pattern = "Cargo.toml",
+  --   callback = function()
+  --     cmp.setup.buffer {
+  --       sources = {
+  --         { name = "crates" },
+  --       },
+  --     }
+  --   end,
+  -- })
+end
+
+return {
+  "hrsh7th/nvim-cmp",
+  dependencies = {
+    "hrsh7th/cmp-buffer",
+    "hrsh7th/cmp-nvim-lsp",
+    "hrsh7th/cmp-nvim-lsp-signature-help",
+    {
+      "FelipeLema/cmp-async-path",
+      url = "https://codeberg.org/FelipeLema/cmp-async-path",
+    },
+    "hrsh7th/cmp-cmdline",
+    "dmitmel/cmp-cmdline-history",
+    "saadparwaiz1/cmp_luasnip",
+    "lukas-reineke/cmp-under-comparator",
+    "onsails/lspkind.nvim",
+  },
+  event = { "CursorHold", "CursorHoldI", "User AfterLoad" },
+  config = opts,
 }
