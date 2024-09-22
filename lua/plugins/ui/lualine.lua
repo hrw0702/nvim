@@ -153,8 +153,8 @@ return {
           function()
             return os.date "%H:%M"
           end,
-          icon = "󱑒",
-          color = { fg = colors.base2, bg = colors.cyan },
+          -- icon = "󱑒",
+          color = { fg = colors.base03, bg = colors.green},
         },
       },
     },
