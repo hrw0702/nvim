@@ -32,7 +32,8 @@ function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
   return orig_util_open_floating_preview(contents, syntax, opts, ...)
 end
 
-vim.lsp.inlay_hint.enable()
+-- turn off virtual_text
+vim.lsp.inlay_hint.enable(false)
 
 -- LspAttach events
 vim.api.nvim_create_autocmd("LspAttach", {
