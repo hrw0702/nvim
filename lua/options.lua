@@ -192,16 +192,16 @@ vim.opt.jumpoptions = "stack"
 -- vim.opt.guifont = "Cascadia Code NF:h12"
 -- vim.opt.shortmess:append "I"
 vim.opt.fillchars = {
-  eob = " ",
-  diff = "╱",
-  foldopen = "",
-  foldclose = "",
-  foldsep = "▕",
+    eob = " ",
+    diff = "╱",
+    foldopen = "",
+    foldclose = "",
+    foldsep = "▕",
 }
 vim.opt.guicursor = {
-  "n-v-c-sm:block-Cursor/lCursor",
-  "i-ci-ve:ver25-Cursor/lCursor",
-  "r-cr-o:hor20-Cursor/lCursor",
+    "n-v-c-sm:block-Cursor/lCursor",
+    "i-ci-ve:ver25-Cursor/lCursor",
+    "r-cr-o:hor20-Cursor/lCursor",
 }
 
 ---@diagnostic disable-next-line: param-type-mismatch
