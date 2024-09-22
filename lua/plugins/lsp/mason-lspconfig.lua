@@ -53,7 +53,7 @@ return {
                 telemetry = { enable = false },
                 --@type 禁用一些lua错误提示
                 diagnostics = {
-                  disable = { "missing-fields" },
+                  -- disable = { "missing-fields" },
                 },
               },
             },
