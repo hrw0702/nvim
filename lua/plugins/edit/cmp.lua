@@ -12,7 +12,6 @@ local opts = function()
         border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
         -- 弹出窗口高亮设置
         -- winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,CursorLine:PmenuSel,Search:None",
-        -- winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,CursorLine:PmenuSel,Search:None",
         -- scrolloff = 0,
         col_offset = 0,
         side_padding = 1,
@@ -28,17 +27,14 @@ local opts = function()
         -- winhighlight = "FloatBorder:Pmenu",
       },
     },
-    -- window = {
-    --   completion = cmp.config.window.bordered(),
-    --   documentation = cmp.config.window.bordered(),
-    --
-    -- },
     completion = {
       completeopt = vim.o.completeopt,
     },
 
     view = {
-      entries = { name = "custom", selection_order = "near_cursor" },
+      ---@diagnostic disable-next-line:undefined-doc-name
+      ---@type selection_order = "near_cursor","top_down"
+      entries = { name = "custom", selection_order = "top_down" },
     },
 
     snippet = {
@@ -53,7 +49,7 @@ local opts = function()
       ["<C-d>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), { "i", "c" }),
       ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
       ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
-      ["<C-e>"] = cmp.mapping {
+      ["<Esc>"] = cmp.mapping {
         i = cmp.mapping.close(),
         c = cmp.mapping.close(),
       },
@@ -100,6 +96,7 @@ local opts = function()
     },
 
     --lspkind
+    ---@diagnostic disable-next-line: missing-fields
     formatting = {
       fields = { "kind", "abbr", "menu" },
       format = function(entry, vim_item)
@@ -123,6 +120,8 @@ local opts = function()
         return kind
       end,
     },
+
+    ---@diagnostic disable-next-line: missing-fields
     sorting = {
       comparators = {
         cmp.config.compare.offset,
@@ -151,19 +150,6 @@ local opts = function()
       { name = "cmdline_history" },
     }),
   })
-
-  -- for cargo specially
-  -- vim.api.nvim_create_autocmd("BufRead", {
-  --   desc = "Setup cmp buffer crates source",
-  --   pattern = "Cargo.toml",
-  --   callback = function()
-  --     cmp.setup.buffer {
-  --       sources = {
-  --         { name = "crates" },
-  --       },
-  --     }
-  --   end,
-  -- })
 end
 
 return {
@@ -182,6 +168,6 @@ return {
     "lukas-reineke/cmp-under-comparator",
     "onsails/lspkind.nvim",
   },
-  event = { "CursorHold", "CursorHoldI", "User AfterLoad" },
+  event = { "InsertEnter", "CursorHold", "CursorHoldI", "User AfterLoad" },
   config = opts,
 }
