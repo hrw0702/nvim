@@ -31,7 +31,7 @@ return {
         "  Configuration",
         "<Cmd>edit ~/.config/nvim<CR>"
       ),
-      dashboard.button("u", "  Update plugins", "<Cmd>Lazy sync<CR>"),
+      dashboard.button("u", "  Update plugins", "<Cmd>Lazy sync<CR>"),
       dashboard.button("q", "󰅚  Quit", "<Cmd>qa<CR>"),
     }
 
