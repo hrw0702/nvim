@@ -29,6 +29,7 @@ return {
       callback = function()
         local cmp = require "cmp"
         cmp.setup.buffer {
+          ---@diagnostic disable-next-line:missing-fields
           sorting = {
             comparators = {
               cmp.config.compare.offset,

@@ -1,6 +1,7 @@
 local capabilities = require "capabilities"
 
 ---@type LazyPluginSpec
+---@diagnostic disable:missing-fields
 return {
   "williamboman/mason-lspconfig.nvim",
   event = {
@@ -86,6 +87,7 @@ return {
           lspconfig.zls.setup {
             capabilities = capabilities,
             settings = {
+              ---@diagnostic disable-next-line:missing-fields
               zls = {
                 inlay_hints_hide_redundant_param_names = true,
                 inlay_hints_hide_redundant_param_names_last_token = true,
