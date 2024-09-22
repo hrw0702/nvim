@@ -3,7 +3,7 @@ local custom = require "custom"
 ---@type LazyPluginSpec
 return {
   "folke/noice.nvim",
-  enabled = false,
+  enabled = true,
   event = "VeryLazy",
   init = function()
     vim.o.cmdheight = 0
