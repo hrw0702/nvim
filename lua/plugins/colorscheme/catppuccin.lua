@@ -61,12 +61,12 @@ return {
         teal = "#2aa198",
         green = "#859900",
 
-        rosewater = "#f5e0dc",
-        flamingo = "#f2cdcd",
-        peach = "#fab387",
-        sky = "#89dceb",
-        sapphire = "#74c7ec",
-        lavender = "#b4befe",
+        rosewater = "#cb4b16",
+        flamingo = "#2aa198",
+        peach = "#b58900",
+        sky = "#268bd2",
+        sapphire = "#268bd2",
+        lavender = "#6c71c4",
       },
     },
     custom_highlights = function(color)
