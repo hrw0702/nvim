@@ -225,6 +225,7 @@ return {
 
                 -- 变量
                 ["@variable"] = { fg = color.base1 },
+                ["@variable.builtin"] = { fg = color.orange},
 
                 -- 变量类型
                 ["@type.builtin"] = { fg = color.fg, bold = true },
@@ -296,7 +297,7 @@ return {
                 -- ["@lsp.type.builtinType"] = hl.treesitter["@type.builtin"],
                 ["@lsp.typemod.macro.globalScope"] = { fg = color.cyan },
                 ["@lsp.typemod.function.defaultLibrary"] = {
-                    fg = color.light_blue,
+                    fg = color.blue,
                 },
                 ["@lsp.typemod.parameter.functionScope.c"] = {
                     fg = color.base0,

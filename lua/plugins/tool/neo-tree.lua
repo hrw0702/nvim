@@ -140,6 +140,7 @@ return {
                         )
                     end
                 elseif node.type == "file" then
+                    ---@diagnostic disable-next-line:missing-parameter
                     require("neo-tree.sources.common.commands").open(state)
                 end
             end,
